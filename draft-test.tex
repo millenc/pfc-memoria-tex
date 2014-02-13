@@ -2,7 +2,7 @@
 \documentclass[oneside,11pt,parskip=full]{scrbook}
 
 % Incluir sólo algunos capítulos/ficheros. Útil para trabajar sólo en lo que interesa en cada momento.
-\includeonly{introduccion,conclusiones}
+\includeonly{introduccion,conclusiones,ejemplo-codigo-fuente-matlab}
 
 % Utilizar UTF-8 como codificación de entrada
 \usepackage[utf8]{inputenc}
@@ -22,6 +22,9 @@
 
 % Texto de pruebas
 \usepackage{lipsum}
+
+% Código fuente
+\usepackage{listings}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
@@ -64,6 +67,8 @@
 \include{introduccion}
 
 \include{conclusiones}
+
+\include{ejemplo-codigo-fuente-matlab}
 
 \backmatter
 
