@@ -24,9 +24,21 @@
 \usepackage{lipsum}
 
 % Código fuente
+\usepackage{scrhack}
 \usepackage{listings}
+\usepackage{amsthm}
 
+% Comandos
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+% Nombre de sección en cursiva
+\renewcommand*{\headfont}{\normalfont\itshape}
+% Nº de página en negrita
+\renewcommand*{\pnumfont}{\normalfont\bfseries}
+
+% Teoremas
+\newtheorem{theorem}{Theorem}[chapter]
+
 
 % Estilos del header y el footer
 \usepackage{scrpage2}
@@ -37,12 +49,6 @@
 \ifoot[]{}
 \cfoot[]{}
 \ofoot[\pagemark]{\pagemark}
-
-
-% Nombre de sección en cursiva
-\renewcommand*{\headfont}{\normalfont\itshape}
-% Nº de página en negrita
-\renewcommand*{\pnumfont}{\normalfont\bfseries}
 
 % Información general del documento
 \title{Documento de ejemplo}
@@ -73,6 +79,9 @@
 \backmatter
 
 % Glosario de términos
+
 % Bibliografía
+\bibliographystyle{plain}
+\bibliography{draft-test}
 
 \end{document}
