@@ -5,3 +5,11 @@
 *.pdf
 *.synctex.gz
 *.toc
+*.bbl
+*.bak
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
