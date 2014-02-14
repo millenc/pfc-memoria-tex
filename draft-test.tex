@@ -7,12 +7,18 @@
 % Utilizar UTF-8 como codificación de entrada
 \usepackage[utf8]{inputenc}
 
+% Traducción al español de palabras como "Bibiliografía","Figura" etc.
+\usepackage[spanish]{babel}
+
 % Fuentes
 \usepackage[T1]{fontenc}
-\usepackage[math]{anttor}
+%\usepackage{fourier}
+%\usepackage[math]{anttor}
 %\usepackage{libris}
-%\usepackage{palatino}
-\usepackage{stix}
+\usepackage{palatino}
+%\usepackage{stix}
+\addtokomafont{disposition}{\rmfamily}
+\addtokomafont{title}{\rmfamily}
 
 % Márgenes
 \usepackage[margin=1in]{geometry}
@@ -24,9 +30,12 @@
 \usepackage{lipsum}
 
 % Código fuente
-\usepackage{scrhack}
+%\usepackage{scrhack}
 \usepackage{listings}
 \usepackage{amsthm}
+
+% Índice
+\usepackage{makeidx}
 
 % Comandos
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -57,6 +66,8 @@
 \titlehead{Un draft de ejemplo escrito en LaTeX}
 \publishers{Escuela de ingenieros industriales y de telecomunicaciones\\Universidad de Navarra}
 
+\makeindex
+
 \begin{document}
 
 \input{titulo_upna}
@@ -78,10 +89,11 @@
 
 \backmatter
 
-% Glosario de términos
-
 % Bibliografía
 \bibliographystyle{plain}
 \bibliography{draft-test}
+
+% Glosario de términos
+\printindex
 
 \end{document}
