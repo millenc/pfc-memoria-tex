@@ -1,3 +1,29 @@
 \chapter{Introducción}
 \label{cha:introduccion}
-En este proyecto se 
+\section{Conjuntos difusos}
+En esta sección se presentan algunas definiciones y teoremas que forman la base de toda la teoría de lógica difusa y de los teoremas y métodos presentados en este trabajo.
+
+El concepto de conjunto difuso fue introducido por L.A. Zadeh en 1965 \cite{Zadeh65}.
+\begin{definition}
+Dado un conjunto de referencia (o universo) \emph{U}, un conjunto difuso \emph{A} sobre \emph{U} es un conjunto tal que:\\
+\begin{equation}
+\{(u_{i},\mu_{A}(u_{i}))\arrowvert u_{i} \in U\}
+\end{equation}
+donde \begin{math}\emph{A}:\emph{U}\rightarrow[0,1]\end{math} es una función llamada \emph{función de pertenencia}\index{función de pertenencia} de \emph{A}.
+\end{definition}
+
+\subsection{T-normas y operadores de agregación}
+Dada una función \begin{math}\emph{F}:[0,1]^2\rightarrow[0,1]\end{math} y dos conjuntos difusos \emph{A} y \emph{B} definidos sobre el mismo universo \emph{U}, \begin{math}A,B\in FS(U)\end{math}, denotamos como \begin{math}F(A,B)\end{math} el conjunto difuso sobre \emph{U} cuya función de pertenencia viene dada por:
+\begin{equation}
+\mu_{F(A,B)}(u_{i}) = F(A(u_{i}),B(u_{i}))
+\end{equation}
+Una clase importante de este tipo de funciones son las llamadas t-normas (triangular norms) \cite{klement2000triangular}.
+\begin{definition}
+Una t-norma es una operación binaria \emph{T} en el intervalo $[0,1]$ que es conmutativa, asociativa, monotona y tiene el valor \emph{1} como elemento neutro. Es decir, una función $\emph{T} : [0,1]^2 \rightarrow [0,1]$ tal que $\forall x,y,z \in [0,1]$:
+\begin{enumerate}[label=(T\arabic*),ref=(T\arabic*)]
+   \item $T(x,y) = T(y,x)$ (Conmutatividad)\label{statement1}
+   \item $T(x,T(y,z)) = T(T(x,y),z)$ (Asociatividad)\label{statement2}
+   \item $T(x,y) \leq T(x,z)$ cuando $y \leq z$ (Monotonía)\label{statement3}
+   \item $T(x,1) = x$ (Elemento neutro)\label{statement4}
+  \end{enumerate}
+\end{definition} 
