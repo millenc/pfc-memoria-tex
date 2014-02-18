@@ -17,8 +17,8 @@ Dada una función \begin{math}\emph{F}:[0,1]^2\rightarrow[0,1]\end{math} y dos c
 \begin{equation}
 \mu_{F(A,B)}(u_{i}) = F(A(u_{i}),B(u_{i}))
 \end{equation}
-Una clase importante de este tipo de funciones son las llamadas t-normas (triangular norms) \cite{klement2000triangular}.
-\begin{definition}
+Una clase importante de este tipo de funciones son las llamadas t-normas y t-conormas (triangular norms) \cite{klement2000triangular}.
+\begin{definition}\label{def-tnorma}
 Una t-norma es una operación binaria \emph{T} en el intervalo $[0,1]$ que es conmutativa, asociativa, monotona y tiene el valor \emph{1} como elemento neutro. Es decir, una función $\emph{T} : [0,1]^2 \rightarrow [0,1]$ tal que $\forall x,y,z \in [0,1]$:
 \begin{enumerate}[label=(T\arabic*),ref=(T\arabic*)]
    \item $T(x,y) = T(y,x)$ (Conmutatividad)\label{statement1}
@@ -26,4 +26,28 @@ Una t-norma es una operación binaria \emph{T} en el intervalo $[0,1]$ que es co
    \item $T(x,y) \leq T(x,z)$ cuando $y \leq z$ (Monotonía)\label{statement3}
    \item $T(x,1) = x$ (Elemento neutro)\label{statement4}
   \end{enumerate}
-\end{definition} 
+\end{definition}
+Estas propiedades son suficientes para garantizar que las t-normas generalizan la conjunción clásica ($x\bigwedge y$) cuando se aplican a valores booleanos ($T(0,0)=0$,$T(0,1)=T(1,0)=0$ y $T(1,1)=1$).
+Algunos ejemplos prominentes de t-normas son los siguientes:
+\begin{itemize}
+	\item \bfseries Mínimo o t-norma de Gödel: $T_{G}(x,y) = min\{x,y\}$
+	\item \bfseries Producto: $T_{P}(x,y) = xy$
+	\item \bfseries \L{}ukasiewicz: $T_{L}(x,y) = max\{x+y-1,0\}$
+\end{itemize}
+
+\begin{definition}
+Una t-conorma es una operación binaria \emph{S} en el intervalo $[0,1]$ que es conmutativa, asociativa, monotona y tiene el valor \emph{0} como elemento neutro. Es decir, una función $\emph{S} : [0,1]^2 \rightarrow [0,1]$ tal que $\forall x,y,z \in [0,1]$:
+\begin{enumerate}[label=(T\arabic*),ref=(S\arabic*)]
+   \item $S(x,y) = S(y,x)$ (Conmutatividad)\label{statement1}
+   \item $S(x,S(y,z)) = S(S(x,y),z)$ (Asociatividad)\label{statement2}
+   \item $S(x,y) \leq S(x,z)$ cuando $y \leq z$ (Monotonía)\label{statement3}
+   \item $S(x,0) = x$ (Elemento neutro)\label{statement4}
+  \end{enumerate}
+\end{definition}
+De la misma forma que las t-normas (definición \ref{def-tnorma}) generalizan la conjunción clásica, las t-conormas generalizan la disyunción ($x\bigvee y$). A continuación se incluyen algunos ejemplos de t-conormas:
+\begin{itemize}
+	\item \bfseries Máximo: $S_{max}(x,y) = max\{x,y\}$
+	\item \bfseries Suma probabilística: $S_{P}(x,y) = x + y - xy$
+	\item \bfseries Suma acotada: $S_{B}(x,y) = min\{x+y,1\}$
+\end{itemize}
+
