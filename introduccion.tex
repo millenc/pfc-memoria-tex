@@ -13,14 +13,14 @@ Dado un conjunto de referencia (o universo) \emph{U}, un conjunto difuso \emph{A
 donde \begin{math}\emph{A}:\emph{U}\rightarrow[0,1]\end{math} es una función llamada \emph{función de pertenencia}\index{función de pertenencia} de \emph{A}.
 \end{definition}
 
-\subsection{T-normas y operadores de agregación}
+\section{T-normas y operadores de agregación}
 Dada una función \begin{math}\emph{F}:[0,1]^2\rightarrow[0,1]\end{math} y dos conjuntos difusos \emph{A} y \emph{B} definidos sobre el mismo universo \emph{U}, \begin{math}A,B\in FS(U)\end{math}, denotamos como \begin{math}F(A,B)\end{math} el conjunto difuso sobre \emph{U} cuya función de pertenencia viene dada por:
 \begin{equation}
 \mu_{F(A,B)}(u_{i}) = F(A(u_{i}),B(u_{i}))
 \end{equation}
 Una clase importante de este tipo de funciones son las llamadas t-normas y t-conormas (triangular norms) \cite{klement2000triangular}.
-\begin{definition}\label{def-tnorma}
-Una t-norma es una operación binaria \emph{T} en el intervalo $[0,1]$ que es conmutativa, asociativa, monotona y tiene el valor \emph{1} como elemento neutro. Es decir, una función $\emph{T} : [0,1]^2 \rightarrow [0,1]$ tal que $\forall x,y,z \in [0,1]$:
+\begin{definition}\label{def:tnorma}
+Una t-norma es una operación binaria \emph{T} en el intervalo $[0,1]$ que es conmutativa, asociativa, monótona y tiene el valor \emph{1} como elemento neutro. Es decir, una función $\emph{T} : [0,1]^2 \rightarrow [0,1]$ tal que $\forall x,y,z \in [0,1]$:
 \begin{enumerate}[label=(T\arabic*),ref=(T\arabic*)]
    \item $T(x,y) = T(y,x)$ (Conmutatividad)\label{T1}
    \item $T(x,T(y,z)) = T(T(x,y),z)$ (Asociatividad)\label{T2}
@@ -45,7 +45,7 @@ Una t-conorma es una operación binaria \emph{S} en el intervalo $[0,1]$ que es 
    \item $S(x,0) = x$ (Elemento neutro)\label{S4}
   \end{enumerate}
 \end{definition}
-De la misma forma que las t-normas (definición \ref{def-tnorma}) generalizan la conjunción clásica, las t-conormas generalizan la disyunción ($x\bigvee y$). A continuación se incluyen algunos ejemplos de t-conormas:
+De la misma forma que las t-normas (definición \ref{def:tnorma}) generalizan la conjunción clásica, las t-conormas generalizan la disyunción ($x\bigvee y$). A continuación se incluyen algunos ejemplos de t-conormas:
 \begin{itemize}
 	\item \bfseries Máximo: $S_{max}(x,y) = max\{x,y\}$
 	\item \bfseries Suma probabilística: $S_{P}(x,y) = x + y - xy$
@@ -70,3 +70,17 @@ A continuación se incluyen algunos de los operadores de agregación más comune
 	\item \bfseries Máximo: $M(x_{1},x_{2},\cdots,x_{n}) = max(x_{1},x_{2},\cdots,x_{n})$
 	\item \bfseries Mínimo: $M(x_{1},x_{2},\cdots,x_{n}) = min(x_{1},x_{2},\cdots,x_{n})$
 \end{itemize}
+
+\section{Funciones de solapamiento}
+En esta sección se presenta el concepto de \emph{función de solapamiento}\index{función de solapamiento} \cite{bustince2010overlapfunctions,bustince2012pairwisecomparisons,jurio2013propertiesoverlap}, que tendrá una gran importancia en el desarrollo de este trabajo, ya que a partir de estas funciones se construyen los índices de solapamiento, que serán utilizados en el método de interpolación presentado.
+\begin{definition}
+Una función de solapamiento $G_{O} : [0,1]^{2} \rightarrow [0,1]$ cumple:
+\begin{enumerate}[label=(G\arabic*),ref=(G\arabic*)]
+   \item $G_{O}(x,y) = G_{O}(y,x) \;\; \forall \; x,y \in [0,1]$ \label{G1}
+   \item $G_{O}(x,y) = 0$ si y sólo si $x \cdot y = 0$ \label{G2}
+   \item $G_{O}(x,y) = 1$ si y sólo si $x \cdot y = 1$ \label{G3}
+   \item $G_{O}$ es creciente \label{G4}
+   \item $G_{O}$ es continua \label{G5}
+\end{enumerate}
+\end{definition}
+Las funciones de solapamiento generalizan los operadores de intersección tales como el mínimo o, en general, las t-normas (definidas en \ref{def:tnorma}).
