@@ -22,10 +22,10 @@ Una clase importante de este tipo de funciones son las llamadas t-normas y t-con
 \begin{definition}\label{def-tnorma}
 Una t-norma es una operación binaria \emph{T} en el intervalo $[0,1]$ que es conmutativa, asociativa, monotona y tiene el valor \emph{1} como elemento neutro. Es decir, una función $\emph{T} : [0,1]^2 \rightarrow [0,1]$ tal que $\forall x,y,z \in [0,1]$:
 \begin{enumerate}[label=(T\arabic*),ref=(T\arabic*)]
-   \item $T(x,y) = T(y,x)$ (Conmutatividad)\label{statement1}
-   \item $T(x,T(y,z)) = T(T(x,y),z)$ (Asociatividad)\label{statement2}
-   \item $T(x,y) \leq T(x,z)$ cuando $y \leq z$ (Monotonía)\label{statement3}
-   \item $T(x,1) = x$ (Elemento neutro)\label{statement4}
+   \item $T(x,y) = T(y,x)$ (Conmutatividad)\label{T1}
+   \item $T(x,T(y,z)) = T(T(x,y),z)$ (Asociatividad)\label{T2}
+   \item $T(x,y) \leq T(x,z)$ cuando $y \leq z$ (Monotonía)\label{T3}
+   \item $T(x,1) = x$ (Elemento neutro)\label{T4}
   \end{enumerate}
 \end{definition}
 Estas propiedades son suficientes para garantizar que las t-normas generalizan la conjunción clásica ($x\bigwedge y$) cuando se aplican a valores booleanos ($T(0,0)=0$,$T(0,1)=T(1,0)=0$ y $T(1,1)=1$).
@@ -38,11 +38,11 @@ Algunos ejemplos prominentes de t-normas son los siguientes:
 
 \begin{definition}
 Una t-conorma es una operación binaria \emph{S} en el intervalo $[0,1]$ que es conmutativa, asociativa, monotona y tiene el valor \emph{0} como elemento neutro. Es decir, una función $\emph{S} : [0,1]^2 \rightarrow [0,1]$ tal que $\forall x,y,z \in [0,1]$:
-\begin{enumerate}[label=(T\arabic*),ref=(S\arabic*)]
-   \item $S(x,y) = S(y,x)$ (Conmutatividad)\label{statement1}
-   \item $S(x,S(y,z)) = S(S(x,y),z)$ (Asociatividad)\label{statement2}
-   \item $S(x,y) \leq S(x,z)$ cuando $y \leq z$ (Monotonía)\label{statement3}
-   \item $S(x,0) = x$ (Elemento neutro)\label{statement4}
+\begin{enumerate}[label=(S\arabic*),ref=(S\arabic*)]
+   \item $S(x,y) = S(y,x)$ (Conmutatividad)\label{S1}
+   \item $S(x,S(y,z)) = S(S(x,y),z)$ (Asociatividad)\label{S2}
+   \item $S(x,y) \leq S(x,z)$ cuando $y \leq z$ (Monotonía)\label{S3}
+   \item $S(x,0) = x$ (Elemento neutro)\label{S4}
   \end{enumerate}
 \end{definition}
 De la misma forma que las t-normas (definición \ref{def-tnorma}) generalizan la conjunción clásica, las t-conormas generalizan la disyunción ($x\bigvee y$). A continuación se incluyen algunos ejemplos de t-conormas:
@@ -50,4 +50,23 @@ De la misma forma que las t-normas (definición \ref{def-tnorma}) generalizan la
 	\item \bfseries Máximo: $S_{max}(x,y) = max\{x,y\}$
 	\item \bfseries Suma probabilística: $S_{P}(x,y) = x + y - xy$
 	\item \bfseries Suma acotada: $S_{B}(x,y) = min\{x+y,1\}$
+\end{itemize}
+Otra clase importante de funciones son los \emph{operadores de agregación} \index{operador de agregación}\cite{calvo2002aggregation, beliakov2007aggregation}.
+\begin{definition}
+Una función $\emph{M} : [a,b]^{n} \rightarrow [a,b]$ es un operador de agregación si es monótona y no decreciente en cada una de sus componentes y además cumple que $M(a, a, \cdots,a) = a$ y $M(b, b, \cdots,b) = b$.
+\end{definition}
+\begin{definition}
+Una función de agregación \emph{M} se dice que es una media si cumple que:
+\begin{center}
+$min(x) = min(x_{1},\cdots,x_{n})\leq \emph{M}(x_{1},\cdots,x_{n}) \leq max(x_{1},\cdots,x_{n}) = max(x)$
+\end{center}
+\end{definition}
+A continuación se incluyen algunos de los operadores de agregación más comunes:
+\begin{itemize}
+	\item \bfseries Media aritmética: $M(x_{1},x_{2},\cdots,x_{n}) = \frac{1}{n}\sum\limits_{i=1}^{n}x_{i}$
+	\item \bfseries Media geométrica: $M(x_{1},x_{2},\cdots,x_{n}) = (\prod\limits_{i=1}^{n}x_{i})^{\frac{1}{n}}$
+	\item \bfseries Media ponderada: $M_{w_{1},w_{2},\cdots,w_{n}}(x_{1},x_{2},\cdots,x_{n}) =\sum\limits_{i=1}^{n}(w_{i}\cdot x_{i})$ \normalfont tal que $0 \leq w_{i} \leq 1$ y $\sum\limits_{i=1}^{n}w_{i} = 1$.
+	\item \bfseries Mediana: \normalfont Se toma el elemento central del conjunto ordenado de argumentos.
+	\item \bfseries Máximo: $M(x_{1},x_{2},\cdots,x_{n}) = max(x_{1},x_{2},\cdots,x_{n})$
+	\item \bfseries Mínimo: $M(x_{1},x_{2},\cdots,x_{n}) = min(x_{1},x_{2},\cdots,x_{n})$
 \end{itemize}
