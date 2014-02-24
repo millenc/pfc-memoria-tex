@@ -99,3 +99,38 @@ Sea $A,B \in FS(U)$. La consistencia entre A y B se define como:
 $$O_{Z}(A,B) = sup_{i=1}^{n}(min(A(u_{i}),B(u_{i})))$$
 \end{definition}
 
+Para conjuntos de referencia finitos, el supremo es en realidad el máximo elemento del conjunto.
+
+En 1982 Dubois y Prade \cite{dubois2000} presentan la siguiente definición para el índice de solapamiento:
+
+\begin{definition}
+Un índice de solapamiento es una función $O : FS(U) \times FS(U) \rightarrow [0,1]$ tal que:
+\begin{enumerate}[label=(O\arabic*),ref=(O\arabic*)]
+\item $O(A,B) = 0$ si y sólo si A y B son completamente disjuntos. \label{DP01}
+\item $O(A,B) = 1$, si ($A(u_{i}) = 0$ o $B(u_{i}) = 0$) o ($A(u_{i}) = 1$ o $B(u_{i}) = 1$) \label{DPO2}
+\item $O(A,B) = O(B,A)$ \label{DPO3}
+\item Si $B \leq C$, entonces $O(A,B) \leq O(A,C)$ \label{DPO4}
+\end{enumerate}
+\end{definition} \label{def:dubois-overlap-index}
+La condición \ref{DPO2} en esta definición presenta la ventaja de que, si \emph{A} no es difuso, entonces $O(A,A) = 1$.
+
+Por esta razón Dubois, Ostasiewicz y Prade imponen en \cite{dubois2000} las siguientes condiciones:
+\begin{enumerate}[label=(\arabic*),ref=(\arabic*)]
+\item Para todos los conjuntos difusos tales que $A(u_{i}) \le 1$ y $A(u_{i}) \le 1$ para cualquier $u_{i} \in U$, \ref{DPO2} debe ignorarse.
+\item El índice ROC (\cite{dubois2000}) no satisface \ref{DPO2}.
+\end{enumerate}
+Debido a estas consideraciones, normalmente sólo se imponen las condiciones \ref{DP01}, \ref{DPO3}, \ref{DPO4} de la definición \ref{def:dubois-overlap-index} a los índices de solapamiento.
+En \cite{bustince2013overlap} se propone la siguiente definición de índice de solapamiento:
+\begin{definition}\label{def:bustince-overlap-index}
+Un índice de solapamiento es una función $O : FS(U) \times FS(U) \rightarrow [0,1]$ tal que:
+\begin{enumerate}[label=(O\arabic*),ref=(O\arabic*)]
+\item $O(A,B) = 0$ si y sólo si A y B tienen soportes disjuntos, es decir, $A(u_{i})B(u_{i}) = 0$ para todo $u_{i} \in U$\label{BO1}
+\item $O(A,B) = O(B,A)$\label{BO2}
+\item Si $B \leq C$, entonces $O(A,B) \leq O(A,C)$\label{BO3}
+\end{enumerate}
+Un índice de solapamiento normal es un índice \emph{O} tal que:
+\begin{enumerate}[label=(O4),ref=(O4)]
+\item Si existe un $u_{i} \in U$ tal que $A(u_{i}) = B(u_{i}) = 1$, entonces $O(A,B) = 1$\label{BO4}
+\end{enumerate}
+\end{definition}
+
