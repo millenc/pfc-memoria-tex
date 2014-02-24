@@ -13,7 +13,7 @@ Dado un conjunto de referencia (o universo) \emph{U}, un conjunto difuso \emph{A
 donde \begin{math}\emph{A}:\emph{U}\rightarrow[0,1]\end{math} es una función llamada \emph{función de pertenencia}\index{función de pertenencia} de \emph{A}.
 \end{definition}
 
-\section{T-normas y operadores de agregación}
+\section{T-normas y operadores de agregación}\label{sec:t-norms-aggregation-operator}
 Dada una función \begin{math}\emph{F}:[0,1]^2\rightarrow[0,1]\end{math} y dos conjuntos difusos \emph{A} y \emph{B} definidos sobre el mismo universo \emph{U}, \begin{math}A,B\in FS(U)\end{math}, denotamos como \begin{math}F(A,B)\end{math} el conjunto difuso sobre \emph{U} cuya función de pertenencia viene dada por:
 \begin{equation}
 \mu_{F(A,B)}(u_{i}) = F(A(u_{i}),B(u_{i}))
@@ -57,9 +57,9 @@ Una función $\emph{M} : [a,b]^{n} \rightarrow [a,b]$ es un operador de agregaci
 \end{definition}
 \begin{definition}
 Una función de agregación \emph{M} se dice que es una media si cumple que:
-\begin{center}
-$min(x) = min(x_{1},\cdots,x_{n})\leq \emph{M}(x_{1},\cdots,x_{n}) \leq max(x_{1},\cdots,x_{n}) = max(x)$
-\end{center}
+\begin{equation}\label{def:mean-aggregation-operator}
+min(x) = min(x_{1},\cdots,x_{n})\leq \emph{M}(x_{1},\cdots,x_{n}) \leq max(x_{1},\cdots,x_{n}) = max(x)
+\end{equation}
 \end{definition}
 A continuación se incluyen algunos de los operadores de agregación más comunes:
 \begin{itemize}
@@ -71,7 +71,7 @@ A continuación se incluyen algunos de los operadores de agregación más comune
 	\item \bfseries Mínimo: $M(x_{1},x_{2},\cdots,x_{n}) = min(x_{1},x_{2},\cdots,x_{n})$
 \end{itemize}
 
-\section{Funciones de solapamiento}
+\section{Funciones de solapamiento}\label{sec:overlap-functions}
 En esta sección se presenta el concepto de \emph{función de solapamiento}\index{función de solapamiento} \cite{bustince2010overlapfunctions,bustince2012pairwisecomparisons,jurio2013propertiesoverlap}, que tendrá una gran importancia en el desarrollo de este trabajo, ya que a partir de estas funciones se construyen los índices de solapamiento, que serán utilizados en el método de interpolación presentado.
 \begin{definition}
 Una función de solapamiento $G_{O} : [0,1]^{2} \rightarrow [0,1]$ cumple:
@@ -90,13 +90,16 @@ $G_{O}(x,y) = \sqrt{xy}$\\
 $G_{O}(x,y) = min(x^{k}y,xy^{k}), k \in ]0,1[$\\
 
 \section{Índices de solapamiento}
+\subsection{Definición y propiedades}
 En esta sección se presenta la definición de índice de solapamiento y se estudian algunas de sus propiedades más importantes. Los índices de solapamiento tienen una importancia vital en el desarrollo de este trabajo, ya que son la base del método estudiado. 
 
 El concepto de solapamiento aplicado a conjuntos difusos fue introducido por Zadeh en 1978 \cite{zadeh1978}.
 
 \begin{definition}
 Sea $A,B \in FS(U)$. La consistencia entre A y B se define como:
-$$O_{Z}(A,B) = sup_{i=1}^{n}(min(A(u_{i}),B(u_{i})))$$
+\begin{equation}\label{eq:zadeh-consistency}
+O_{Z}(A,B) = sup_{i=1}^{n}(min(A(u_{i}),B(u_{i})))
+\end{equation}
 \end{definition}
 
 Para conjuntos de referencia finitos, el supremo es en realidad el máximo elemento del conjunto.
@@ -133,4 +136,12 @@ Un índice de solapamiento normal es un índice \emph{O} tal que:
 \item Si existe un $u_{i} \in U$ tal que $A(u_{i}) = B(u_{i}) = 1$, entonces $O(A,B) = 1$\label{BO4}
 \end{enumerate}
 \end{definition}
-
+\subsection{Construcción de índices de solapamiento}
+En esta sección se presenta el método de construcción de índices de solapamiento propuesto por \cite{bustince2013overlap} que se basa en operadores de agregación (sección \ref{sec:t-norms-aggregation-operator}) y funciones de solapamiento (sección \ref{sec:overlap-functions}).
+\begin{theorem}
+Sea $M : [0,1]^{2} \rightarrow [0,1]$ una función de agregación tal que $M(x_{1},\cdots,x_{n}) = 0$ si y sólo si $x_{1} = \cdots = x_{n} = 0$. Sea $G_{O} : [0,1]^{2} \rightarrow [0,1]$ una función de solapamiento. Entonces, la función $O: F(U) \times F(U) \rightarrow [0,1]$ definida como:
+\begin{equation}\label{eq:construction-overlap-index}
+O(A,B) = M(G_{O}(A(u_{1}),B(u_{1})),\cdots,G_{O}(A(u_{n}),B(u_{n})))
+\end{equation}
+es un índice de solapamiento en el sentido de la definición \ref{def:bustince-overlap-index}. Recíprocamente, si $G_{O}$ es una función de solapamiento y $M:[0,1]^{n} \rightarrow [0,1]$ es un operador de agregación tal que O definido por la ecuación \ref{eq:construction-overlap-index} es un índice de solapamiento, entonces $M(x_{1},\cdots,x_{n}) = 0$ si y sólo si $x_{1} = \cdots = x_{n} = 0$.
+\end{theorem}
