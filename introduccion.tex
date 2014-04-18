@@ -36,6 +36,38 @@ Algunos ejemplos prominentes de t-normas son los siguientes:
 	\item \bfseries \L{}ukasiewicz: $T_{L}(x,y) = max\{x+y-1,0\}$
 \end{itemize}
 
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\newlength\figureheight 
+		\newlength\figurewidth
+		\setlength\figureheight{4.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/min-3dplot.tikz}
+		\caption{Mínimo}
+		\label{fig:t-norms-min}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{4.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/prod-3dplot.tikz}
+		\caption{Producto}
+		\label{fig:t-norms-prod}
+	\end{subfigure}
+	
+	\vspace{1 cm}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{4.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/luka-3dplot.tikz}
+		\caption{\L{}ukasiewicz}
+		\label{fig:t-norms-lukasiewicz}
+	\end{subfigure}
+	\label{fig:t-norms}
+	\caption{Representación gráfica de las t-normas \emph{Mínimo} (\ref{fig:t-norms-min}), \emph{Producto} (\ref{fig:t-norms-prod}) y \emph{\L{}ukasiewicz} (\ref{fig:t-norms-lukasiewicz}).}
+\end{figure}
+
 \begin{definition}
 Una t-conorma es una operación binaria \emph{S} en el intervalo $[0,1]$ que es conmutativa, asociativa, monotona y tiene el valor \emph{0} como elemento neutro. Es decir, una función $\emph{S} : [0,1]^2 \rightarrow [0,1]$ tal que $\forall x,y,z \in [0,1]$:
 \begin{enumerate}[label=(S\arabic*),ref=(S\arabic*)]
