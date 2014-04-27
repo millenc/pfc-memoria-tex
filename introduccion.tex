@@ -35,8 +35,7 @@ Algunos ejemplos prominentes de t-normas son los siguientes:
 	\item \bfseries Producto: $T_{P}(x,y) = xy$
 	\item \bfseries \L{}ukasiewicz: $T_{L}(x,y) = max\{x+y-1,0\}$
 \end{itemize}
-
-\begin{figure}[t]
+\begin{figure}[H]
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
 		\newlength\figureheight 
@@ -83,6 +82,35 @@ De la misma forma que las t-normas (definición \ref{def:tnorma}) generalizan la
 	\item \bfseries Suma probabilística: $S_{P}(x,y) = x + y - xy$
 	\item \bfseries Suma acotada: $S_{B}(x,y) = min\{x+y,1\}$
 \end{itemize}
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{4.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/max-3dplot.tikz}
+		\caption{Máximo}
+		\label{fig:t-conorms-max}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{4.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/probabilistic-sum-3dplot.tikz}
+		\caption{Suma probabilística}
+		\label{fig:t-conorms-probabilistic-sum}
+	\end{subfigure}
+	
+	\vspace{1 cm}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{4.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/bounded-sum-3dplot.tikz}
+		\caption{Suma acotada}
+		\label{fig:t-conorms-bounded-sum}
+	\end{subfigure}
+	\label{fig:t-conorms}
+	\caption{Representación gráfica de las t-conormas \emph{Máximo} (\ref{fig:t-conorms-max}), \emph{Suma probabilística} (\ref{fig:t-conorms-probabilistic-sum}) y \emph{Suma acotada} (\ref{fig:t-conorms-bounded-sum}).}
+\end{figure}
 Otra clase importante de funciones son los \emph{operadores de agregación} \index{operador de agregación}\cite{calvo2002aggregation, beliakov2007aggregation}.
 \begin{definition}
 Una función $\emph{M} : [a,b]^{n} \rightarrow [a,b]$ es un operador de agregación si es monótona y no decreciente en cada una de sus componentes y además cumple que $M(a, a, \cdots,a) = a$ y $M(b, b, \cdots,b) = b$.
