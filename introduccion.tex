@@ -4,13 +4,31 @@
 \section{Conjuntos difusos}
 En esta sección se presentan algunas definiciones y teoremas que forman la base de toda la teoría de lógica difusa y de los teoremas y métodos presentados en este trabajo.
 
-El concepto de conjunto difuso fue introducido por L.A. Zadeh en 1965 \cite{Zadeh65}.
+\begin{definition}
+Sea \emph{X} un conjunto clásico de objetos, denominado \emph{universo}, cuyos elementos son denotados como \emph{x}. La pertenencia a un subconjunto clásico \emph{A} de \emph{X} se expresa normalmente por medio de una función de pertenencia $\mu_{A}:X\rightarrow\{0,1\}$ tal que:
+\begin{equation}
+\mu_{A}(x)=\begin{cases} 1 & \mbox{iff } \mbox{x}\in A, \\ 0 & \mbox{iff } \mbox{x}\notin A \end{cases}
+\end{equation}
+(se utiliza \emph{iff} como abreviatura de "si y sólo si")
+\end{definition}
+
+De esta forma, en un conjunto clásico, se dice que un elemento \emph{x} pertenece al conjunto A ($\mu_{A}(x)=1$) o no pertenece ($\mu_{A}(x)=0$). 
+\begin{example}
+\normalfont
+Un ejemplo de conjunto clásico es el conjunto de todos los números enteros pares, cuya función de pertenencia $\mu_{A}:\mathbb{Z}\rightarrow\{0,1\}$ podría expresarse como:
+\begin{equation}
+\mu_{A}(x)=\begin{cases} 1 & \mbox{iff } \mbox{x}\bmod 2=0, \\ 0 & \mbox{iff } \mbox{x}\bmod 2\ne 0 \end{cases}
+\end{equation}
+\end{example}
+Si el valor de salida de la función de pertenencia puede ser cualquier número en el intervalo [0,1] (y no sólo los valores discretos \{0,1\}) se dice que el conjunto \emph{A} es \emph{difuso} y que la función $\mu_{A}(x)$ es el \emph{grado de pertenencia} de \emph{x} a \emph{A}. En este tipo de conjuntos, cuanto más próximo sea el valor de $\mu_{A}(x)$ a 1, más pertenece \emph{x} a \emph{A}.
+
+El concepto de conjunto difuso fue introducido por L.A. Zadeh en 1965 \cite{Zadeh65} y se define como:
 \begin{definition}
 Dado un conjunto de referencia (o universo) \emph{U}, un conjunto difuso \emph{A} sobre \emph{U} es un conjunto tal que:\\
 \begin{equation}
 \{(u_{i},\mu_{A}(u_{i}))\arrowvert u_{i} \in U\}
 \end{equation}
-donde \begin{math}\emph{A}:\emph{U}\rightarrow[0,1]\end{math} es una función llamada \emph{función de pertenencia}\index{función de pertenencia} de \emph{A}.
+donde \begin{math}\emph{A}:\emph{U}\rightarrow[0,1]\end{math} es la \emph{función de pertenencia}\index{función de pertenencia} (o \emph{grado de pertenencia}) de \emph{A}.
 \end{definition}
 
 \section{T-normas y operadores de agregación}\label{sec:t-norms-aggregation-operator}
