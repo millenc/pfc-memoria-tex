@@ -30,6 +30,29 @@ Dado un conjunto de referencia (o universo) \emph{U}, un conjunto difuso \emph{A
 \end{equation}
 donde \begin{math}\emph{A}:\emph{U}\rightarrow[0,1]\end{math} es la \emph{función de pertenencia}\index{función de pertenencia} (o \emph{grado de pertenencia}) de \emph{A}.
 \end{definition}
+\subsection{Operaciones sobre conjuntos difusos}
+En esta sección se definen algunas operaciones básicas sobre conjuntos difusos. Un conjunto difuso compuesto a partir de dos conjuntos difusos sobre el mismo universo \emph{U} puede definirse por su función de pertenencia tal que:
+\begin{definition}
+Dada una función \begin{math}\emph{F}:[0,1]^2\rightarrow[0,1]\end{math} y dos conjuntos difusos \emph{A} y \emph{B} definidos sobre el mismo universo \emph{U}, \begin{math}A,B\in FS(U)\end{math}, denotamos como \begin{math}F(A,B)\end{math} el conjunto difuso sobre \emph{U} cuya función de pertenencia viene dada por:
+\begin{equation}
+\mu_{F(A,B)}(u_{i}) = F(A(u_{i}),B(u_{i}))
+\end{equation}
+\end{definition}
+De esta forma, se pueden definir las operaciones de unión ($\cup$) y de intersección ($\cap$) clásicas sobre los subconjuntos difusos \emph{A} y \emph{B} sobre \emph{U} \cite{dubois1980} tal que:
+\begin{equation}
+\forall\mu_{i}\in U,\quad\mu_{A\cup B}(u_{i}) = max(\mu_{A}(u_{i}),\mu_{B}(u_{i}))
+\end{equation}
+\begin{equation}
+\forall\mu_{i}\in U,\quad\mu_{A\cap B}(u_{i}) = min(\mu_{A}(u_{i}),\mu_{B}(u_{i}))
+\end{equation}
+donde $\mu_{A\cup B}$ y $\mu_{A\cap B}$ son las funciones de pertenencia de $A\cup B$ (unión) y $A\cap B$ (intersección) respectivamente.
+\begin{definition}
+El \emph{complementario} \emph{$\overline{A}$} de un conjunto difuso \emph{A} sobre \emph{U} puede definirse por su función de pertenencia \cite{Zadeh65}, tal que:
+\begin{equation}
+\forall \mu_{i} \in U, \quad \mu_{\overline{A}}(\mu_{i}) = 1 - \mu_{A}(\mu_{i})
+\end{equation}
+\end{definition}
+
 
 \section{T-normas y operadores de agregación}\label{sec:t-norms-aggregation-operator}
 Dada una función \begin{math}\emph{F}:[0,1]^2\rightarrow[0,1]\end{math} y dos conjuntos difusos \emph{A} y \emph{B} definidos sobre el mismo universo \emph{U}, \begin{math}A,B\in FS(U)\end{math}, denotamos como \begin{math}F(A,B)\end{math} el conjunto difuso sobre \emph{U} cuya función de pertenencia viene dada por:
