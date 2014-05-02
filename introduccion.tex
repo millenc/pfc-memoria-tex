@@ -75,6 +75,7 @@ Algunos ejemplos prominentes de t-normas son los siguientes:
 	\item \bfseries Mínimo o t-norma de Gödel: $T_{G}(x,y) = min\{x,y\}$
 	\item \bfseries Producto: $T_{P}(x,y) = xy$
 	\item \bfseries \L{}ukasiewicz: $T_{L}(x,y) = max\{x+y-1,0\}$
+	\item \bfseries T-norma drástica: \mdseries $T_{D}(x,y) = \begin{cases} y & if\quad x=1, \\ x & if\quad y=1, \\0 & \text{en cualquier otro caso}. \end{cases}$
 \end{itemize}
 \begin{figure}[H]
 	\centering
@@ -104,8 +105,16 @@ Algunos ejemplos prominentes de t-normas son los siguientes:
 		\caption{\L{}ukasiewicz}
 		\label{fig:t-norms-lukasiewicz}
 	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+			\setlength\figureheight{4.5cm}
+			\setlength\figurewidth{6cm}
+			\input{figures/drastic-tnorm-3dplot.tikz}
+			\caption{T-norma drástica}
+			\label{fig:t-norms-drastic}
+	\end{subfigure}
 	\label{fig:t-norms}
-	\caption{Representación gráfica de las t-normas \emph{Mínimo} (\ref{fig:t-norms-min}), \emph{Producto} (\ref{fig:t-norms-prod}) y \emph{\L{}ukasiewicz} (\ref{fig:t-norms-lukasiewicz}).}
+	\caption{Representación gráfica de las t-normas \emph{Mínimo} (\ref{fig:t-norms-min}), \emph{Producto} (\ref{fig:t-norms-prod}), \emph{\L{}ukasiewicz} (\ref{fig:t-norms-lukasiewicz}) y la \emph{t-norma drástica} (\ref{fig:t-norms-drastic}).}
 \end{figure}
 
 \begin{definition}
@@ -122,6 +131,7 @@ De la misma forma que las t-normas (definición \ref{def:tnorma}) generalizan la
 	\item \bfseries Máximo: $S_{max}(x,y) = max\{x,y\}$
 	\item \bfseries Suma probabilística: $S_{P}(x,y) = x + y - xy$
 	\item \bfseries Suma acotada: $S_{B}(x,y) = min\{x+y,1\}$
+	\item \bfseries T-conorma drástica: \mdseries $S_{D}(x,y) = \begin{cases} y & if\quad x=0, \\ x & if\quad y=0, \\1 & \text{en cualquier otro caso}. \end{cases}$
 \end{itemize}
 \begin{figure}[H]
 	\centering
@@ -149,8 +159,16 @@ De la misma forma que las t-normas (definición \ref{def:tnorma}) generalizan la
 		\caption{Suma acotada}
 		\label{fig:t-conorms-bounded-sum}
 	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+			\setlength\figureheight{4.5cm}
+			\setlength\figurewidth{6cm}
+			\input{figures/drastic-tconorm-3dplot.tikz}
+			\caption{T-conorma drástica}
+			\label{fig:t-conorms-drastic}
+	\end{subfigure}
 	\label{fig:t-conorms}
-	\caption{Representación gráfica de las t-conormas \emph{Máximo} (\ref{fig:t-conorms-max}), \emph{Suma probabilística} (\ref{fig:t-conorms-probabilistic-sum}) y \emph{Suma acotada} (\ref{fig:t-conorms-bounded-sum}).}
+	\caption{Representación gráfica de las t-conormas \emph{Máximo} (\ref{fig:t-conorms-max}), \emph{Suma probabilística} (\ref{fig:t-conorms-probabilistic-sum}), \emph{Suma acotada} (\ref{fig:t-conorms-bounded-sum})  y la \emph{t-conorma drástica} (\ref{fig:t-conorms-drastic}).}
 \end{figure}
 Otra clase importante de funciones son los \emph{operadores de agregación} \index{operador de agregación}\cite{calvo2002aggregation, beliakov2007aggregation}.
 \begin{definition}
