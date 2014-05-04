@@ -1,0 +1,48 @@
+% !TeX spellcheck = es_ES
+\chapter{Lógica difusa}
+\label{cha:logica-difusa}
+En esta sección se introducen las bases de la lógica difusa y los mecanismos de inferencia difusa. Además se describen algunos de los métodos clásicos de inferencia difusa basada en reglas.
+\section{El controlador de Mamdani}
+El método de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.
+\section{Método de interpolación basado en índices de solapamiento}
+En esta sección se introduce un nuevo método para resolver sistemas basados en reglas que generaliza el método clásico de interpolación , utilizando para ello índices de solapamiento \cite{bustince2013overlap}.\\
+\\
+Históricamente el método más utilizado para resolver sistemas basados en reglas, es decir, para calcular el consecuente \emph{B'}, era el método de interpolación \cite{klir1987}. En este método se utiliza la consistencia de Zadeh \emph{$O_{Z}$} \cite{zadeh1978}, dada en la ecuación \ref{eq:zadeh-consistency}. Los pasos a seguir son:
+
+\begin{algorithm}
+\DontPrintSemicolon
+\KwIn{Un conjunto de reglas $R_{j}$, con $j \in \{1,\ldots,n\}$, un hecho \emph{A'} y el índice de consistencia $O_{Z}$ (ec. \ref{eq:zadeh-consistency}).}
+\KwOut{\emph{B'}.}
+\vspace{0.4 cm}
+\For{$j \in \{1,\ldots,n\}$} {
+Calcular $O_{Z}(A',A_{j}) = \max\limits_{x \in X}(\min(A'(x),A_{j}(x))) $
+}
+Construir $B' = \{(y, B'(y))|y \in Y\}$ dado por: \\
+\centering
+\nonl $B'(y) = \max\limits_{j=1}^{n}(\min(B_{j}(y),O_{Z}(A', A_{j})))$.\\
+\Return{$B'$}\;
+\caption{Método de interpolación}
+\label{algo:interpolation-method}
+\end{algorithm}
+Dado que el índice de consistencia $O_{Z}$ es un índice de solapamiento que cumple la definición \ref{def:dubois-overlap-index}, el algoritmo \ref{algo:interpolation-method} se puede generalizar para utilizar cualquier índice de solapamiento:
+
+\begin{algorithm}
+\DontPrintSemicolon
+\KwIn{Un conjunto de reglas $R_{j}$, con $j \in \{1,\ldots,n\}$ y un hecho \emph{A'}.}
+\KwOut{\emph{B'}.}
+\vspace{0.4 cm}
+Seleccionar un operador de agregación $M_{1}$, una función de solapamiento $G_{O}$ y un índice de solapamiento O.\\
+\For{$j \in \{1,\ldots,n\}$} {
+Calcular $O(A', A_{j})$
+}
+Construir $B' = \{(y, B'(y))|y \in Y\}$ dado por: \\
+\centering
+\nonl $B'(y) = \overset{n}{\underset{j=1}{M_{1}}}(G_{O}(B_{j}(y),O(A', A_{j})))$.\\
+\Return{$B'$}\;
+\caption{Método de interpolación generalizado}
+\label{algo:overlap-interpolation-method}
+\end{algorithm}
+
+Si en el algoritmo \ref{algo:overlap-interpolation-method} utilizamos $M_{1} = \max$, $G_{O} = \min$ y $O = O_{Z}$ entonces se recupera el algoritmo \ref{algo:interpolation-method}.
+
+

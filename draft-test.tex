@@ -48,6 +48,14 @@
 \pgfplotsset{compat=newest}
 \usepackage{amsmath}
 
+%Algoritmos
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\renewcommand*{\algorithmcfname}{Algoritmo}
+\let\oldnl\nl% Store \nl in \oldnl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
+%\renewcommand{\ALG@name}{Algoritmo}
+%\renewcommand{\listalgorithmname}{List of \ALG@name s}
+
 % Float: poner las figuras en un punto exacto
 \usepackage{float}
 \usepackage{subcaption}
@@ -92,7 +100,6 @@
 \frontmatter
 \tableofcontents
 \listoffigures
-\listoftables
 
 %\chapter{Reconocimientos}
 %\chapter{Objetivos}
@@ -100,6 +107,8 @@
 \mainmatter
 
 \include{introduccion}
+
+\include{logica-difusa}
 
 \include{deteccion-incendios-forestales}
 
