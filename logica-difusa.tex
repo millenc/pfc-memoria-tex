@@ -45,4 +45,24 @@ Construir $B' = \{(y, B'(y))|y \in Y\}$ dado por: \\
 
 Si en el algoritmo \ref{algo:overlap-interpolation-method} utilizamos $M_{1} = \max$, $G_{O} = \min$ y $O = O_{Z}$ entonces se recupera el algoritmo \ref{algo:interpolation-method}.
 
+En el caso de que cada regla tenga varios antecedentes, se puede generalizar el algoritmo \ref{algo:overlap-interpolation-method} de la siguiente manera:
+
+\begin{algorithm}
+\DontPrintSemicolon
+\KwIn{Un conjunto de reglas $R_{j}$ con varios antecedentes, con $j \in \{1,\ldots,n\}$ y un hecho \emph{A'}.}
+\KwOut{\emph{B'}.}
+\vspace{0.4 cm}
+Seleccionar un operador de agregación $M$, una t-norma \emph{T} y un índice de solapamiento \emph{O}.\\
+\For{$i =1 \to n$} {
+Calcular $O(A'_{i}, A_{i1}),\ldots,O(A'_{m}, A_{im})$\\
+Calcular $k_{i} = T(O(A'_{i}, A_{i1}),\ldots,O(A'_{m}, A_{im}))$\\
+Construir sobre el universo de referencia \emph{Y} el conjunto $K_{i} = \{(y,k_{i})|y \in Y\}$
+}
+Construir $B' = \{(y, B'(y))|y \in Y\}$ dado por: \\
+\centering
+\nonl $B'(y) = \overset{n}{\underset{i=1}{M}}(\min(K_{i},B_{i}))$.\\
+\Return{$B'$}\;
+\caption{Método de interpolación generalizado para reglas con varios antecedentes}
+\label{algo:multi-overlap-interpolation-method}
+\end{algorithm}
 
