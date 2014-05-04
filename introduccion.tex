@@ -30,6 +30,43 @@ Dado un conjunto de referencia (o universo) \emph{U}, un conjunto difuso \emph{A
 \end{equation}
 donde \begin{math}\emph{A}:\emph{U}\rightarrow[0,1]\end{math} es la \emph{función de pertenencia}\index{función de pertenencia} (o \emph{grado de pertenencia}) de \emph{A}.
 \end{definition}
+
+\begin{example}
+\normalfont
+Supongamos que el universo \emph{U} está compuesto por los valores razonables de altura (medida en centímetros) de una persona adulta, tal que:
+
+\begin{equation}
+\emph{U} = \{150,151,\ldots,229,230\}
+\end{equation}
+
+Se puede definir sobre \emph{U} el conjunto difuso \emph{VT}, para representar el concepto de altura \emph{"Muy alta"}, especificando su función de pertenencia \emph{$\mu_{VT}$}, de forma que los valores de altura \emph{$\mu_{i}$} considerados como \emph{"muy altos"} hagan que el valor de dicha función de pertenencia \emph{$\mu_{VT}(\mu_{i})$} sea más próximo a 1 (pertenecen más al conjunto).\\
+\\
+Se puede elegir cualquier tipo de función para definir al conjunto difuso, siempre que se ajuste a las necesidades del problema que se pretende resolver. En este ejemplo se va a definir la función de pertenencia \emph{$\mu_{VT}$} como una función sigmoidal tal que:
+\begin{equation}
+\mu_{VT}(\mu_{i}) = \frac{1}{1 + e^{-0.4(\mu_{i}-190)}}
+\end{equation}
+La función de pertenencia $\mu_{VT}(\mu_{i})$ se representa en la figura \ref{fig:fuzzyset-verytall-example}. Se puede observar que alturas que no podrían considerarse muy altas como 150, 160, 170,etc. hacen que la función de pertenencia  $\mu_{VT}$ sea cero (no pertenencen al conjunto). Algunos valores del conjunto difuso \emph{VT}:
+\begin{equation}
+VT = \{(150,0),(160,0),(170,0),\ldots,(190,0.5),(195,0.88),(200,1),(210,1),\ldots\}
+\end{equation}
+
+
+\end{example}
+
+
+\begin{figure}[t]
+	\centering
+	\newlength\figureheight 
+	\newlength\figurewidth
+	\setlength\figureheight{4.5cm}
+	\setlength\figurewidth{12cm}
+	\input{figures/very-tall-fuzzyset-example.tikz}
+	\caption{Función de pertenencia del conjunto difuso \emph{"Muy Alto"} ($\mu_{VT}(\mu_{i})$).}
+	\label{fig:fuzzyset-verytall-example}
+\end{figure}
+
+
+
 \subsection{Operaciones sobre conjuntos difusos}
 En esta sección se definen algunas operaciones básicas sobre conjuntos difusos. Un conjunto difuso compuesto a partir de dos conjuntos difusos sobre el mismo universo \emph{U} puede definirse por su función de pertenencia tal que:
 \begin{definition}
@@ -80,8 +117,6 @@ Algunos ejemplos prominentes de t-normas son los siguientes:
 \begin{figure}[H]
 	\centering
 	\begin{subfigure}[b]{0.45\textwidth}
-		\newlength\figureheight 
-		\newlength\figurewidth
 		\setlength\figureheight{4.5cm}
 		\setlength\figurewidth{6cm}
 		\input{figures/t-norms/min-3dplot.tikz}
