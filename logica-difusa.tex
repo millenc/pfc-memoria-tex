@@ -2,6 +2,21 @@
 \chapter{Lógica difusa}
 \label{cha:logica-difusa}
 En esta sección se introducen las bases de la lógica difusa y los mecanismos de inferencia difusa. Además se describen algunos de los métodos clásicos de inferencia difusa basada en reglas.
+
+\section{¿Qué es la lógica difusa?}
+La lógica difusa fue introducida por Lofti A. Zadeh en 1965. Desde entonces se ha aplicado en multitud de escenarios tales como control de procesos industriales, medicina, electrónica y otros tipos de sistemas expertos. En general, la mayoría de aplicaciones de la lógica difusa son el área del control.
+
+La motivación para el desarrollo de una lógica difusa fue expresada por Zadeh (1984, BUSCAR CITA) de la siguiente manera:
+\begin{quote}
+\emph{``La habilidad de la mente humana para razonar en términos difusos es realmente una gran ventaja. Aunque una gran cantidad de información es captada por los sentidos en una situación determinada, de alguna manera la mente humana es capaz de descartar la mayoría de esa información y concentrarse sólo en aquello que es relevante.''}
+\end{quote}
+El objetivo principal de la lógica difusa es intentar dotar a las máquinas de un sistema de razonamiento aproximado similar al de los humanos, que pueda lidiar con imprecisiones y términos inexactos. Para ello, la lógica difusa se basa en la utilización de variables lingüísticas expresadas en lenguaje natural, que forman la base del razonamiento aproximado. 
+
+Por medio del uso de variables lingüísticas se pueden modelar conceptos como \emph{``muy alto''} o \emph{``bastante caliente''} y establecer relaciones entre ellos, expresadas de forma matemática y algorítmica. Los sistemas de lógica difusa tratan la imprecisión de las entradas mediante el uso de variables lingüísticas (expresadas como conjuntos difusos), que transforman dichos valores de entrada en números difusos.
+
+\section{Sistemas difusos basados en reglas}
+Un enfoque muy utilizado a la hora de modelar un sistema de lógica difusa es la utilización de \emph{reglas} expresadas en un lenguaje muy próximo al natural, mediante variables lingüísticas. Estas reglas habitualmente son formuladas por un experto humano aunque pueden ser derivadas también de datos numéricos. A este tipo de sistemas difusos se les denomina \emph{sistemas difusos basados en reglas}. Los métodos estudiados en este trabajo pertenecen a este tipo de sistemas. 
+
 \section{El controlador de Mamdani}
 El método de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.
 \section{Método de interpolación basado en índices de solapamiento}
