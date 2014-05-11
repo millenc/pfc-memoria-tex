@@ -15,7 +15,41 @@ El objetivo principal de la lógica difusa es intentar dotar a las máquinas de 
 Por medio del uso de variables lingüísticas se pueden modelar conceptos como \emph{``muy alto''} o \emph{``bastante caliente''} y establecer relaciones entre ellos, expresadas de forma matemática y algorítmica. Los sistemas de lógica difusa tratan la imprecisión de las entradas mediante el uso de variables lingüísticas (expresadas como conjuntos difusos), que transforman dichos valores de entrada en números difusos.
 
 \section{Sistemas difusos basados en reglas}
-Un enfoque muy utilizado a la hora de modelar un sistema de lógica difusa es la utilización de \emph{reglas} expresadas en un lenguaje muy próximo al natural, mediante variables lingüísticas. Estas reglas habitualmente son formuladas por un experto humano aunque pueden ser derivadas también de datos numéricos. A este tipo de sistemas difusos se les denomina \emph{sistemas difusos basados en reglas}. Los métodos estudiados en este trabajo pertenecen a este tipo de sistemas. 
+Un enfoque muy utilizado a la hora de modelar un sistema de lógica difusa es la utilización de \emph{reglas} expresadas en un lenguaje muy próximo al natural, mediante variables lingüísticas. Estas reglas habitualmente son formuladas por un experto humano aunque pueden ser derivadas también de datos numéricos. A este tipo de sistemas difusos se les denomina \emph{sistemas difusos basados en reglas}. Los métodos estudiados en este trabajo pertenecen a este tipo de sistemas.
+
+Existen principalmente 3 tipos de sistemas difusos \cite{wang1997}: sistemas difusos puros, sistemas difusos tipo Takagi-Sugeno-Kang (TKG) y sistemas difusos con difusificador y desdifusificador. A continuación se realiza una breve descripción de las características de estos sistemas.
+
+En la figura \ref{fig:pure-fuzzy-system} se representa el esquema básico de un sistema difuso puro. En los sistemas difusos puros tanto las entradas como la salida del sistema son conjuntos difusos. El sistema difuso está dotado de un \emph{conjunto de reglas difusas} \emph{IF-THEN}, que forman la base de conocimiento sobre el dominio del problema. El \emph{sistema de inferencia difusa} combina estas reglas \emph{IF-THEN} y transforma los conjuntos difusos de entrada sobre el universo $U \subset R^{n}$ ($x_{1}.\ldots,x_{n}$) en un conjunto difuso sobre $V \subset R$ ($y$), utilizando principios de lógica difusa (modus ponens).
+
+\begin{figure}[tb]
+	\centering
+	\input{figures/pure-fuzzy-system.tikz}
+	\caption{Diagrama de un sistema difuso puro.}
+	\label{fig:pure-fuzzy-system}
+\end{figure}
+
+El principal problema de los sistemas difusos puros es que tanto las entradas como las salidas son conjuntos difusos, mientras que en aplicaciones de control industrial se utilizan generalmente valores escalares reales. Para solucionar este problema, Takagi, Sugeno y Kang propusieron un nuevo método simplificado que utiliza entradas y salidas escalares \cite{takagisugeno1985}\cite{sugenokang1988}.
+
+El método de Takagi-Sugeno-Kang utiliza reglas de la forma:
+
+\begin{equation}
+R_{i}: \text{IF }x_{1}\text{ es }A_{1i}\text{, }x_{2}\text{ es }A_{2i}\text{ , \ldots , }x_{n}\text{ es }A_{ni}\text{ THEN } y = f_{i}(x_{1},x_{2},\ldots,x_{n})
+\end{equation}
+
+donde $A_{ij}$ representa las funciones de pertenencia asociadas a las variables lingüísticas utilizadas en los antecedentes y $f_{i}(x_{1},x_{2},\ldots,x_{n})$ representa los consecuentes. Normalmente $f_{i}$ es un polinomio en las variables de entrada, pero puede ser cualquier tipo de función mientras pueda describir la salida del modelo de forma apropiada, teniendo en cuenta las entradas. 
+
+Como se puede ver, la principal diferencia entre un sistema difuso puro y el sistema de Takagi-Sugeno-Kang es que el consecuente de la regla (\emph{THEN}) es sustituido por una simple fórmula matemática. Este cambio supone que el método para combinar las diferentes reglas para proporcionar una salida es más sencillo. De hecho, en el método de Takagi-Sugeno-Kang se utiliza la media ponderada de los consecuentes obtenidos de las diferentes reglas.
+
+El principal problema del método de Takagi-Sugeno-Kang es que el consecuente de las reglas es una función matemática y por lo tanto se pierde cierta capacidad de modelar el sistema utilizando el lenguaje natural. Para solucionar estos problemas, se puede modificar el sistema difuso puro, añadiendo un difusificador a la entrada de las variables y un desdifusificador a la salida.
+
+\begin{figure}[tb]
+	\centering
+	\input{figures/fuzzy-system.tikz}
+	\caption{Diagrama de un sistema difuso con difusificador y desdifusificador.}
+	\label{fig:fuzzy-system}
+\end{figure}
+
+En la figura \ref{fig:fuzzy-system} se representa el esquema básico de un sistema difuso con difusificador y desdifusificador. El difusificador transforma las entradas escalares en $U$ del sistema en conjuntos difusos. Una vez realizada la inferencia difusa se obtiene un conjunto difuso como salida. El desdifusificador transforma el conjunto difuso de salida en una variable escalar en $V$. Existen multitud de métodos para realizar estas transformaciones y en siguientes secciones se detallarán algunos de ellos. El sistema difuso presentado en este trabajo se basa en este último tipo de sistema.
 
 \section{El controlador de Mamdani}
 El método de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.

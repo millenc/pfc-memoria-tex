@@ -1,0 +1,51 @@
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=6em]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+
+\tikzset{
+    state/.style={
+    	   fill=white,
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           minimum height=4em,
+           minimum width=15em,
+           inner sep=2pt,
+           text centered,
+           drop shadow
+           },
+}
+
+\tikzset{
+    state-small/.style={
+    	   fill=white,
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           minimum height=4em,
+           minimum width=5em,
+           inner sep=2pt,
+           text centered,
+           drop shadow
+           },
+}
+
+\tikzstyle{materia}=[draw, fill=blue!20, text width=6.0em, text centered,
+  minimum height=1.5em,drop shadow]
+
+
+\shorthandoff{>}
+\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+\node [input, name=input] {};
+\node [state-small, right of=input,node distance=2.5cm,align=left] (fuzzifier) {Fuzzy};
+\node [state, right of=fuzzifier,node distance=6cm,align=left] (inference-engine) {Sistema de inferencia difusa};
+\node [state, above of=inference-engine] (rule-base) {Conjunto de reglas difusas};
+\node [state-small, right of=inference-engine,node distance=6cm,align=left] (defuzzifier) {Defuzzy};
+\node [output, right of=defuzzifier,node distance=2.5cm] (output) {};
+
+\draw [->] (input) -- node {$x \in U$} (fuzzifier);
+\draw [->] (fuzzifier) -- node {$x \in FS(U)$} (inference-engine);
+\draw [->] (rule-base) -- node {} (inference-engine);
+\draw [->] (inference-engine) -- node {$y \in FS(V)$} (defuzzifier);
+\draw [->] (defuzzifier) -- node {$y \in V$} (output);
+\end{tikzpicture}
