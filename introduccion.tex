@@ -65,7 +65,7 @@ VT = \{(150,0),(160,0),(170,0),\ldots,(190,0.5),(195,0.88),(200,1),(210,1),\ldot
 \subsection{Variables lingüísticas}
 Una variable lingüística se puede definir de manera informal como una variable que puede tomar palabras del lenguaje natural como valores. Para formular palabras y utilizarlas como valores de variables lingüísticas se utilizan conjuntos difusos (por medio de sus correspondientes funciones de pertenencia). Así pues, una variable lingüística se puede definir como \cite{wang1997}:
 
-\begin{definition}
+\begin{definition}\label{def:informal-lang-variable}
 Una \emph{variable lingüística} es un tipo de variable que puede tomar palabras como valores. Las palabras son caracterizadas por conjuntos difusos definidos en el mismo universo en el que la variable es definida.
 \end{definition}
 
@@ -83,6 +83,18 @@ Supongamos que la temperatura medida por un termómetro en grados celsius (ºC) 
 	\label{fig:example-temp-lang-variable}
 \end{figure}
 
+Una definición más formal de \emph{variable lingüística} (equivalente a la definición \ref{def:informal-lang-variable}), dada por Zadeh \cite{Zadeh75}, es la siguiente:
+
+\begin{definition}\label{def:formal-lang-variable}
+\normalfont
+Una \emph{variable lingüística} se caracteriza por la tupla $(X,T,U,M)$, donde:
+\begin{itemize}
+  \item $X$ es el nombre de la variable lingüística. En el ejemplo \ref{ex:lang-variable},``Temperatura en ºC''.
+  \item $T$ es el conjunto de valores lingüísticos que $X$ puede tomar. En el ejemplo \ref{ex:lang-variable}, $T$ = \{baja, media, alta\}
+  \item $U$ es el universo de referencia del que cada valor lingüístico toma sus valores cuantitativos (escalares). En el ejemplo \ref{ex:lang-variable}, $U = [0,100]$
+  \item $M$ es la regla semántica que relaciona cada valor lingüístico en $T$ con un conjunto difuso en $U$. En el ejemplo \ref{ex:lang-variable}, $M$ relaciona los valores ``baja'', ``media'' y ``alta'' con las funciones de pertenencia representadas en la figura \ref{fig:example-temp-lang-variable}.
+\end{itemize}
+\end{definition}
 \subsection{Operaciones sobre conjuntos difusos}
 En esta sección se definen algunas operaciones básicas sobre conjuntos difusos. Un conjunto difuso compuesto a partir de dos conjuntos difusos sobre el mismo universo \emph{U} puede definirse por su función de pertenencia tal que:
 \begin{definition}
