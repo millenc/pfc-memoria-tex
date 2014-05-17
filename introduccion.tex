@@ -71,8 +71,17 @@ Una \emph{variable lingüística} es un tipo de variable que puede tomar palabra
 
 \begin{example}\label{ex:lang-variable}
 \normalfont
-Supongamos que la temperatura medida por un termómetro en grados celsius (ºC) es una variable $x$ que puede tomar valores enteros en el intervalo $[0,100]$. Este intervalo de valores posibles es lo que se define como el \emph{universo de discurso} o \emph{universo de referencia} $U$. Podemos definir sobre $U$ los conjuntos difusos \emph{``baja''},\emph{``media''} y \emph{``alta''} para modelar los conceptos de temperatura alta, media y baja respectivamente. Si consideramos que $x$ es una variable lingüística entonces $x$ puede tomar los valores \emph{``baja''},\emph{``media''} y \emph{``alta''}. Es decir, podemos decir que: \emph{``x es baja''},\emph{``x es media''} o \emph{``x es alta''}, o lo que es lo mismo \emph{``Temperatura es baja''},\emph{``Temperatura es media''} o \emph{``Temperatura es alta''}.
+Supongamos que la temperatura medida por un termómetro en grados celsius (ºC) es una variable $x$ que puede tomar valores enteros en el intervalo $[0,100]$. Este intervalo de valores posibles es lo que se define como el \emph{universo de discurso} o \emph{universo de referencia} $U$. Podemos definir sobre $U$ los conjuntos difusos \emph{``baja''},\emph{``media''} y \emph{``alta''} para modelar los conceptos de temperatura alta, media y baja respectivamente. Si consideramos que $x$ es una variable lingüística entonces $x$ puede tomar los valores \emph{``baja''},\emph{``media''} y \emph{``alta''}. Es decir, podemos decir que: \emph{``x es baja''},\emph{``x es media''} o \emph{``x es alta''}, o lo que es lo mismo \emph{``Temperatura es baja''},\emph{``Temperatura es media''} o \emph{``Temperatura es alta''}. En la figura \ref{fig:example-temp-lang-variable} se representan las funciones de pertenencia para los conjuntos difusos \emph{``Temperatura baja''},\emph{``Temperatura media''} y \emph{``Temperatura alta''}.
 \end{example}
+
+\begin{figure}[t]
+	\centering
+	\setlength\figureheight{4.5cm}
+	\setlength\figurewidth{12cm}
+	\input{figures/example-temp-lang-variable.tikz}
+	\caption{Ejemplo \ref{ex:lang-variable}: Funciones de pertenencia para los valores \emph{``baja''} ($\mu_{Baja}$),\emph{``media''} ($\mu_{Media}$) y \emph{``alta''} ($\mu_{Alta}$) de la variable lingüística \emph{Temperatura}.}
+	\label{fig:example-temp-lang-variable}
+\end{figure}
 
 \subsection{Operaciones sobre conjuntos difusos}
 En esta sección se definen algunas operaciones básicas sobre conjuntos difusos. Un conjunto difuso compuesto a partir de dos conjuntos difusos sobre el mismo universo \emph{U} puede definirse por su función de pertenencia tal que:
