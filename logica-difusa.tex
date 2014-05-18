@@ -14,6 +14,48 @@ El objetivo principal de la lógica difusa es intentar dotar a las máquinas de 
 
 Por medio del uso de variables lingüísticas se pueden modelar conceptos como \emph{``muy alto''} o \emph{``bastante caliente''} y establecer relaciones entre ellos, expresadas de forma matemática y algorítmica. Los sistemas de lógica difusa tratan la imprecisión de las entradas mediante el uso de variables lingüísticas (expresadas como conjuntos difusos), que transforman dichos valores de entrada en números difusos.
 
+\section{Reglas difusas}
+Una manera de modelar el conocimiento humano es por medio de \emph{reglas difusas IF-THEN}\footnote{Podría traducirse como SI-ENTONCES.}:
+
+\begin{definition}
+Una regla difusa IF-THEN es una estructura condicional de la forma:
+\begin{equation}
+\text{IF [antecedentes] THEN [consecuentes]}
+\end{equation},
+donde [antecedentes] y [consecuentes] son proposiciones difusas.
+\end{definition}
+
+Las proposiciones difusas pueden ser \emph{simples} o \emph{compuestas}. Una proposición difusa simple es un predicado único formado por una variable lingüística \emph{x} y un valor \emph{A} de dicha variable (un conjunto difuso). Es decir, \emph{A} es un conjunto difuso (valor lingüístico) definido sobre el mismo universo de referencia \emph{U} de \emph{x}. Por ejemplo si la variable \emph{x} es la \emph{``Temperatura medida en ºC''} del ejemplo \ref{ex:lang-variable}, entonces las siguientes son proposiciones difusas sobre \emph{x}:
+
+\begin{equation}
+\text{$x$ es B}
+\end{equation}
+\begin{equation}
+\text{$x$ es M}
+\end{equation}
+\begin{equation}
+\text{$x$ es A}
+\end{equation}
+
+donde \emph{B}, \emph{M} y \emph{A} son los valores lingüísticos ``baja'', ``media'' y ``alta'' respectivamente. Estos valores lingüísticos vienen definidos por conjuntos difusos con funciones de pertenencia $\mu_{Baja}$, $\mu_{Media}$ y $\mu_{Alta}$.
+
+Las proposiciones difusas simples se pueden combinar para formar predicados más complejos. Para ello se utilizan normalmente los conectivos \emph{AND} (intersección difusa) y \emph{OR} (unión difusa). Por ejemplo, se puede definir la condición \emph{``Temperatura es Alta Ó Temperatura es Media''} con la siguiente proposición difusa:
+
+\begin{equation}
+\text{$x$ es $A$ OR $x$ es $M$}
+\end{equation}
+
+donde $A$ y $M$ son los valores lingüísticos \emph{``alta''} ($\mu_{Alta}$) y \emph{``media''} ($\mu_{Media}$) respectivamente. En la misma proposición difusa se pueden utilizar variables diferentes (generalmente es así) definidas normalmente sobre universos de referencia diferentes. El consecuente generalmente suele ser una proposición difusa simple formado por una variable \emph{y} sobre \emph{V}. Por ello, se puede definir el concepto de \emph{regla difusa IF-THEN} de manera más formal como:
+
+\begin{definition}
+Una \emph{regla difusa IF-THEN} es una estructura condicional de la forma:
+
+\begin{equation}
+\text{IF $x_{1}$ es $A_{1}$ $\odot$ $x_{2}$ es $A_{2}$ $\odot$ \ldots $\odot$ $x_{n}$ es $A_{n}$ THEN $y$ es $B$}
+\end{equation}
+donde $x_{1} \in U_{i}$,\ldots, $x_{n} \in U_{n}$,$y \in V$ son variables lingüísticas y $\odot$ algún conectivo difuso (AND,OR,AND NOT,etc.).
+\end{definition}
+
 \section{Sistemas difusos basados en reglas}
 Un enfoque muy utilizado a la hora de modelar un sistema de lógica difusa es la utilización de \emph{reglas} expresadas en un lenguaje muy próximo al natural, mediante variables lingüísticas. Estas reglas habitualmente son formuladas por un experto humano aunque pueden ser derivadas también de datos numéricos. A este tipo de sistemas difusos se les denomina \emph{sistemas difusos basados en reglas}. Los métodos estudiados en este trabajo pertenecen a este tipo de sistemas.
 
