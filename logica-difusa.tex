@@ -56,7 +56,7 @@ Una \emph{regla difusa IF-THEN} es una estructura condicional de la forma:
 donde $x_{1} \in U_{i}$,\ldots, $x_{n} \in U_{n}$,$y \in V$ son variables lingüísticas y $\odot$ algún conectivo difuso (AND,OR,AND NOT,etc.).
 \end{definition}
 
-\section{Sistemas difusos basados en reglas}
+\section{Sistemas difusos basados en reglas}\label{sec:sistemas-difusos-basados-en-reglas}
 Un enfoque muy utilizado a la hora de modelar un sistema de lógica difusa es la utilización de \emph{reglas} expresadas en un lenguaje muy próximo al natural, mediante variables lingüísticas. Estas reglas habitualmente son formuladas por un experto humano aunque pueden ser derivadas también de datos numéricos. A este tipo de sistemas difusos se les denomina \emph{sistemas difusos basados en reglas}. Los métodos estudiados en este trabajo pertenecen a este tipo de sistemas.
 
 Existen principalmente 3 tipos de sistemas difusos \cite{wang1997}: sistemas difusos puros, sistemas difusos tipo Takagi-Sugeno-Kang (TKG) y sistemas difusos con difusificador y desdifusificador. A continuación se realiza una breve descripción de las características de estos sistemas.
@@ -92,6 +92,67 @@ El principal problema del método de Takagi-Sugeno-Kang es que el consecuente de
 \end{figure}
 
 En la figura \ref{fig:fuzzy-system} se representa el esquema básico de un sistema difuso con difusificador y desdifusificador. El difusificador transforma las entradas escalares en $U$ del sistema en conjuntos difusos. Una vez realizada la inferencia difusa se obtiene un conjunto difuso como salida. El desdifusificador transforma el conjunto difuso de salida en una variable escalar en $V$. Existen multitud de métodos para realizar estas transformaciones y en siguientes secciones se detallarán algunos de ellos. El sistema difuso presentado en este trabajo se basa en este último tipo de sistema.
+
+\subsection{Difusificadores}
+
+En la sección \ref{sec:sistemas-difusos-basados-en-reglas} se ha definido un tipo de sistema difuso que utiliza un concepto llamado \emph{difusificador} para transformar las entradas escalares del sistema en conjuntos difusos. Un \emph{difusificador} puede definirse formalmente como:
+
+\begin{definition}\label{def:difusificador}
+Un \emph{difusificador} es una función $F:\mathbb{R} \rightarrow FS(U)$ que toma un valor escalar real $x^{*}$ en el universo $U$, $x^{*}\in U \subset \mathbb{R}$, y lo transforma en un conjunto difuso $A'$ sobre $U$.
+\end{definition}
+
+Para que el conjunto de salida represente de manera lo más fiel posible al valor de entrada, es necesario imponer algunas restricciones a la hora de construir el difusificador. La principal es que la función de pertenencia de $A'$ debe tener un valor alto en el punto $x^*$ (generalmente máximo, $\mu_{A'}(x^*) = \max(\mu_{A'}(\mu_{i})),\forall \mu_{i} \in U$). Además, si se considera que existe ruido o imprecisión en los valores entrada (por ejemplo imprecisiones provocadas por instrumentos de medida) se puede utilizar una función de pertenencia cuyo valor sea alto en los puntos próximos a $x^*$ y bajo (o incluso cero) en los más alejados.
+
+Algunos de los difusificadores más utilizados son los siguientes \cite{wang1997}:
+
+\begin{itemize}
+\item\bfseries Difusificador singleton: \normalfont El \emph{difusificador singleton} (fig. \ref{fig:fuzzifier-singleton}) trasnforma un valor escalar real $x^* \in U$ en un conjunto difuso $A'$ en $U$, de forma que la función de pertenencia de $A'$ tiene valor 1 en el punto $x^*$ y 0 en el resto de puntos de $U$:
+\begin{equation}
+\mu_{A'}(x) = \begin{cases} 1 & \mbox{si } \mbox{x}=x^*, \\ 0 & \mbox{en cualquier otro caso} \end{cases}
+\end{equation}
+Este tipo de difusificador tiene la ventaja de ser simple y facilitar los cálculos realizados en el motor de inferencia. Sin embargo, tiene la desventaja de que no puede lidiar con ruido o imprecisiones en los valores de entrada. 
+\item\bfseries Difusificador gaussiano: \normalfont El \emph{difusificador gaussiano} (fig. \ref{fig:fuzzifier-gaussian}) trasnforma un valor escalar real $x^* \in U$ en un conjunto difuso $A'$ en $U$, utilizando una función de pertenencia Gaussiana:
+\begin{equation}
+\mu_{A'}(x) = e^{-(\frac{x_1 - x_1^*}{a_1})^2}\star\ldots\star e^{-(\frac{x_n - x_n^*}{a_n})^2}
+\end{equation}
+donde $a_i$ son parámetros positivos y $\star$ es una t-norma, generalmente el producto algebraico o el mínimo. Este tipo de difusificador es adecuado cuando existe ruido o imprecisiones en los datos de entrada.
+\item\bfseries Difusificador triangular: \normalfont El \emph{difusificador triangular} (fig. \ref{fig:fuzzifier-triangular}) trasnforma un valor escalar real $x^* \in U$ en un conjunto difuso $A'$ en $U$, utilizando una función de pertenencia triangular:
+\begin{equation}
+\mu_{A'}(x) = \begin{cases} (1 - \frac{|x_1 - x_1^*|}{b_1})\star\ldots\star  (1 - \frac{|x_n - x_n^*|}{b_n}) & \mbox{si } |x_i - x_i^*| \leq b_i, i = 1,2,\ldots,n, \\ 0 & \mbox{en cualquier otro caso} \end{cases}
+\end{equation}
+donde $b_i$ son parámetros positivos y $\star$ es una t-norma, generalmente el producto algebraico o el mínimo. Al igual que el difusificador gaussiano este tipo de difusificador es adecuado cuando existe ruido o imprecisiones en los datos de entrada.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}[t]{\textwidth}
+		\setlength\figureheight{4cm}
+		\setlength\figurewidth{12cm}
+		\input{figures/fuzzifiers/fuzzifier_singleton.tikz}
+		\caption{Difusificador singleton.}
+		\label{fig:fuzzifier-singleton}
+	\end{subfigure}
+	
+	\vspace{1 cm}
+	\begin{subfigure}[t]{\textwidth}
+		\setlength\figureheight{4cm}
+		\setlength\figurewidth{12cm}
+		\input{figures/fuzzifiers/fuzzifier_gaussian.tikz}
+		\caption{Difusificador gaussiano.}
+		\label{fig:fuzzifier-gaussian}
+	\end{subfigure}
+	
+	\vspace{1 cm}
+	\begin{subfigure}[t]{\textwidth}
+		\setlength\figureheight{4cm}
+		\setlength\figurewidth{12cm}
+		\input{figures/fuzzifiers/fuzzifier_triangular.tikz}
+		\caption{Difusificador triangular.}
+		\label{fig:fuzzifier-triangular}
+	\end{subfigure}
+		\caption{Representación de las funciones de pertenencia obtenidas con los difusificadores \emph{singleton} (\ref{fig:fuzzifier-singleton}), \emph{gaussiano} (\ref{fig:fuzzifier-gaussian}) y \emph{triangular} (\ref{fig:fuzzifier-triangular}).}
+		\label{fig:fuzzifiers}
+\end{figure}
 
 \section{El controlador de Mamdani}
 El método de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.
