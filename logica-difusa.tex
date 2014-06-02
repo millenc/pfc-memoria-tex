@@ -93,7 +93,7 @@ El principal problema del método de Takagi-Sugeno-Kang es que el consecuente de
 
 En la figura \ref{fig:fuzzy-system} se representa el esquema básico de un sistema difuso con difusificador y desdifusificador. El difusificador transforma las entradas escalares en $U$ del sistema en conjuntos difusos. Una vez realizada la inferencia difusa se obtiene un conjunto difuso como salida. El desdifusificador transforma el conjunto difuso de salida en una variable escalar en $V$. Existen multitud de métodos para realizar estas transformaciones y en siguientes secciones se detallarán algunos de ellos. El sistema difuso presentado en este trabajo se basa en este último tipo de sistema.
 
-\subsection{Difusificadores}
+\subsection{Difusificadores}\label{sec:difusificadores}
 
 En la sección \ref{sec:sistemas-difusos-basados-en-reglas} se ha definido un tipo de sistema difuso que utiliza un concepto llamado \emph{difusificador} para transformar las entradas escalares del sistema en conjuntos difusos. Un \emph{difusificador} puede definirse formalmente como:
 
@@ -153,6 +153,61 @@ donde $b_i$ son parámetros positivos y $\star$ es una t-norma, generalmente el 
 		\caption{Representación de las funciones de pertenencia obtenidas con los difusificadores \emph{singleton} (\ref{fig:fuzzifier-singleton}), \emph{gaussiano} (\ref{fig:fuzzifier-gaussian}) y \emph{triangular} (\ref{fig:fuzzifier-triangular}).}
 		\label{fig:fuzzifiers}
 \end{figure}
+
+\subsection{Desdifusificadores}
+El último paso en el sistema difuso definido en \ref{sec:sistemas-difusos-basados-en-reglas} es la \emph{desdifusificación}, es decir, transformar el conjunto difuso, obtenido al aplicar las reglas de inferencia, en un valor escalar. Puede decirse que un desdifusificador realiza la operación complementaria a un difusificador (descritos en la sección \ref{sec:difusificadores}). Así pues, un desdifusificador puede definirse como \cite{wang1997}:
+
+\begin{definition}
+Un \emph{desdifusificador} es una función que transforma un conjunto difuso $B'$ en $V \subset \mathbb{R}$ (la salida del sistema de inferencia difusa) en un valor escalar $y^* \in V$.
+\end{definition}
+
+La misión de un desdifusificador es obtener el punto $y^*$ en $V$ que mejor representa al conjunto difuso $B'$. En este sentido, los desdifusificadores cumplen un rol similar a los operadores de agregación (por ejemplo la media aritmética). Se pueden utilizar diversas funciones como desdifusificadores, aunque generalmente se eligen aquellas que satisfacen las siguientes condiciones \cite{hellendoorn93}:
+
+\begin{itemize}
+\item\bfseries Continuidad: \normalfont Un cambio pequeño en la entrada del sistema difuso no debería causar una gran variación en la salida.
+\item\bfseries Desambiguación: \normalfont El método de difusificación debe devolver un único valor para $y^*$. Es decir, no debe existir ambigüedad a la hora de seleccionar el valor para $y^*$.
+\item\bfseries Plausibilidad: \normalfont El punto $y^*$ debe representar al conjunto difuso $B'$ de forma intuitiva. Es decir, el punto $y^*$ debe estar aproximadamente en el centro del soporte de $B'$ y tener un grado de pertenencia alto en $B'$.
+\item\bfseries Simplicidad computacional: \normalfont La función debe ser lo más sencilla posible de calcular. Esto es especialmente importante en controladores difusos que operan en tiempo real.
+\item\bfseries Método de ponderado: \normalfont El método seleccionado debe ponderar los diferentes conjuntos de salida. Este criterio depende del ámbito del problema.
+\end{itemize}
+A continuación se presentan algunos de los métodos de desdifusificación más utilizados:
+
+\begin{itemize}
+  \item\bfseries Centroide: \normalfont También conocido como \emph{centro de gravedad}, el método del \emph{centroide} fue propuesto por Sugeno en 1985 y es uno de los métodos más utilizados \cite{lee1990}. Este método obtiene el valor $y^*$ como el centro del área cubierta por la función de pertenencia de $B'$. El método del centro de gravedad puede definirse como:
+  \begin{equation}
+	y^* = \frac{\int_V y \mu_{B'}(y)dy}{\int_V \mu_{B'}(y)dy}
+  \end{equation}
+  donde $\int_V$ es la integral convencional. Este método tiene la ventaja de que proporciona un valor plausible de forma intuitiva. Sin embargo tiene la importante desventaja de que es muy costoso computacionalmente. 
+  \item\bfseries Bisector: \normalfont El método del bisector obtiene el punto por el que pasa la línea que divide la región delimitada por la función de pertenencia de $B'$ y el eje de abscisas, en dos subsecciones de igual área:
+  \begin{equation}
+	y^*\text{ tal que: } \int\limits_{y_0}^{y^*}\mu_{B'}(y)dy = \int\limits_{y^*}^{y_n}\mu_{B'}(y)dy
+  \end{equation}
+  El valor obtenido con este método coincide en ocasiones con el método del \emph{centroide} y también es computacionalmente costoso.
+  \item\bfseries Máximo: \normalfont El defusificador del máximo obtiene el punto $y^*$ en el que la función de pertenencia $\mu_{B'}(y)$ alcanza su máximo valor. Es decir:
+  \begin{equation}
+	y^*\text{ tal que: } \mu_{B'}(y^*) = \max(\mu_{B'}(y_{i}))\qquad ,\forall y_{i} \in V
+  \end{equation}
+  Este método tiene la ventaja de ser fácil de implementar y poco costoso de calcular. Sin embargo, puede producir resultados ambiguos, puesto que pueden existir varios puntos en los que $\mu_{B'}(y)$ alcanza un valor máximo. En el caso de que existan varios puntos con valores máximos es necesario imponer algún criterio para seleccionar uno de ellos. Si se construye el conjunto:
+  \begin{equation}
+	hgt(B') = \{y \in V | \mu_{B'}(y) = \sup\limits_{y \in V}\mu_{B'}(y)\}
+  \end{equation}
+  es decir, el conjunto de todos los puntos en $V$ donde $\mu_{B'}(y)$ alcanza su valor máximo. El desdifusificador del máximo obtiene un elemento arbitrario $y^*$ del conjunto $hgt(B')$, es decir:
+  \begin{equation}
+	y^* = \text{ cualquier punto en } hgt(B')
+  \end{equation}
+  \item\bfseries Menor de máximos: \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{menor de máximos} obtiene el menor punto $y^*$ del conjunto tal que:
+  \begin{equation}
+	y^* = \inf\{y \in hgt(B')\}
+  \end{equation}
+  \item\bfseries Mayor de máximos: \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{mayor de máximos} obtiene el mayor punto $y^*$ del conjunto tal que:
+   \begin{equation}
+  	y^* = \sup\{y \in hgt(B')\}
+    \end{equation}
+   \item\bfseries Media de máximos: \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{media de máximos} obtiene el punto medio $y^*$ del conjunto tal que:
+   \begin{equation}
+     	y^* = \frac{ \inf\{y \in hgt(B')\} + \sup\{y \in hgt(B')\}}{2}
+   \end{equation}
+\end{itemize}
 
 \section{El controlador de Mamdani}
 El método de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.
