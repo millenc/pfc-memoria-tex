@@ -195,19 +195,28 @@ A continuación se presentan algunos de los métodos de desdifusificación más 
   \begin{equation}
 	y^* = \text{ cualquier punto en } hgt(B')
   \end{equation}
-  \item\bfseries Menor de máximos: \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{menor de máximos} obtiene el menor punto $y^*$ del conjunto tal que:
+  \item\bfseries Menor de máximos (SOM, \emph{smallest of maximum}): \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{menor de máximos} obtiene el menor punto $y^*$ del conjunto tal que:
   \begin{equation}
 	y^* = \inf\{y \in hgt(B')\}
   \end{equation}
-  \item\bfseries Mayor de máximos: \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{mayor de máximos} obtiene el mayor punto $y^*$ del conjunto tal que:
+  \item\bfseries Mayor de máximos (LOM, \emph{largest of maximum}): \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{mayor de máximos} obtiene el mayor punto $y^*$ del conjunto tal que:
    \begin{equation}
   	y^* = \sup\{y \in hgt(B')\}
     \end{equation}
-   \item\bfseries Media de máximos: \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{media de máximos} obtiene el punto medio $y^*$ del conjunto tal que:
+   \item\bfseries Media de máximos (MOM, \emph{mean of maximum}): \normalfont Dado el conjunto $hgt(B')$ con todos los puntos donde $\mu_{B'}(y)$ alcanza su valor máximo, el desdifusificador \emph{media de máximos} obtiene el punto medio $y^*$ del conjunto tal que:
    \begin{equation}
      	y^* = \frac{ \inf\{y \in hgt(B')\} + \sup\{y \in hgt(B')\}}{2}
    \end{equation}
 \end{itemize}
+En la figura \ref{fig:defuzzifiers} se presenta una función de pertenencia y los resultados de aplicar los desdifusificadores definidos anteriormente. En este caso, los resultados obtenidos con el método del \emph{centroide} y el \emph{bisector} coinciden, aunque no siempre tiene por qué ser así.
+\begin{figure}[t]
+	\centering
+	\setlength\figureheight{5.5cm}
+	\setlength\figurewidth{12cm}
+	\input{figures/defuzzifiers.tikz}
+	\caption{Resultado de aplicar los desdifusificadores \emph{centroide} (\textasteriskcentered), \emph{bisector}(+), \emph{media de máximos} ($\square$), \emph{menor de máximos}($\triangledown$) y \emph{mayor de máximos}($\vartriangle$).}
+	\label{fig:defuzzifiers}
+\end{figure}
 
 \section{El controlador de Mamdani}
 El método de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.
