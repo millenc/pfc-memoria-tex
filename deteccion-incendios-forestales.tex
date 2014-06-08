@@ -15,7 +15,79 @@ El diseño y despliegue de una red de sensores inalámbricos queda totalmente fu
 Las mediciones realizadas por la red de sensores constituyen las entradas del sistema de inferencia y decisión. Estas entradas son, originalmente, valores escalares que son transformados por el sistema de lógica difusa en valores difusos (por medio de variables lingüísticas). Esto permite realizar, sobre estas mediciones, un proceso de razonamiento aproximado que puede tratar mejor las imprecisiones, en comparación con utilizar dichos valores escalares directamente.
 
 
-\section{Magnitudes medidas y variables linguísticas}
+\section{Magnitudes medidas y variables lingüísticas}
+
+Las entradas del sistema difuso son valores escalares de magnitudes que describen el incendio forestal, tales como la temperatura o la luminosidad, medidas por la red de sensores. Para cada una de estas magnitudes se define una variable lingüística con tres valores posibles (definidas por sus correspondientes funciones de pertenencia). Así pues, los valores escalares de entrada serán transformados en conjuntos difusos que posteriormente serán comparados con las variables lingüísticas según las reglas definidas, para obtener como salida el riesgo de incendio (que es también una variable lingüística). Estas variables lingüísticas así como sus correspondientes universos (rangos de valores posibles) son:
+
+\begin{enumerate}[label=($\chi_\arabic*$),ref=(X\arabic*)]
+   \item \bfseries Temperatura: \normalfont medida en grados centígrados (0ºC a 120ºC).
+   \item \bfseries Humo: \normalfont medida en partes por millón (0 a 100ppm).
+   \item \bfseries Luz: \normalfont medida en lux (0 a 1000 lux).
+   \item \bfseries Humedad: \normalfont medida en partes por millón (0 a 100ppm).
+   \item \bfseries Distancia: \normalfont medida en metros (0 a 80m).
+\end{enumerate}
+
+Para cada una de estas variables lingüísticas se definen tres valores posibles: \emph{Baja} (L,\emph{Low}), \emph{Media} (M, \emph{Medium}) y \emph{Alta} (H, \emph{High}) que los valores tienen el sentido de \emph{Cerca} (C, \emph{Close}), \emph{Media} (M, \emph{Medium}) y \emph{Lejos} (F, \emph{Far}) respectivamente.
+
+La salida del sistema viene dada por la variable lingüística $y = $ \emph{``Riesgo de incendio''}, que determina el riesgo de incendio forestal en una escala del 0 al 100 (\%). Esta variable lingüística puede tomar los valores: \emph{Muy bajo} (VL, \emph{Very Low}), \emph{Bajo} (L, \emph{Low}), \emph{Medio} (M, \emph{Medium}), \emph{Alto} (H, \emph{High}) y \emph{Muy Alto} (VH, \emph{Very High}). 
+
+En la figura \ref{fig:fire-detection-lang-variables} se representan las variables lingüística descritas anteriormente. Como se puede ver, se han elegido funciones de pertenencia lineales para modelar los valores de las variables lingüísticas.
+
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{2.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-lang-variables/temp_lang_variable.tikz}
+		\caption{$\chi_1$ - Temperatura (ºC)}
+		\label{fig:temp-lang-variable}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{2.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-lang-variables/smoke_lang_variable.tikz}
+		\caption{$\chi_2$ - Humo (ppm)}
+		\label{fig:smoke-lang-variable}
+	\end{subfigure}
+	
+	\vspace{1 cm}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{2.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-lang-variables/light_lang_variable.tikz}
+		\caption{$\chi_3$ - Luz (lux)}
+		\label{fig:light-lang-variable}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{2.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-lang-variables/humidity_lang_variable.tikz}
+		\caption{$\chi_4$ - Humedad (ppm)}
+		\label{fig:humidity-lang-variable}
+	\end{subfigure}
+	
+	\vspace{1 cm}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{2.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-lang-variables/distance_lang_variable.tikz}
+		\caption{$\chi_5$ - Distancia (m)}
+		\label{fig:distance-lang-variable}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{2.5cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-lang-variables/threat_lang_variable.tikz}
+		\caption{$y$ - Riesgo de incendio (\%)}
+		\label{fig:threat-lang-variable}
+	\end{subfigure}
+	\caption{Variables lingüísticas utilizadas en la determinación de riesgo de incendios.}
+	\label{fig:fire-detection-lang-variables}
+\end{figure}
+
 \section{Conjunto de reglas}
 
 
