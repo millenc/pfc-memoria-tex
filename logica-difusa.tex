@@ -219,7 +219,35 @@ En la figura \ref{fig:defuzzifiers} se presenta una función de pertenencia y lo
 \end{figure}
 
 \section{El controlador de Mamdani}
-El método de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.
+Uno de los métodos de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.
+
+El método de Mamdani utiliza reglas difusas de la forma:
+
+\begin{equation}
+R_{i}: \text{IF }\chi_{1}\text{ es }A_{i1}\text{, }\chi_{2}\text{ es }A_{i2}\text{ , \ldots , }\chi_{n}\text{ es }A_{im}\text{ THEN } y \text{ es } B_i
+\end{equation}
+
+donde $\chi_1,\ldots,\chi_m$ son variables lingüísticas cuyos valores son conjuntos difusos $A_{ij} \subset FS(U_j)$ con $j\in\{1,\ldots,m\}$. El consecuente $y$ es también una variable lingüística sobre $Y$ ($B_i \subset FS(Y)$). Las entradas del sistema son valores escalares $x_1 \in U_1,\ldots,x_m \in U_m$. 
+
+Cada regla se evalúa por separado y se obtiene el grado de pertenencia de cada entrada al conjunto difuso de su correspondiente antecedente, utilizando el operador mínimo para realizar la conjunción AND de los antecedentes ($k_i = \min(\mu_{Ai1}(x_1),\ldots,\mu_{Aim}(x_m))$). A este valor $k_i$ se le denomina normalmente \emph{grado de activación} de la regla. El resultado de evaluar cada regla es un conjunto difuso sobre $Y$ ($B_i'$), que se calcula ``truncando'' el consecuente con el grado de activación ($B_i' = \{(y,\min(B_i(y),k_i))|y \in Y\}$). En el caso de múltiples reglas, el conjunto difuso de salida se calcula combinando los conjuntos difusos obtenidos en cada regla utilizando el máximo ($B'(y) = \max\limits_{i=1}^{n}(B_i')$).
+
+\begin{algorithm}
+\caption{Método de Mamdani}
+\DontPrintSemicolon
+\KwIn{Un conjunto de reglas $R_{i}$ ($i \in \{1,\ldots,n\}$) con varios antecedentes $A_{ij}$ ($j \in \{1,\ldots,m\}$)  y entradas escalares $x_1,\ldots,x_m$.}
+\KwOut{\emph{B'}.}
+\For{$i \in \{1,\ldots,n\}$} {
+Calcular $k_i = \min(\mu_{Ai1}(x_1),\ldots,\mu_{Aim}(x_m))$ \\
+Calcular $B_i' = \{(y,\min(B_i(y),k_i))|y \in Y\}$
+}
+Construir $B' = \{(y, B'(y))|y \in Y\}$ dado por: \\
+\centering
+\nonl $B'(y) = \max\limits_{i=1}^{n}(B_i')$.\\
+\Return{$B'$}\;
+\end{algorithm}
+
+La principal ventaja del método de Mamdani es que es relativamente sencillo de implementar y computacionalmente eficiente. El método de Larsen es similar, pero utilizando el producto en vez del mínimo como operador de implicación \cite{larsen1980}.
+
 \section{Método de interpolación basado en índices de solapamiento}
 En esta sección se introduce un nuevo método para resolver sistemas basados en reglas que generaliza el método clásico de interpolación , utilizando para ello índices de solapamiento \cite{bustince2013overlap}.\\
 \\
