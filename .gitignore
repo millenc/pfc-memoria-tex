@@ -13,4 +13,5 @@
 *.idx
 *.ilg
 *.ind
+*.out
 .DS_Store
