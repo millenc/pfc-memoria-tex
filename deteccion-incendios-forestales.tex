@@ -351,3 +351,96 @@ Donde $\chi_1,\ldots,\chi_n$ son las variables de entrada del sistema difuso (de
     \label{tab:fire-detection-rule-set}
     \end{longtable}
 \end{center}
+
+\section{Resultados y comparación de métodos}
+En esta sección se presentan los resultados obtenidos al aplicar los métodos descritos en secciones anteriores y se realiza una comparativa de los mismos, usando diferentes t-normas e índices de solapamiento (en el caso del algoritmo \ref{algo:multi-overlap-interpolation-method}). 
+
+\subsection{Método de Mamdani}
+El primer método estudiado es el \emph{método de Mamdani}, presentado en la sección \ref{sec:mamdani-controller} (algoritmo \ref{algo:mamdani}). En la figura \ref{fig:mamdani-fire-detection-example} y en la tabla \ref{tab:fire-detection-mamdani-example} se presentan los resultados de aplicar el método de Mamdani, utilizando el conjunto de reglas definidas en la tabla \ref{tab:fire-detection-rule-set} a diferentes entradas. Las entradas del sistema son valores escalares para cada una de las variables lingüísticas:
+
+\begin{center}
+	%\def\arraystretch{1.5}
+    \begin{longtable}{| c | c | c | c | c | c | c | c | c  | c  | c |}
+    \hline
+    \multirow{2}{*}{\textbf{Fig.}} & \multirow{2}{*}{\textbf{Temp.}} & \multirow{2}{*}{\textbf{Humo}} & \multirow{2}{*}{\textbf{Luz}}& \multirow{2}{*}{\textbf{Hum.}} & \multirow{2}{*}{\textbf{Dist.}} &  \multicolumn{5}{|c|}{\textbf{Riesgo (\%)}} \\ 
+    \cline{7-11}
+    & & & & & & \textbf{cent.  (\textasteriskcentered)} & \textbf{bis. (+)} & \textbf{som ($\triangledown$)} & \textbf{mom ($\square$)} & \textbf{lom ($\vartriangle$)}  \\ 
+    \hline
+    \ref{fig:fire-detection-mamdani-low} & 25 & 0 & 200 & 20 & 70 & 20 & 18 & 0 & 6 & 12 \\ 
+    \hline
+    \ref{fig:fire-detection-mamdani-low-medium} & 30 & 20 & 500 & 50 & 40 & 35 & 33 & 10 & 25 & 40 \\
+    \hline
+    \ref{fig:fire-detection-mamdani-medium} & 40 & 50 & 500 & 30 & 40 & 43 & 45 & 38 & 50 & 62 \\
+    \hline
+    \ref{fig:fire-detection-mamdani-high} & 100 & 90 & 900 & 0 & 20 & 80 & 82 & 84 & 92 & 100 \\
+    \hline
+    \caption{Resultados de aplicar el método de Mamdani a la detección de incendios forestales. Las gráficas correspondientes se muestran en la figura \ref{fig:mamdani-fire-detection-example}.}
+    \end{longtable}
+    \label{tab:fire-detection-mamdani-example}
+\end{center}
+
+Los valores de salida (riesgo (\%)) se obtienen aplicando los desdifusificadores definidos en la sección \ref{sec:desdifusificadores} al conjunto difuso obtenido al aplicar el método de Mamdani sobre las entradas (representados en la figura \ref{fig:mamdani-fire-detection-example}). 
+
+Se puede comprobar que los resultados obtenidos con el método de Mamdani parecen ser intuitivamente correctos. En el primer ejemplo (fig. \ref{fig:fire-detection-mamdani-low}) las entradas sugieren un riesgo de incendio bajo, debido a la baja temperatura medida, el humo inexistente y la baja luminosidad. Aplicando el método de Mamdani efectivamente se obtiene un nivel de riesgo bajo (entre 0\% y 20\%). 
+
+Como se puede ver, en general, los valores obtenidos con el desdifusificador \emph{centroide} y el \emph{bisector} son similares y pueden diferir ampliamente de los obtenidos con los métodos basados en el máximo. En este ejemplo se puede comprobar además que los desdifusificadores basados en el máximo pueden no dar resultados intuitivamente acertados, ya que el método del menor de los máximos da un resultado del 0\% de riesgo en el primer ejemplo, a pesar de que las entradas no son mínimas.
+
+A medida que aumentan la temperatura, el humo y la luz y disminuyen la humedad y la distancia el riesgo de incendio aumenta (figuras \ref{fig:fire-detection-mamdani-medium} y \ref{fig:fire-detection-mamdani-high}), lo cual es coherente con lo expresado en el conjunto de reglas.
+
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{3cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-results/mamdani/mamdani-T25_S0_L200_H20_D70.tikz}
+		\caption{Riesgo bajo.}\label{fig:fire-detection-mamdani-low}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{3cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-results/mamdani/mamdani-T30_S20_L500_H50_D40.tikz}
+		\caption{Riesgo bajo-medio.}\label{fig:fire-detection-mamdani-low-medium}
+	\end{subfigure}
+	
+	\vspace{1cm}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{3cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-results/mamdani/mamdani-T40_S50_L500_H30_D40.tikz}
+		\caption{Riesgo medio.}\label{fig:fire-detection-mamdani-medium}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{3cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-results/mamdani/mamdani-T100_S90_L900_H0_D20.tikz}
+		\caption{Riesgo alto.}\label{fig:fire-detection-mamdani-high}
+	\end{subfigure}
+	\caption{Método de Mamdani aplicado a la detección de incendios forestales.}
+	\label{fig:mamdani-fire-detection-example}
+\end{figure}
+
+\subsection{Método de interpolación basada índices de solapamiento}
+Para ejecutar el algoritmo \ref{algo:multi-overlap-interpolation-method} es necesario seleccionar una t-norma(\emph{T}), un operador de agregación(\emph{M}) y un índice de solapamiento (\emph{O}). En este estudio se va a utilizar la media aritmética como operador de agregación. En cuanto a las t-normas, se van a utilizar las siguientes:
+
+\begin{itemize}
+	\item \bfseries Mínimo: $T_{min}(x_{1},x_{2},\cdots,x_{n}) = \min\{x_{1},x_{2},\cdots,x_{n}\}$
+	\item \bfseries Producto: $T_{prod}(x_{1},x_{2},\cdots,x_{n}) = x_{1}*x_{2} * \cdots * x_{n}$
+	\item \bfseries Media geométrica: $T_{geo}(x_{1},x_{2},\cdots,x_{n}) = (\prod\limits_{i=1}^{n}x_{i})^{\frac{1}{n}}$
+	\item \bfseries Media armónica: $T_{harm}(x_{1},x_{2},\cdots,x_{n}) = \frac{n}{\sum_{i=1}^{n}\frac{1}{x_i}}$
+	\item \bfseries Seno: $T_{sin}(x_{1},x_{2},\cdots,x_{n}) = \frac{1}{n}\sin(\frac{\pi}{2}(x_1 * x_2 * \ldots * x_n))^{\frac{1}{4}}$
+	\item \bfseries Einstein: $T_{einstein}(x_{1},x_{2},\cdots,x_{n}) = \frac{(x_{1}*x_{2} * \cdots * x_{n})}{1 + (1 - x_{1} )* \ldots * (1 - x_{n} )}$
+\end{itemize}
+
+Además se van a utilizar los siguientes índices de solapamiento:
+
+\begin{itemize}
+	\item \bfseries Media de productos: $O_{\pi}(A,B) = \frac{1}{n}\sum_{i=1}^{n}\mu_A(x_i)*\mu_B(x_i)$
+	\item \bfseries Media de mínimos: $O_{avgmin}(A,B) = \frac{1}{n}\sum_{i=1}^{n}\min(\mu_A(x_i),\mu_B(x_i))$
+	\item \bfseries Máximo de mínimos: $O_{Z}(A,B) = \max\limits_{i=1}^{n}(\min(\mu_A(x_i),\mu_B(x_i)))$
+	\item \bfseries Media de raíces cuadradas: $O_{\sqrt{\text{ }}}(A,B) =  \frac{1}{n}\sum_{i=1}^{n}\sqrt{\mu_A(x_i)*\mu_B(x_i)}$
+	\item \bfseries Media del seno:  $O_{sin}(A, B) = \frac{1}{n}\sum_{i=1}^{n}\sin(\frac{\pi}{2}(\mu_A(x_i)*\mu_B(x_i)))^{\frac{1}{4}}$
+\end{itemize}
+
+

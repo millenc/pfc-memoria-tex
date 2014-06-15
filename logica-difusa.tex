@@ -154,7 +154,7 @@ donde $b_i$ son parámetros positivos y $\star$ es una t-norma, generalmente el 
 		\label{fig:fuzzifiers}
 \end{figure}
 
-\subsection{Desdifusificadores}
+\subsection{Desdifusificadores}\label{sec:desdifusificadores}
 El último paso en el sistema difuso definido en \ref{sec:sistemas-difusos-basados-en-reglas} es la \emph{desdifusificación}, es decir, transformar el conjunto difuso, obtenido al aplicar las reglas de inferencia, en un valor escalar. Puede decirse que un desdifusificador realiza la operación complementaria a un difusificador (descritos en la sección \ref{sec:difusificadores}). Así pues, un desdifusificador puede definirse como \cite{wang1997}:
 
 \begin{definition}
@@ -218,7 +218,7 @@ En la figura \ref{fig:defuzzifiers} se presenta una función de pertenencia y lo
 	\label{fig:defuzzifiers}
 \end{figure}
 
-\section{El controlador de Mamdani}
+\section{El controlador de Mamdani}\label{sec:mamdani-controller}
 Uno de los métodos de inferencia difusa más utilizado es el llamado \emph{controlador de Mamdani} \cite{Mamdani1975}, propuesto por Mamdani y Assilian en 1975 para realizar el control de un motor de vapor a partir de un conjunto de reglas obtenidas de operadores humanos experimentados.
 
 El método de Mamdani utiliza reglas difusas de la forma:
@@ -233,6 +233,7 @@ Cada regla se evalúa por separado y se obtiene el grado de pertenencia de cada 
 
 \begin{algorithm}
 \caption{Método de Mamdani}
+\label{algo:mamdani}
 \DontPrintSemicolon
 \KwIn{Un conjunto de reglas $R_{i}$ ($i \in \{1,\ldots,n\}$) con varios antecedentes $A_{ij}$ ($j \in \{1,\ldots,m\}$)  y entradas escalares $x_1,\ldots,x_m$.}
 \KwOut{\emph{B'}.}
