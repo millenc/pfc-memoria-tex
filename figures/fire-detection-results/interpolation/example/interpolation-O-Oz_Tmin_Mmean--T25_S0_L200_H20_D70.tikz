@@ -1,0 +1,144 @@
+% This file was created by matlab2tikz v0.4.7 running on MATLAB 8.0.
+% Copyright (c) 2008--2014, Nico Schlömer <nico.schloemer@gmail.com>
+% All rights reserved.
+% Minimal pgfplots version: 1.3
+% 
+%
+% defining custom colors
+\definecolor{mycolor1}{rgb}{0.00000,1.00000,1.00000}%
+\definecolor{mycolor2}{rgb}{1.00000,0.00000,1.00000}%
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=\figurewidth,
+height=\figureheight,
+scale only axis,
+xmin=0,
+xmax=100,
+xlabel={Riesgo (\%)},
+ymin=0,
+ymax=0.01,
+axis x line*=bottom,
+axis y line*=left
+]
+\addplot [color=black,solid,line width=1.2pt,forget plot]
+  table[row sep=crcr]{0	0.00617283950617284\\
+1	0.00666666666666667\\
+2	0.0071604938271605\\
+3	0.00765432098765432\\
+4	0.00814814814814815\\
+5	0.00864197530864198\\
+6	0.0091358024691358\\
+7	0.00938271604938272\\
+8	0.00946502057613169\\
+9	0.00946502057613169\\
+10	0.00946502057613169\\
+11	0.00946502057613169\\
+12	0.00946502057613169\\
+13	0.00938271604938272\\
+14	0.00921810699588477\\
+15	0.00905349794238683\\
+16	0.00888888888888889\\
+17	0.00872427983539095\\
+18	0.008559670781893\\
+19	0.00823045267489712\\
+20	0.00740740740740741\\
+21	0.0065843621399177\\
+22	0.00576131687242798\\
+23	0.00493827160493827\\
+24	0.00411522633744856\\
+25	0.00329218106995885\\
+26	0.00329218106995885\\
+27	0.00329218106995885\\
+28	0.00329218106995885\\
+29	0.00329218106995885\\
+30	0.00329218106995885\\
+31	0.00329218106995885\\
+32	0.00329218106995885\\
+33	0.00329218106995885\\
+34	0.00329218106995885\\
+35	0.00329218106995885\\
+36	0.00329218106995885\\
+37	0.00329218106995885\\
+38	0.00329218106995885\\
+39	0.00329218106995885\\
+40	0.00329218106995885\\
+41	0.00329218106995885\\
+42	0.00329218106995885\\
+43	0.00320987654320988\\
+44	0.00296296296296296\\
+45	0.00246913580246914\\
+46	0.00197530864197531\\
+47	0.00148148148148148\\
+48	0.000987654320987654\\
+49	0.000493827160493828\\
+50	0\\
+51	0\\
+52	0\\
+53	0\\
+54	0\\
+55	0\\
+56	0\\
+57	0\\
+58	0\\
+59	0\\
+60	0\\
+61	0\\
+62	0\\
+63	0\\
+64	0\\
+65	0\\
+66	0\\
+67	0\\
+68	0\\
+69	0\\
+70	0\\
+71	0\\
+72	0\\
+73	0\\
+74	0\\
+75	0\\
+76	0\\
+77	0\\
+78	0\\
+79	0\\
+80	0\\
+81	0\\
+82	0\\
+83	0\\
+84	0\\
+85	0\\
+86	0\\
+87	0\\
+88	0\\
+89	0\\
+90	0\\
+91	0\\
+92	0\\
+93	0\\
+94	0\\
+95	0\\
+96	0\\
+97	0\\
+98	0\\
+99	0\\
+100	0\\
+};
+\addplot [color=blue,line width=1.2pt,mark size=4.5pt,only marks,mark=asterisk,mark options={solid},forget plot]
+  table[row sep=crcr]{18	0.008559670781893\\
+};
+\addplot [color=green,line width=1.2pt,mark size=4.5pt,only marks,mark=+,mark options={solid},forget plot]
+  table[row sep=crcr]{15	0.00905349794238683\\
+};
+\addplot [color=red,line width=1.2pt,mark size=3.2pt,only marks,mark=square,mark options={solid},forget plot]
+  table[row sep=crcr]{10	0.00946502057613169\\
+};
+\addplot [color=mycolor1,line width=1.2pt,mark size=3.0pt,only marks,mark=triangle,mark options={solid,rotate=180},forget plot]
+  table[row sep=crcr]{8	0.00946502057613169\\
+};
+\addplot [color=mycolor2,line width=1.2pt,mark size=3.0pt,only marks,mark=triangle,mark options={solid},forget plot]
+  table[row sep=crcr]{12	0.00946502057613169\\
+};
+\end{axis}
+\end{tikzpicture}%

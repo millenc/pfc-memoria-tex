@@ -443,4 +443,61 @@ Además se van a utilizar los siguientes índices de solapamiento:
 	\item \bfseries Media del seno:  $O_{sin}(A, B) = \frac{1}{n}\sum_{i=1}^{n}\sin(\frac{\pi}{2}(\mu_A(x_i)*\mu_B(x_i)))^{\frac{1}{4}}$
 \end{itemize}
 
+Así por ejemplo, si tomamos $M = \text{Media aritmética}$, $T = T_{min}$ y $O = O_Z$ y aplicamos el método de interpolación(algoritmo \ref{algo:multi-overlap-interpolation-method}) a las entradas de la tabla \ref{tab:fire-detection-mamdani-example} se obtienen los resultados mostrados en la tabla \ref{tab:fire-detection-interpolation-example} y la figura \ref{fig:interpolation-fire-detection-example}:
 
+\begin{center}
+	%\def\arraystretch{1.5}
+    \begin{longtable}{| c | c | c | c | c | c | c | c | c  | c  | c |}
+    \hline
+    \multirow{2}{*}{\textbf{Fig.}} & \multirow{2}{*}{\textbf{Temp.}} & \multirow{2}{*}{\textbf{Humo}} & \multirow{2}{*}{\textbf{Luz}}& \multirow{2}{*}{\textbf{Hum.}} & \multirow{2}{*}{\textbf{Dist.}} &  \multicolumn{5}{|c|}{\textbf{Riesgo (\%)}} \\ 
+    \cline{7-11}
+    & & & & & & \textbf{cent.  (\textasteriskcentered)} & \textbf{bis. (+)} & \textbf{som ($\triangledown$)} & \textbf{mom ($\square$)} & \textbf{lom ($\vartriangle$)}  \\ 
+    \hline
+    \ref{fig:fire-detection-interpolation-low} & 25 & 0 & 200 & 20 & 70 & 18 & 15 & 8 & 10 & 12  \\ 
+    \hline
+    \ref{fig:fire-detection-interpolation-low-medium} & 30 & 20 & 500 & 50 & 40 & 30 & 30 & 32 & 36 & 40 \\
+    \hline
+    \ref{fig:fire-detection-interpolation-medium} & 40 & 50 & 500 & 30 & 40 & 41 & 41 & 38 & 42 & 45 \\
+    \hline
+    \ref{fig:fire-detection-interpolation-high} & 100 & 90 & 900 & 0 & 20 & 85 & 87 & 84 & 90 & 95 \\
+    \hline
+    \caption{Resultados de aplicar el método de interpolación con $M = \text{Media aritmética}$, $T = T_{min}$ y $O = O_Z$  a la detección de incendios forestales. Las gráficas correspondientes se muestran en la figura \ref{fig:interpolation-fire-detection-example}.}
+    \end{longtable}
+    \label{tab:fire-detection-interpolation-example}
+\end{center}
+
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{3cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-results/interpolation/example/interpolation-O-Oz_Tmin_Mmean--T25_S0_L200_H20_D70.tikz}
+		\caption{Riesgo bajo.}\label{fig:fire-detection-interpolation-low}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{3cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-results/interpolation/example/interpolation-O-Oz_Tmin_Mmean--T30_S20_L500_H50_D40.tikz}
+		\caption{Riesgo bajo-medio.}\label{fig:fire-detection-interpolation-low-medium}
+	\end{subfigure}
+	
+	\vspace{1cm}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{3cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-results/interpolation/example/interpolation-O-Oz_Tmin_Mmean--T40_S50_L500_H30_D40.tikz}
+		\caption{Riesgo medio.}\label{fig:fire-detection-interpolation-medium}
+	\end{subfigure}
+	\qquad
+	\begin{subfigure}[b]{0.45\textwidth}
+		\setlength\figureheight{3cm}
+		\setlength\figurewidth{6cm}
+		\input{figures/fire-detection-results/interpolation/example/interpolation-O-Oz_Tmin_Mmean--T100_S90_L900_H0_D20.tikz}
+		\caption{Riesgo alto.}\label{fig:fire-detection-interpolation-high}
+	\end{subfigure}
+	\caption{Método de interpolación aplicado a la detección de incendios forestales.}
+	\label{fig:interpolation-fire-detection-example}
+\end{figure}
+
+En este caso, los resultados son bastante similares a los obtenidos con el método de Mamdani, a pesar de que se obtienen conjuntos de salida con características diferentes. Los valores obtenidos con los desdifusificadores \emph{centroide} y \emph{bisector} son bastante parecidos a los obtenidos con el método de Mamdani, mientras que en los desdifusificadores basados en el máximo(\emph{som}, \emph{mom} y \emph{lom}) las diferencias son más notables.
