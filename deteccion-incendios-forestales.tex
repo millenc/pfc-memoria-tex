@@ -501,3 +501,13 @@ Así por ejemplo, si tomamos $M = \text{Media aritmética}$, $T = T_{min}$ y $O 
 \end{figure}
 
 En este caso, los resultados son bastante similares a los obtenidos con el método de Mamdani, a pesar de que se obtienen conjuntos de salida con características diferentes. Los valores obtenidos con los desdifusificadores \emph{centroide} y \emph{bisector} son bastante parecidos a los obtenidos con el método de Mamdani, mientras que en los desdifusificadores basados en el máximo(\emph{som}, \emph{mom} y \emph{lom}) las diferencias son más notables.
+
+La ventaja de este método es que permite seleccionar diferentes combinaciones de t-normas e índices de solapamiento y evaluar las salidas obtenidas con cada uno de ellos. En la tabla \ref{tab:fire-detection-interpolation-comparison} se presentan los resultados al aplicar el método de interpolación a las entradas: $Temperatura = 30 \text{ ºC}$, $Humo = 20 \text{ ppm}$, $Luz = 500 \text{ lux}$, $Humedad = 50 \text{ ppm}$ y $Distancia = 40 \text{ m}$.
+
+\begin{center}
+	\def\arraystretch{1.1}
+    \input{./tables/table-interpolation-comparison--T30_S20_L500_H50_D40.tex}
+    \label{tab:fire-detection-interpolation-comparison}
+\end{center}
+
+Como se puede ver en la tabla, los resultados al aplicar diferentes t-normas y operadores de agregación no varían significativamente (al menos en este ejemplo). 
