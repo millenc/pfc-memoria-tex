@@ -500,14 +500,85 @@ Así por ejemplo, si tomamos $M = \text{Media aritmética}$, $T = T_{min}$ y $O 
 	\label{fig:interpolation-fire-detection-example}
 \end{figure}
 
-En este caso, los resultados son bastante similares a los obtenidos con el método de Mamdani, a pesar de que se obtienen conjuntos de salida con características diferentes. Los valores obtenidos con los desdifusificadores \emph{centroide} y \emph{bisector} son bastante parecidos a los obtenidos con el método de Mamdani, mientras que en los desdifusificadores basados en el máximo(\emph{som}, \emph{mom} y \emph{lom}) las diferencias son más notables.
+En este caso, los resultados son bastante similares a los obtenidos con el método de Mamdani, a pesar de que se obtienen conjuntos de salida con características diferentes. Los valores obtenidos con los desdifusificadores \emph{centroide} y \emph{bisector} se asemejan bastante a los obtenidos con el método de Mamdani, mientras que en los desdifusificadores basados en el máximo(\emph{som}, \emph{mom} y \emph{lom}) las diferencias son más notables.
 
-La ventaja de este método es que permite seleccionar diferentes combinaciones de t-normas e índices de solapamiento y evaluar las salidas obtenidas con cada uno de ellos. En la tabla \ref{tab:fire-detection-interpolation-comparison} se presentan los resultados al aplicar el método de interpolación a las entradas: $Temperatura = 30 \text{ ºC}$, $Humo = 20 \text{ ppm}$, $Luz = 500 \text{ lux}$, $Humedad = 50 \text{ ppm}$ y $Distancia = 40 \text{ m}$.
+La ventaja de este método es que permite seleccionar diferentes combinaciones de t-normas e índices de solapamiento y evaluar las salidas obtenidas con cada uno de ellos. En la tabla \ref{tab:fire-detection-interpolation-comparison} y en las figuras \ref{fig:fire-detection-interpolation-comparison-tnorm-prod}-\ref{fig:fire-detection-interpolation-comparison-tnorm-einstein} se presentan los resultados obtenidos al aplicar el método de interpolación utilizando diferentes combinaciones de t-normas e índices de solapamiento a las entradas: $Temperatura = 30 \text{ ºC}$, $Humo = 20 \text{ ppm}$, $Luz = 500 \text{ lux}$, $Humedad = 50 \text{ ppm}$ y $Distancia = 40 \text{ m}$.
 
 \begin{center}
 	\def\arraystretch{1.1}
     \input{./tables/table-interpolation-comparison--T30_S20_L500_H50_D40.tex}
-    \label{tab:fire-detection-interpolation-comparison}
 \end{center}
 
-Como se puede ver en la tabla, los resultados al aplicar diferentes t-normas y operadores de agregación no varían significativamente (al menos en este ejemplo). 
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{\textwidth}
+	\textbf{T-norma: Producto ($T_{prod}$)} \\
+	\setlength\figureheight{2cm}
+	\setlength\figurewidth{7cm}
+	\input{figures/fire-detection-results/interpolation/interpolation-comparison-Tnorma-prod--T30_S20_L500_H50_D40.tikz}
+\end{subfigure}
+\label{fig:fire-detection-interpolation-comparison-tnorm-prod}
+\caption{T-norma: Producto ($T_{prod}$)}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{\textwidth}
+	\textbf{T-norma: Mínimo ($T_{min}$)} \\
+	\setlength\figureheight{2cm}
+	\setlength\figurewidth{7cm}
+	\input{figures/fire-detection-results/interpolation/interpolation-comparison-Tnorma-min--T30_S20_L500_H50_D40.tikz}
+\end{subfigure}
+\label{fig:fire-detection-interpolation-comparison-tnorm-min}
+\caption{T-norma: Mínimo ($T_{min}$)}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{\textwidth}
+	\textbf{T-norma: Media geométrica ($T_{geo}$)} \\
+	\setlength\figureheight{2cm}
+	\setlength\figurewidth{7cm}
+	\input{figures/fire-detection-results/interpolation/interpolation-comparison-Tnorma-geomean--T30_S20_L500_H50_D40.tikz}
+\end{subfigure}
+\caption{T-norma: Media geométrica ($T_{geo}$)}
+\label{fig:fire-detection-interpolation-comparison-tnorm-geomean}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{\textwidth}
+	\textbf{T-norma: Media armónica ($T_{harm}$)} \\
+	\setlength\figureheight{2cm}
+	\setlength\figurewidth{7cm}
+	\input{figures/fire-detection-results/interpolation/interpolation-comparison-Tnorma-harmmean--T30_S20_L500_H50_D40.tikz}
+\end{subfigure}
+\caption{T-norma: Media armónica ($T_{harm}$)}
+\label{fig:fire-detection-interpolation-comparison-tnorm-harmmean}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{\textwidth}
+	\textbf{T-norma: Seno ($T_{sin}$)} \\
+	\setlength\figureheight{2cm}
+	\setlength\figurewidth{7cm}
+	\input{figures/fire-detection-results/interpolation/interpolation-comparison-Tnorma-sinmean--T30_S20_L500_H50_D40.tikz}
+\end{subfigure}
+\caption{T-norma: Seno ($T_{sin}$)}
+\label{fig:fire-detection-interpolation-comparison-tnorm-sinmean}
+\end{figure}
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{\textwidth}
+	\textbf{T-norma: Einstein ($T_{einstein}$)} \\
+	\setlength\figureheight{2cm}
+	\setlength\figurewidth{7cm}
+	\input{figures/fire-detection-results/interpolation/interpolation-comparison-Tnorma-einsteinmean--T30_S20_L500_H50_D40.tikz}
+\end{subfigure}
+\caption{T-norma: Einstein ($T_{einstein}$)}
+\label{fig:fire-detection-interpolation-comparison-tnorm-einstein}
+\end{figure}
+
+Como se puede ver en la tabla, los resultados finales (desdifusificados) al aplicar diferentes t-normas y operadores de agregación no varían significativamente (al menos con estos datos de entrada). En las gráficas se puede apreciar que los conjuntos de salida sí presentan algunas diferencias entre sí, especialmente cuando se utiliza el índice de solapamiento del máximo de mínimos ($O_Z$).
+
+También existen diferencias notables en la escala de la función de pertenencia de los conjuntos de salida. El ejemplo más claro se puede ver en las gráficas obtenidas con la t-norma producto. Los valores son del orden de $10^{-14}$, mientras que al utilizar otras t-normas como el mínimo se obtienen resultados ``más grandes'' (de órdenes entre $10^{-3}$ y $10^{-5}$). Esto se debe a que los índices de solapamiento entre las entradas y los antecedentes son valores en el rango [0,1] y por tanto al realizar el producto de estos valores se obtienen números cada vez más pequeños. 
+
+Es importante tener esto en cuenta a la hora de elegir una t-norma puesto que en el caso de reglas con muchos antecedentes se podrían producir problemas de precisión al trabajar con números tan pequeños. Un caso similar es el de la t-norma de \L{}ukasiewicz, que no se puede aplicar de forma efectiva a reglas con más de dos antecedentes, puesto que el resultado tiende a cero muy rápidamente.
