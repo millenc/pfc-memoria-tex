@@ -360,22 +360,7 @@ El primer método estudiado es el \emph{método de Mamdani}, presentado en la se
 
 \begin{center}
 	%\def\arraystretch{1.5}
-    \begin{longtable}{| c | c | c | c | c | c | c | c | c  | c  | c |}
-    \hline
-    \multirow{2}{*}{\textbf{Fig.}} & \multirow{2}{*}{\textbf{Temp.}} & \multirow{2}{*}{\textbf{Humo}} & \multirow{2}{*}{\textbf{Luz}}& \multirow{2}{*}{\textbf{Hum.}} & \multirow{2}{*}{\textbf{Dist.}} &  \multicolumn{5}{|c|}{\textbf{Riesgo (\%)}} \\ 
-    \cline{7-11}
-    & & & & & & \textbf{cent.  (\textasteriskcentered)} & \textbf{bis. (+)} & \textbf{som ($\triangledown$)} & \textbf{mom ($\square$)} & \textbf{lom ($\vartriangle$)}  \\ 
-    \hline
-    \ref{fig:fire-detection-mamdani-low} & 25 & 0 & 200 & 20 & 70 & 20 & 18 & 0 & 6 & 12 \\ 
-    \hline
-    \ref{fig:fire-detection-mamdani-low-medium} & 30 & 20 & 500 & 50 & 40 & 35 & 33 & 10 & 25 & 40 \\
-    \hline
-    \ref{fig:fire-detection-mamdani-medium} & 40 & 50 & 500 & 30 & 40 & 43 & 45 & 38 & 50 & 62 \\
-    \hline
-    \ref{fig:fire-detection-mamdani-high} & 100 & 90 & 900 & 0 & 20 & 80 & 82 & 84 & 92 & 100 \\
-    \hline
-    \caption{Resultados de aplicar el método de Mamdani a la detección de incendios forestales. Las gráficas correspondientes se muestran en la figura \ref{fig:mamdani-fire-detection-example}.}
-    \end{longtable}
+	\input{./tables/table-mamdani-examples.tex}
     \label{tab:fire-detection-mamdani-example}
 \end{center}
 
@@ -414,9 +399,24 @@ A medida que aumentan la temperatura, el humo y la luz y disminuyen la humedad y
 	\begin{subfigure}[b]{0.45\textwidth}
 		\setlength\figureheight{3cm}
 		\setlength\figurewidth{6cm}
-		\input{figures/fire-detection-results/mamdani/mamdani-T100_S90_L900_H0_D20.tikz}
-		\caption{Riesgo alto.}\label{fig:fire-detection-mamdani-high}
+		\input{figures/fire-detection-results/mamdani/mamdani-T80_S80_L700_H20_D30.tikz}
+		\caption{Riesgo medio-alto.}\label{fig:fire-detection-mamdani-medium-high}
 	\end{subfigure}
+	
+		\vspace{1cm}
+		\begin{subfigure}[b]{0.45\textwidth}
+			\setlength\figureheight{3cm}
+			\setlength\figurewidth{6cm}
+			\input{figures/fire-detection-results/mamdani/mamdani-T100_S90_L900_H10_D20.tikz}
+			\caption{Riesgo alto.}\label{fig:fire-detection-mamdani-high}
+		\end{subfigure}
+		\qquad
+		\begin{subfigure}[b]{0.45\textwidth}
+			\setlength\figureheight{3cm}
+			\setlength\figurewidth{6cm}
+			\input{figures/fire-detection-results/mamdani/mamdani-T120_S100_L1000_H10_D10.tikz}
+			\caption{Riesgo muy alto.}\label{fig:fire-detection-mamdani-very-high}
+		\end{subfigure}
 	\caption{Método de Mamdani aplicado a la detección de incendios forestales.}
 	\label{fig:mamdani-fire-detection-example}
 \end{figure}
@@ -447,22 +447,7 @@ Así por ejemplo, si tomamos $M = \text{Media aritmética}$, $T = T_{min}$ y $O 
 
 \begin{center}
 	%\def\arraystretch{1.5}
-    \begin{longtable}{| c | c | c | c | c | c | c | c | c  | c  | c |}
-    \hline
-    \multirow{2}{*}{\textbf{Fig.}} & \multirow{2}{*}{\textbf{Temp.}} & \multirow{2}{*}{\textbf{Humo}} & \multirow{2}{*}{\textbf{Luz}}& \multirow{2}{*}{\textbf{Hum.}} & \multirow{2}{*}{\textbf{Dist.}} &  \multicolumn{5}{|c|}{\textbf{Riesgo (\%)}} \\ 
-    \cline{7-11}
-    & & & & & & \textbf{cent.  (\textasteriskcentered)} & \textbf{bis. (+)} & \textbf{som ($\triangledown$)} & \textbf{mom ($\square$)} & \textbf{lom ($\vartriangle$)}  \\ 
-    \hline
-    \ref{fig:fire-detection-interpolation-low} & 25 & 0 & 200 & 20 & 70 & 18 & 15 & 8 & 10 & 12  \\ 
-    \hline
-    \ref{fig:fire-detection-interpolation-low-medium} & 30 & 20 & 500 & 50 & 40 & 30 & 30 & 32 & 36 & 40 \\
-    \hline
-    \ref{fig:fire-detection-interpolation-medium} & 40 & 50 & 500 & 30 & 40 & 41 & 41 & 38 & 42 & 45 \\
-    \hline
-    \ref{fig:fire-detection-interpolation-high} & 100 & 90 & 900 & 0 & 20 & 85 & 87 & 84 & 90 & 95 \\
-    \hline
-    \caption{Resultados de aplicar el método de interpolación con $M = \text{Media aritmética}$, $T = T_{min}$ y $O = O_Z$  a la detección de incendios forestales. Las gráficas correspondientes se muestran en la figura \ref{fig:interpolation-fire-detection-example}.}
-    \end{longtable}
+    \input{./tables/table-interpolation-examples.tex}
     \label{tab:fire-detection-interpolation-example}
 \end{center}
 
@@ -493,9 +478,24 @@ Así por ejemplo, si tomamos $M = \text{Media aritmética}$, $T = T_{min}$ y $O 
 	\begin{subfigure}[b]{0.45\textwidth}
 		\setlength\figureheight{3cm}
 		\setlength\figurewidth{6cm}
-		\input{figures/fire-detection-results/interpolation/example/interpolation-O-Oz_Tmin_Mmean--T100_S90_L900_H0_D20.tikz}
-		\caption{Riesgo alto.}\label{fig:fire-detection-interpolation-high}
+		\input{figures/fire-detection-results/interpolation/example/interpolation-O-Oz_Tmin_Mmean--T80_S80_L700_H20_D30.tikz}
+		\caption{Riesgo medio-alto.}\label{fig:fire-detection-interpolation-medium-high}
 	\end{subfigure}
+	
+		\vspace{1cm}
+		\begin{subfigure}[b]{0.45\textwidth}
+			\setlength\figureheight{3cm}
+			\setlength\figurewidth{6cm}
+			\input{figures/fire-detection-results/interpolation/example/interpolation-O-Oz_Tmin_Mmean--T100_S90_L900_H10_D20.tikz}
+			\caption{Riesgo alto.}\label{fig:fire-detection-interpolation-high}
+		\end{subfigure}
+		\qquad
+		\begin{subfigure}[b]{0.45\textwidth}
+			\setlength\figureheight{3cm}
+			\setlength\figurewidth{6cm}
+			\input{figures/fire-detection-results/interpolation/example/interpolation-O-Oz_Tmin_Mmean--T120_S100_L1000_H10_D10.tikz}
+			\caption{Riesgo muy alto.}\label{fig:fire-detection-interpolation-very-high}
+		\end{subfigure}
 	\caption{Método de interpolación aplicado a la detección de incendios forestales.}
 	\label{fig:interpolation-fire-detection-example}
 \end{figure}
