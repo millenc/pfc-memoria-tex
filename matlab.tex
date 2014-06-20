@@ -1,0 +1,53 @@
+\chapter{Implementación en MATLAB}
+En este capítulo se incluye el código fuente de la implementación en MATLAB de los métodos estudiados en este proyecto.
+
+\section{Detección de incendios forestales}
+\subsection{Variables lingüísticas}
+Como se ha definido en \ref{def:formal-lang-variable}, una variable lingüística es una variable que puede tomar conjuntos difusos como valores. Así mismo, un conjunto difuso viene definido por su función de pertenencia. Por tanto, se debe definir una función para cada valor de cada variable lingüística utilizada. 
+
+Generalmente, en MATLAB, cada función se define en un fichero separado que únicamente contiene el código de dicha función. En este caso y dado que se utilizan 5 variables lingüísticas para los antecedentes con 3 valores posibles cada una y una variable de salida para el consecuente con 5 valores posibles, habría que crear 20 ficheros para definir estas funciones. Aunque es perfectamente posible y válido hacerlo de esta manera, resulta tedioso manejar tantos ficheros. 
+
+Una solución adecuada al problema es definir cada variable lingüística en un fichero en el que se implementan las funciones de pertenencia de sus posibles valores. Para ello se puede crear una clase para cada variable lingüística y definir la función de pertenencia de cada valor como un método estático de la misma. Esta forma de definir las variables lingüísticas tiene la ventaja de que todo el código asociado a la variable está en un mismo fichero. Además la forma de utilizar las funciones resulta muy cómoda y expresiva.
+
+Por ejemplo, para la variable lingüística $\chi_1$ = \emph{Temperatura} se ha definido la clase \lstinline|temp| en el fichero \lstinline|lang_variables/temp.m|. Esta clase tiene los siguientes métodos estáticos:
+\begin{itemize}
+\item \lstinline|get_x()| : Devuelve el universo de referencia para la variable (en este caso el vector $[0,100]$).
+\item \lstinline|low(t)| : Función de pertenencia para el valor ``Bajo''.
+\item \lstinline|medium(t)| : Función de pertenencia para el valor ``Medio''.
+\item \lstinline|high(t)| : Función de pertenencia para el valor ``Alto''.
+\end{itemize}
+
+De esta forma, para obtener el grado de pertenencia de un valor \lstinline|t| al conjunto \emph{``Temperatura Media''} basta con hacer:
+
+\begin{lstlisting}
+v = temp.medium(t);
+\end{lstlisting}
+
+Además es posible obtener un puntero a estas funciones utilizando el operador \lstinline|@|:
+
+\begin{lstlisting}
+fh = @temp.medium;
+v = fh(t);
+\end{lstlisting}
+
+La variable \lstinline|fh| es un puntero a la función \lstinline|temp.medium()| y puede utilizarse de la misma forma que ésta (línea 2). Además la variable \lstinline|fh| se puede utilizar de forma similar a otros tipos de variables, es decir, se pueden crear vectores de punteros de funciones, pasarlos como parámetros a otras funciones etc. Esta propiedad se utilizará de forma intensiva a la hora de implementar los métodos estudiados en este proyecto y el conjunto de reglas.
+
+A continuación se incluyen las definiciones de las variables lingüísticas utilizadas en la aplicación práctica de detección de incendios forestales:
+
+$\chi_1$ = Temperatura (\lstinline|lang_variables/temp.m|):
+\lstinputlisting[inputencoding=cp1252]{./matlab/lang_variables/temp.m}
+
+$\chi_2$ = Humo (\lstinline|lang_variables/smoke.m|):
+\lstinputlisting[inputencoding=cp1252]{./matlab/lang_variables/smoke.m}
+
+$\chi_3$ = Luz (\lstinline|lang_variables/llight.m|)\footnote{Se utiliza el nombre ``llight'' en vez de ``light'' para evitar conflictos con una función propia de MATLAB.}:
+\lstinputlisting[inputencoding=cp1252]{./matlab/lang_variables/llight.m}
+
+$\chi_4$ = Humedad (\lstinline|lang_variables/humidity.m|):
+\lstinputlisting[inputencoding=cp1252]{./matlab/lang_variables/humidity.m}
+
+$\chi_5$ = Distancia (\lstinline|lang_variables/distance.m|):
+\lstinputlisting[inputencoding=cp1252]{./matlab/lang_variables/distance.m}
+
+$y$ = Riesgo (\lstinline|lang_variables/threat.m|):
+\lstinputlisting[inputencoding=cp1252]{./matlab/lang_variables/threat.m}

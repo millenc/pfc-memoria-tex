@@ -2,7 +2,7 @@
 \documentclass[oneside,11pt,parskip=full]{scrbook}
 
 % Incluir sólo algunos capítulos/ficheros. Útil para trabajar sólo en lo que interesa en cada momento.
-%\includeonly{introduccion,conclusiones,ejemplo-codigo-fuente-matlab}
+\includeonly{matlab}
 
 % Utilizar UTF-8 como codificación de entrada
 \usepackage[utf8]{inputenc}
@@ -12,11 +12,7 @@
 
 % Fuentes
 \usepackage[T1]{fontenc}
-%\usepackage{fourier}
-%\usepackage[math]{anttor}
-%\usepackage{libris}
 \usepackage{palatino}
-%\usepackage{stix}
 \addtokomafont{disposition}{\rmfamily}
 \addtokomafont{title}{\rmfamily}
 
@@ -31,7 +27,6 @@
 \usepackage{lipsum}
 
 % Código fuente
-%\usepackage{scrhack}
 \usepackage{listings}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -59,14 +54,23 @@
 \renewcommand*{\algorithmcfname}{Algoritmo}
 \let\oldnl\nl% Store \nl in \oldnl
 \newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
-%\renewcommand{\ALG@name}{Algoritmo}
-%\renewcommand{\listalgorithmname}{List of \ALG@name s}
 
 % Float: poner las figuras en un punto exacto
 \usepackage{float}
 \usepackage{subcaption}
 
 \usepackage[bookmarks]{hyperref}
+
+% Código MATLAB
+\usepackage[framed,numbered,autolinebreaks]{mcode}
+\usepackage{listingsutf8}
+% Transliterar acentos
+\lstset{
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 
+    			  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+    			  {ü}{{\"{u}}}1 {Ü}{{\"{U}}}1 
+    			  {ñ}{{\~n}}1,
+}
 
 % Comandos
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
@@ -119,6 +123,8 @@
 \include{logica-difusa}
 
 \include{deteccion-incendios-forestales}
+
+\include{matlab}
 
 \backmatter
 
