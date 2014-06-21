@@ -102,6 +102,20 @@ Otro componente importante de los sistemas difusos basados en reglas son los dif
 
 \lstinputlisting[caption=Difusificador singleton (\lstinline|functions/singleton_fuzzifier.m|),inputencoding=cp1252]{./matlab/functions/singleton_fuzzifier.m}
 
+\subsection{Desdifusificadores}
+El último componente de un sistema difuso basado en reglas es el \emph{desdifusificador}. Un desdifusificador es una función que transforma el conjunto difuso de salida en un valor escalar. En la sección \ref{sec:desdifusificadores} se han establecido las propiedades que debe tener un desdifusificador y se han definido algunos de los más utilizados.
+
+MATLAB, en su toolbox \emph{Fuzzy Logic,} ya tiene implementados los desdifusificadores más utilizados por medio de la función \lstinline|defuzz(x, mf, type)|. Esta función toma como parámetros el universo de referencia del conjunto \lstinline|x|, los grados de pertenencia para los valores del universo de referencia \lstinline|mf| y el tipo de desdifusificador a utilizar \lstinline|type|. Los tipos de desdifusificadores posibles son:
+
+\begin{itemize}
+\item \lstinline|centroid|: Centroide.
+\item \lstinline|bisector|: Bisector.
+\item \lstinline|mom|: Media de máximos.
+\item \lstinline|som|: Menor de máximos.
+\item \lstinline|lom|: Mayor de máximos.
+\end{itemize}
+
+
 \subsection{Método de Mamdani}
 El primero de los métodos estudiados en este proyecto es el método de Mamdani (algoritmo \ref{algo:mamdani}). La implementación de este método es una función que toma como parámetros:
 \begin{itemize}
