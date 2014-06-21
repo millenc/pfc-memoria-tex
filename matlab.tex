@@ -125,6 +125,35 @@ El primero de los métodos estudiados en este proyecto es el método de Mamdani 
 \end{itemize}
 
 \lstinputlisting[caption=Método de Mamdani (\lstinline|functions/mamdani.m|),inputencoding=cp1252]{./matlab/functions/mamdani.m}
+
+\subsection{Método de interpolación basado en índices de solapamiento}
+El método más importante estudiado en este proyecto es el método de interpolación basado en índices de solapamiento (algoritmo \ref{algo:multi-overlap-interpolation-method}). Este método se ha implementado en la función \lstinline|interpolation(R, fact, y, O, T, M)| (\lstinline|functions/interpolation.m|) que toma como parámetros:
+
+\begin{itemize}
+\item \lstinline|R|: Conjunto de reglas tal y como se ha definido en la sección \ref{sec:matlab-rule-base}.
+\item \lstinline|fact|: Premisa. Vector de conjuntos difusos con tantas posiciones como antecedentes tienen las reglas (variables lingüísticas), de forma que el valor para el antecedente \emph{i-ésimo} debe estar en \lstinline|fact(i)|.
+\item \lstinline|y|: Universo de salida (vector).
+\item \lstinline|O|: Índice de solapamiento. Función que puede construirse utilizando el método implementado en \ref{lst:make_overlap_index}.
+\item \lstinline|T|: T-norma. Utilizada para calcular el grado de activación de cada regla agregando los índices de solapamiento de cada antecedente.
+\item \lstinline|M|: Operador de agregación.
+\end{itemize}
+
+El método toma estos parámetros y devuelve el conjunto difuso de salida, resultado de aplicar el conjunto de reglas ( \lstinline|R|) a la entrada (\lstinline|fact|).
+
+\lstinputlisting[label=lst:interpolation,caption=Método de interpolación basado en índices de solapamiento (\lstinline|functions/interpolation.m|),inputencoding=cp1252]{./matlab/functions/interpolation.m}
+
+Como se puede, ver en la línea 23 del código \ref{lst:interpolation} se utiliza una función llamada \lstinline|matching_degree()| (\lstinline|functions/matching_degree.m|) para calcular el grado de activación de cada regla. Esta función toma como parámetros:
+
+\begin{itemize}
+\item \lstinline|R|: Regla.
+\item \lstinline|fact|: Premisa.
+\item \lstinline|O|: Índice de solapamiento.
+\item \lstinline|T|: T-norma.
+\end{itemize}
+
+Esta función calcula el índice de solapamiento (\lstinline|O|) de cada antecedente de la regla \lstinline|R| con su correspondiente valor en la premisa \lstinline|fact|  y agrega los valores obtenidos utilizando la t-norma \lstinline|T|:
+
+\lstinputlisting[label=lst:matching_degree,caption=Cálculo del grado de activación basado en índices de solapamiento (\lstinline|functions/matching_degree.m|),inputencoding=cp1252]{./matlab/functions/matching_degree.m}
  
 \section{Detección de incendios forestales}
 \subsection{Variables lingüísticas}
