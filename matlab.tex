@@ -1,6 +1,29 @@
 \chapter{Implementación en MATLAB}
 En este capítulo se incluye el código fuente de la implementación en MATLAB de los métodos estudiados en este proyecto.
 
+\section{General}
+En esta sección se incluyen algunas funciones de propósito general que han sido implementadas en el desarrollo de este proyecto.
+
+\subsection{T-normas y operadores de agregación}
+MATLAB dispone de una colección importante de funciones predefinidas para calcular t-normas y operadores de agregación. En este proyecto se han utilizado las siguientes:
+
+\begin{itemize}
+\item Media aritmética: \lstinline|mean()|.
+\item Máximo: \lstinline|max()|.
+\item Producto: \lstinline|prod()|.
+\item Mínimo: \lstinline|min()|.
+\item Media geométrica: \lstinline|geomean()|.
+\item Media armónica: \lstinline|harmmean()|.
+\end{itemize}
+
+Además se han implementado sendas funciones para calcular las t-normas del seno y de Einstein:
+
+\lstinputlisting[label=lst:sinmean, caption=T-norma del seno (\lstinline|functions/sinmean.m|),inputencoding=cp1252]{./matlab/functions/sinmean.m}
+
+\lstinputlisting[label=lst:einsteinmean, caption=T-norma de Einstein (\lstinline|functions/einsteinmean.m|),inputencoding=cp1252]{./matlab/functions/einsteinmean.m}
+
+Como se puede ver en la función \lstinline|einsteinmean()| se ha utilizado una función anónima (\lstinline|@(x)(1-x)|), que es una funcionalidad muy útil de MATLAB, inspirada en los lenguajes funcionales, que permite declarar funciones \emph{lambda} o \emph{anónimas} (sin nombre) y utilizarlas como argumentos de otras funciones (en este caso de \lstinline|arrayfun()|, que aplica dicha función anónima a todos los elementos de un vector). Esta característica del lenguaje de MATLAB se utilizará también a la hora de definir índices de solapamiento.
+
 \section{Detección de incendios forestales}
 \subsection{Variables lingüísticas}
 Como se ha definido en \ref{def:formal-lang-variable}, una variable lingüística es una variable que puede tomar conjuntos difusos como valores. Así mismo, un conjunto difuso viene definido por su función de pertenencia. Por tanto, se debe definir una función para cada valor de cada variable lingüística utilizada. 
@@ -47,5 +70,32 @@ A continuación se incluyen las definiciones de las variables lingüísticas uti
 \lstinputlisting[caption=$y$ - Riesgo (\lstinline|lang_variables/threat.m|),inputencoding=cp1252]{./matlab/lang_variables/threat.m}
 
 \subsection{Conjunto de reglas}
+
+El conjunto de reglas se ha definido en la función \lstinline|fire_detection_rules()| (\lstinline|fire_detection_rules.m|), de forma que sea sencillo obtener y utilizar este conjunto en otros scripts y funciones. Esta función devuelve un vector de estructuras donde cada una tiene los siguientes campos:
+\begin{itemize}
+\item \lstinline|R(i).n|: Nº de regla.
+\item \lstinline|R(i).A|: Vector con las funciones de pertenencia de los valores (punteros a funciones) de cada uno de los antecedentes de la regla.
+\item \lstinline|R(i).B|: Puntero a función de pertenencia del valor del consecuente.
+\end{itemize}
+
+Por ejemplo para definir un conjunto de reglas con una única regla tal que:
+\begin{multline}
+\text{IF \emph{Temperatura} es ``Baja'' AND }  \text{ \emph{Humo} es ``Alto'' AND } \text{ \emph{Luz} es ``Baja''} \\
+  \text{AND \emph{Humedad} es ``Alta'' AND }  \text{ \emph{Distancia} es ``Media'' THEN }  \text{ \emph{Riesgo} es ``Bajo'' }
+\end{multline}
+hay que construir una estructura de la siguiente forma:
+
+\begin{lstlisting}
+R(1).n = 1;
+R(1).A = {@temp.low, @smoke.high, @llight.low, @humidity.high, @distance.medium};
+R(1).B = @threat.low;
+\end{lstlisting}
+
+Este tipo de estructura tiene la ventaja de que es sencilla de implementar y de entender. Sin embargo, para conjuntos de reglas grandes (como es el caso) resulta tedioso tener que indicar el índice para cada regla y repetir una y otra vez el nombre del conjunto (\lstinline|R|) o de los campos. 
+
+Por esta razón se ha optado por una forma de definir el conjunto de reglas más concisa y clara. El conjunto de reglas se define como una matriz, en la que cada fila corresponde a una regla y cada columna es un puntero a la función de pertenencia del valor de la variable lingüística que ocupa esa posición. Las primeras $n-1$ columnas de cada fila corresponden a los antecedentes de la regla, y la última al consecuente.
+
+En la función  \lstinline|fire_detection_rules| (código \ref{matlab_fire_detection_rules}) se define el conjunto de reglas en la matriz \lstinline|rules| (líneas 2-335) de esta forma. Dado que el resto de funciones implementadas esperan un conjunto de reglas definido como un vector de estructuras, se transforma esta matriz en dicho vector en las líneas 340-344. De esta forma, el conjunto de reglas es muy sencillo de leer y modificar y se asemeja mucho a la tabla \ref{tab:fire-detection-rule-set}.
+
 \lstset{linewidth=18cm}
-\lstinputlisting[caption=Conjunto de reglas (\lstinline|fire_detection_rules.m|) ,inputencoding=cp1252]{./matlab/fire_detection_rules.m}
+\lstinputlisting[label=matlab_fire_detection_rules, caption=Conjunto de reglas (\lstinline|fire_detection_rules.m|) ,inputencoding=cp1252]{./matlab/fire_detection_rules.m}
