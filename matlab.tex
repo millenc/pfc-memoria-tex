@@ -22,8 +22,40 @@ Además se han implementado sendas funciones para calcular las t-normas del seno
 
 \lstinputlisting[label=lst:einsteinmean, caption=T-norma de Einstein (\lstinline|functions/einsteinmean.m|),inputencoding=cp1252]{./matlab/functions/einsteinmean.m}
 
-Como se puede ver en la función \lstinline|einsteinmean()| se ha utilizado una función anónima (\lstinline|@(x)(1-x)|), que es una funcionalidad muy útil de MATLAB, inspirada en los lenguajes funcionales, que permite declarar funciones \emph{lambda} o \emph{anónimas} (sin nombre) y utilizarlas como argumentos de otras funciones (en este caso de \lstinline|arrayfun()|, que aplica dicha función anónima a todos los elementos de un vector). Esta característica del lenguaje de MATLAB se utilizará también a la hora de definir índices de solapamiento.
+Como se puede ver, en la función \lstinline|einsteinmean()| se ha utilizado una función anónima (\lstinline|@(x)(1-x)|), que es una funcionalidad muy útil de MATLAB, inspirada en los lenguajes funcionales, que permite declarar funciones \emph{lambda} o \emph{anónimas} (sin nombre) y utilizarlas como argumentos de otras funciones (en este caso de \lstinline|arrayfun()|, que aplica dicha función anónima a todos los elementos de un vector). Esta característica del lenguaje de MATLAB se utilizará también a la hora de definir índices de solapamiento.
 
+\subsection{Construcción de índices de solapamiento}
+Los índices de solapamiento (\ref{sec:overlap-indexes}) juegan un papel crucial en el desarrollo de este proyecto, al ser la base del método de interpolación estudiado (\ref{sec:interpolation-method}). En la sección \ref{sec:overlap-index-construction} se ha presentado un método para construir índices de solapamiento a partir de operadores de agregación y funciones de solapamiento. 
+
+Este mismo concepto de ``construir'' índices de solapamiento a partir de otras funciones se puede implementar en MATLAB. Para ello se va a utilizar una técnica de programación llamada \emph{clausura}\footnote{Conocida generalmente por su término inglés ``closure''.}, que junto con las funciones anónimas, es muy utilizada en los lenguajes funcionales. A grandes rasgos, una clausura es una función de primer orden (puede tratarse como cualquier otra variable de tipo básico) que mantiene el estado de las variables del ámbito en el que fue creada. Así pues, el objetivo es definir una función que tome como parámetros una función de agregación y una de solapamiento y devuelva una nueva función que sea el índice de solapamiento construido a partir de estas funciones recibidas como parámetros.
+
+Para implementar la construcción de índices de solapamiento se ha definido la función \lstinline|make_overlap_index()| (\lstinline|functions/make_overlap_index.m|), que toma como parámetros una función de agregación \lstinline|M| y una de solapamiento \lstinline|Go| y devuelve una nueva función que es el índice de solapamiento construido a partir de \lstinline|M| y 
+\lstinline|Go| (según el teorema \ref{sec:overlap-index-construction}):
+
+\lstinputlisting[label=lst:make_overlap_index,caption=Construcción de índices de solapamiento (\lstinline|functions/make_overlap_index.m|).,inputencoding=cp1252]{./matlab/functions/make_overlap_index.m}
+
+El resultado de llamar a esta función es una nueva función que calcula el índice de solapamiento entre dos conjuntos pasados como parámetros \lstinline|A| y \lstinline|B|. Por ejemplo, si queremos construir el índice de solapamiento de Zadeh $O_Z$ (ecuación \ref{eq:zadeh-consistency}) debemos pasar a la función \lstinline|make_overlap_index()| un puntero a la función máximo (\lstinline|@max|) como función de agregación y un puntero a la función mínimo (\lstinline|@min|) como función de solapamiento:
+
+\begin{lstlisting}
+Oz = make_overlap_index(@max,@min);
+\end{lstlisting}
+
+La función \lstinline|Oz()| ahora puede utilizarse para calcular el índice de solapamiento entre dos conjuntos \lstinline|A| y \lstinline|B| pasados como parámetros:
+
+\begin{lstlisting}
+overlap_index = Oz(A, B);
+\end{lstlisting}
+ 
+La construcción de los índices de solapamiento utilizados en la comparativa entre el método de interpolación y Mamdani (sec. \ref{sec:fire-detection-interpolation-method}) se ha implementado en la clase \lstinline|O| (\lstinline|functions/O.m|) utilizando métodos estáticos:
+
+\lstinputlisting[label=lst:overlap_indexes,caption=Índices de solapamiento (\lstinline|functions/O.m|).,inputencoding=cp1252]{./matlab/functions/O.m}
+
+De esta forma se puede obtener el índice de solapamiento ya construido llamando a su función correspondiente. Por ejemplo, para obtener la consistencia de Zadeh:
+
+\begin{lstlisting}
+Oz = O.maxmin();
+\end{lstlisting}
+ 
 \section{Detección de incendios forestales}
 \subsection{Variables lingüísticas}
 Como se ha definido en \ref{def:formal-lang-variable}, una variable lingüística es una variable que puede tomar conjuntos difusos como valores. Así mismo, un conjunto difuso viene definido por su función de pertenencia. Por tanto, se debe definir una función para cada valor de cada variable lingüística utilizada. 
