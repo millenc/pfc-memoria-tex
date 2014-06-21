@@ -96,6 +96,16 @@ R(2).B = @threat.low;
 \end{lstlisting}
 
 La variable \lstinline|R| resultante es un vector de estructuras y se puede obtener la regla \emph{i-ésima} haciendo uso del índice (como cualquier otro vector): \lstinline|R(i)|.
+
+\subsection{Método de Mamdani}
+El primero de los métodos estudiados en este proyecto es el método de Mamdani (algoritmo \ref{algo:mamdani}). La implementación de este método es una función que toma como parámetros:
+\begin{itemize}
+\item \lstinline|R|: Conjunto de reglas tal y como se ha definido en la sección \ref{sec:matlab-rule-base}.
+\item \lstinline|fact|: Premisa o valores escalares de entrada al sistema. Un vector con tantas posiciones como antecedentes tienen las reglas (variables lingüísticas), de forma que el valor para el antecedente \emph{i-ésimo} debe estar en \lstinline|fact(i)|.
+\item \lstinline|y|: Universo de salida (vector).
+\end{itemize}
+
+\lstinputlisting[caption=Método de Mamdani (\lstinline|functions/mamdani.m|),inputencoding=cp1252]{./matlab/functions/mamdani.m}
  
 \section{Detección de incendios forestales}
 \subsection{Variables lingüísticas}
