@@ -55,6 +55,47 @@ De esta forma se puede obtener el índice de solapamiento ya construido llamando
 \begin{lstlisting}
 Oz = O.maxmin();
 \end{lstlisting}
+
+\section{Sistemas difusos basados en reglas}
+En esta sección se incluyen las funciones implementadas relacionadas con los sistemas difusos basados en reglas estudiados a lo largo del proyecto.
+
+\subsection{Conjuntos de reglas}\label{sec:matlab-rule-base}
+Los conjuntos de reglas juegan un papel fundamental en los sistemas difusos basados en ellas, dado que expresan el conocimiento sobre el dominio del problema y tienen la misión de definir cómo se transforman las entradas del sistema difuso en salidas. Los métodos de Mamdani e interpolación implementados en este proyecto reciben el conjunto de reglas como un parámetro, de forma que pueden ser utilizados con cualquier conjunto de reglas y aplicados a cualquier tipo de problema.
+
+Existen multitud de formas de implementar el conjunto de reglas. En este caso se ha optado por utilizar un vector de estructuras, debido a que el código resultante es sencillo de entender y de modificar. Una estructura en MATLAB es un tipo de variable compuesta que puede tener un número arbitrario de campos con nombre (similar a las estructuras de lenguajes como C). En el caso del conjunto de reglas, cada regla es una estructura \lstinline|R| con los siguientes campos:
+
+\begin{itemize}
+\item \lstinline|R.n|: Nº de regla.
+\item \lstinline|R.A|: Vector con las funciones de pertenencia de los valores (punteros a funciones) de cada uno de los antecedentes de la regla.
+\item \lstinline|R.B|: Función de pertenencia del valor del consecuente.
+\end{itemize}
+ 
+Por ejemplo, para definir una regla para el caso de la detección de incendios forestales tal que:
+\begin{multline}
+\text{IF \emph{Temperatura} es ``Baja'' AND }  \text{ \emph{Humo} es ``Alto'' AND } \text{ \emph{Luz} es ``Baja''} \\
+\text{AND \emph{Humedad} es ``Alta'' AND }  \text{ \emph{Distancia} es ``Media'' THEN }  \text{ \emph{Riesgo} es ``Bajo'' }
+\end{multline}
+hay que construir una estructura de la siguiente forma:
+ 
+\begin{lstlisting}
+R.n = 1;
+R.A = {@temp.low, @smoke.high, @llight.low, @humidity.high, @distance.medium};
+R.B = @threat.low;
+\end{lstlisting}
+ 
+Para definir un conjunto con varias reglas basta con añadir índices:
+ 
+\begin{lstlisting}
+R(1).n = 1;
+R(1).A = {@temp.low, @smoke.high, @llight.low, @humidity.high, @distance.medium};
+R(1).B = @threat.low;
+
+R(2).n = 2;
+R(2).A = {@temp.low, @smoke.high, @llight.low, @humidity.high, @distance.high};
+R(2).B = @threat.low;
+\end{lstlisting}
+
+La variable \lstinline|R| resultante es un vector de estructuras y se puede obtener la regla \emph{i-ésima} haciendo uso del índice (como cualquier otro vector): \lstinline|R(i)|.
  
 \section{Detección de incendios forestales}
 \subsection{Variables lingüísticas}
@@ -103,25 +144,7 @@ A continuación se incluyen las definiciones de las variables lingüísticas uti
 
 \subsection{Conjunto de reglas}
 
-El conjunto de reglas se ha definido en la función \lstinline|fire_detection_rules()| (\lstinline|fire_detection_rules.m|), de forma que sea sencillo obtener y utilizar este conjunto en otros scripts y funciones. Esta función devuelve un vector de estructuras donde cada una tiene los siguientes campos:
-\begin{itemize}
-\item \lstinline|R(i).n|: Nº de regla.
-\item \lstinline|R(i).A|: Vector con las funciones de pertenencia de los valores (punteros a funciones) de cada uno de los antecedentes de la regla.
-\item \lstinline|R(i).B|: Puntero a función de pertenencia del valor del consecuente.
-\end{itemize}
-
-Por ejemplo para definir un conjunto de reglas con una única regla tal que:
-\begin{multline}
-\text{IF \emph{Temperatura} es ``Baja'' AND }  \text{ \emph{Humo} es ``Alto'' AND } \text{ \emph{Luz} es ``Baja''} \\
-  \text{AND \emph{Humedad} es ``Alta'' AND }  \text{ \emph{Distancia} es ``Media'' THEN }  \text{ \emph{Riesgo} es ``Bajo'' }
-\end{multline}
-hay que construir una estructura de la siguiente forma:
-
-\begin{lstlisting}
-R(1).n = 1;
-R(1).A = {@temp.low, @smoke.high, @llight.low, @humidity.high, @distance.medium};
-R(1).B = @threat.low;
-\end{lstlisting}
+El conjunto de reglas se ha definido en la función \lstinline|fire_detection_rules()| (\lstinline|fire_detection_rules.m|), de forma que sea sencillo obtener y utilizar este conjunto en otros scripts y funciones. Esta función devuelve un vector de estructuras tal y como se ha definido en la sección \ref{sec:matlab-rule-base}.
 
 Este tipo de estructura tiene la ventaja de que es sencilla de implementar y de entender. Sin embargo, para conjuntos de reglas grandes (como es el caso) resulta tedioso tener que indicar el índice para cada regla y repetir una y otra vez el nombre del conjunto (\lstinline|R|) o de los campos. 
 
