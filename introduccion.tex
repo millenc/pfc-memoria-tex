@@ -1,2 +1,19 @@
 % !TeX spellcheck = es_ES
 \chapter{Introducción y objetivos}
+La teoría de conjuntos difusos ha tenido una gran importancia en el campo de la inteligencia artificial, desde que fuera introducida por L.A. Zadeh en 1965 \cite{Zadeh65}. La principal ventaja de los conjuntos difusos frente a los clásicos es que permiten modelar conceptos vagos o imprecisos. Es precisamente esta propiedad la que ha hecho que los conjuntos difusos se hayan convertido en una pieza clave para multitud de métodos y técnicas de razonamiento aproximado.
+
+Los conjuntos difusos constituyen la base de la lógica difusa que, en palabras del propio Zadeh, pretende emular la habilidad de la mente humana para razonar en términos difusos e imprecisos. Utilizando conjuntos difusos se pueden modelar conceptos vagos como \emph{``Temperatura Alta''} o \emph{``Distancia cercana''} que no son posibles en la lógica clásica. Estos conceptos además pueden ser utilizados para realizar razonamiento aproximado y control.
+
+Dentro del ámbito de la lógica difusa, una clase muy importante de métodos son los llamados sistemas difusos basados en reglas. La principal característica de estos sistemas es que en ellos se modela el conocimiento sobre el problema a resolver utilizando reglas del tipo \emph{SI-ENTONCES}. En este tipo de métodos las entradas del sistema se evalúan contra estas reglas para producir los resultados adecuados.
+
+El principal objetivo de este proyecto es la implementación y evaluación de un nuevo sistema difuso basado en reglas, introducido por Bustince et al. \cite{bustince2013overlap}, que tiene como principal característica la utilización de índices de solapamiento para determinar cómo de parecidas son las entradas a las condiciones (antecedentes) de las reglas difusas. Este método es una generalización de otros sistemas difusos clásicos, como el método de Mamdani \cite{Mamdani1975}, que también será estudiado.
+
+Estos sistemas difusos se van a aplicar a un caso práctico: la detección y determinación de riesgos ambientales, particularmente incendios forestales \cite{bolourchi2013}. En este caso práctico, el sistema difuso recibirá una serie de magnitudes medidas por una red de sensores inalámbricos, tales como: temperatura, luminosidad, humedad, etc. y deberá determinar el riesgo del incendio forestal, utilizando un conjunto de reglas previamente definido.
+
+Este documento se divide en cuatro capítulos. En el capítulo \ref{cha:teoria-conjuntos-difusos} se introduce la teoría de conjuntos difusos básica para el desarrollo posterior de los métodos estudiados. En este capítulo se introducen conceptos importantes y muy utilizados como las variables lingüísticas, operadores de agregación, t-normas,etc. En este capítulo además se define el concepto de índice de solapamiento y se proporciona un método para su construcción \cite{bustince2013overlap}.
+
+En el capítulo \ref{cha:logica-difusa} se introduce el concepto de lógica difusa y se definen las características y propiedades de los sistemas difusos basados en reglas. En este capítulo se introducen además el método clásico de Mamdani \cite{Mamdani1975} y el método de interpolación basado en índices de solapamiento \cite{bustince2013overlap}, que serán aplicados al caso práctico de detección de riesgos ambientales.
+
+En el capítulo \ref{cha:deteccion-incendios-forestales} se presenta el caso práctico de la detección y evaluación de riesgo de incendios forestales \cite{bolourchi2013}. En este capítulo se definirán las características del problema a resolver y se aplicarán los métodos estudiados en el capítulo \ref{cha:logica-difusa}, realizando un estudio comparativo entre ellos.
+
+Por último, en el capítulo \ref{cha:implementacion-matlab} se presenta una implementación en MATLAB de los métodos estudiados aplicados al caso práctico de detección de riesgos de incendios forestales.
