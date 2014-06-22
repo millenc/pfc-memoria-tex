@@ -251,7 +251,7 @@ Con el código implementado hasta ahora ya es posible aplicar el método de Mamd
 
 Utilizando esta función se puede definir una nueva función \lstinline|fire_detection_mamdani_plot()| que acepta los mismos argumentos (y algunos parámetros opcionales más) y que además de aplicar el método de Mamdani sobre las entradas, genera una gráfica con los resultados obtenidos:
 
-\lstinputlisting[caption=Método de Mamdani y gráfica con resultados (\lstinline|functions/fire_detection_mamdani_plot.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani_plot.m}
+\lstinputlisting[caption=Método de Mamdani y gráfica con resultados (\lstinline|fire_detection_mamdani_plot.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani_plot.m}
 
 Este método acepta los siguientes parámetros opcionales:
 
@@ -263,7 +263,7 @@ Este método acepta los siguientes parámetros opcionales:
 
 Para obtener y validar estos parámetros opcionales se utiliza un parser de entradas, que es el método estándar de MATLAB. Este parser es creado por la función \lstinline|fire_detection_plot_input_parser()| (utilizada en la línea 26):
 
-\lstinputlisting[caption=Parser de parámetros opcionales (\lstinline|fire_detection_plot_input_parser.m|),inputencoding=cp1252]{./matlab/fire_detection_plot_input_parser.m}
+\lstinputlisting[label=lst:fire_detection_plot_input_parser, caption=Parser de parámetros opcionales (\lstinline|fire_detection_plot_input_parser.m|),inputencoding=cp1252]{./matlab/fire_detection_plot_input_parser.m}
 
 Esta función define el parser y los parámetros opcionales que acepta, así como sus valores por defecto. 
 
@@ -275,6 +275,14 @@ La función \lstinline|fire_detection_mamdani_plot()| se puede utilizar por ejem
 Con las funciones implementadas también se puede aplicar el método de interpolación basado en índices de solapamiento a la determinación de riesgo de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_interpolation(O, T, M, t, s, l, h, d)|, similar a la ya definida para Mamdani. Esta función, además de las entradas escalares de temperatura, humo, etc. (\lstinline|t, s, l, h, d|) recibe el índice de solapamiento \lstinline|O|, la t-norma \lstinline|T| y la función de agregación \lstinline|M| utilizadas en el método. Al igual que el método de Mamdani, esta función devuelve el valor de riesgo como un conjunto difuso y sus correspondientes valores desdifusificados:
 
 \lstinputlisting[caption=Método de interpolación basado en índices de solapamiento aplicado a la determinación de riesgo de incendios forestales (\lstinline|fire_detection_interpolation.m|),inputencoding=cp1252]{./matlab/fire_detection_interpolation.m}
+
+Al igual que en el método de Mamdani, se puede definir una función que utilice esta función para generar gráficas con los resultados. Esta función (\lstinline|fire_detection_interpolation_plot()|) se ha implementado en \lstinline|fire_detection_interpolation_plot.m| de la siguiente forma:
+
+\lstinputlisting[caption=Método de interpolación y generación de gráficas con resultados (\lstinline|fire_detection_interpolation_plot.m|),inputencoding=cp1252]{./matlab/fire_detection_interpolation_plot.m}
+
+Los parámetros opcionales de este método son los mismos que en el método de Mamdani ya que, de hecho, utiliza el mismo parser de entradas (código \ref{lst:fire_detection_plot_input_parser}). Esta función se puede utilizar por ejemplo para generar las gráficas de la figura \ref{fig:interpolation-fire-detection-example} ejecutando el script:
+
+\lstinputlisting[caption=Ejemplos del método de interpolación (\lstinline|fire_detection_interpolation_examples.m|),inputencoding=cp1252]{./matlab/fire_detection_interpolation_examples.m}
 
 \subsection{Comparativa de resultados obtenidos con el método de interpolación}
 En la sección \ref{sec:fire-detection-interpolation-method} se ha presentado una comparativa de los resultados obtenidos al aplicar el método de interpolación basado en índices de solapamiento a unas entradas concretas utilizando diferentes combinaciones de t-normas e índices de solapamiento.
