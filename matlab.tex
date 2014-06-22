@@ -218,6 +218,19 @@ A continuación se incluyen las definiciones de las variables lingüísticas uti
 
 \lstinputlisting[caption=$y$ - Riesgo (\lstinline|lang_variables/threat.m|),inputencoding=cp1252]{./matlab/lang_variables/threat.m}
 
+La función \lstinline|lineal()| es una función muy simple que permite calcular el valor de una función de pertenencia lineal entre los puntos pasados en los dos primeros parámetros. Esta función toma los siguientes parámetros:
+
+\begin{itemize}
+\item \lstinline|first|: Primer punto del rango (eje x).
+\item \lstinline|last|: Último punto del rango (eje x).
+\item \lstinline|value|: Punto en el que se quiere calcular el valor de la función de pertenencia (eje x).
+\item \lstinline|r|: Parámetro opcional. Si tiene valor 'r' se calcula la función de pertenencia ``inversa''.
+\end{itemize}
+
+Este método construye la función de pertenencia lineal que pasa entre los puntos (\lstinline|first|, 0) y (\lstinline|last|, 1) o (\lstinline|first|, 1) y (\lstinline|last|, 0) en caso de que se pase el último parámetro con valor \lstinline|'r'| y obtiene el grado de pertenencia del punto \lstinline|value| para esa función. En caso de que el valor a calcular esté fuera del rango [\lstinline|first|, \lstinline|last|], el grado de pertenencia devuelto es 0:
+
+\lstinputlisting[caption=Función de pertenencia lineal (\lstinline|functions/lineal.m|),inputencoding=cp1252]{./matlab/functions/lineal.m}
+
 \subsection{Conjunto de reglas}
 
 El conjunto de reglas se ha definido en la función \lstinline|fire_detection_rules()| (\lstinline|fire_detection_rules.m|), de forma que sea sencillo obtener y utilizar este conjunto en otros scripts y funciones. Esta función devuelve un vector de estructuras tal y como se ha definido en la sección \ref{sec:matlab-rule-base}.
