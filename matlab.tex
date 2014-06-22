@@ -243,7 +243,7 @@ En la función  \lstinline|fire_detection_rules| (código \ref{matlab_fire_detec
 
 \lstset{linewidth=18cm}
 \lstinputlisting[label=matlab_fire_detection_rules, caption=Conjunto de reglas (\lstinline|fire_detection_rules.m|) ,inputencoding=cp1252]{./matlab/fire_detection_rules.m}
-
+\lstset{linewidth=\textwidth}
 \subsection{Método de Mamdani aplicado a la detección de incendios forestales}
 Con el código implementado hasta ahora ya es posible aplicar el método de Mamdani a la detección y determinación de riesgos de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_mamdani(temp, smoke, light, humidity, distance)| que recibe como parámetros las entradas escalares de temperatura, humo , etc. y devuelve el riesgo de incendio resultante al aplicar el método de Mamdani. Esta función además devuelve los valores desdifusificados de este conjunto de salida:
 
