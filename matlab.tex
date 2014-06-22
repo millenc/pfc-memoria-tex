@@ -249,6 +249,28 @@ Con el código implementado hasta ahora ya es posible aplicar el método de Mamd
 
 \lstinputlisting[caption=Método de Mamdani aplicado a la determinación de riesgo de incendios forestales (\lstinline|fire_detection_mamdani.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani.m}
 
+Utilizando esta función se puede definir una nueva función \lstinline|fire_detection_mamdani_plot()| que acepta los mismos argumentos (y algunos parámetros opcionales más) y que además de aplicar el método de Mamdani sobre las entradas, genera una gráfica con los resultados obtenidos:
+
+\lstinputlisting[caption=Método de Mamdani y gráfica con resultados (\lstinline|functions/fire_detection_mamdani_plot.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani_plot.m}
+
+Este método acepta los siguientes parámetros opcionales:
+
+\begin{itemize}
+\item \lstinline|'showTitle'| (true/false): Mostrar el título en la gráfica generada.
+\item \lstinline|'showLegend'| (true/false): Mostrar la leyenda en la gráfica generada.
+\item \lstinline|'exportTikz'| (true/false): Exportar la gráfica generada a tikz.
+\end{itemize} 
+
+Para obtener y validar estos parámetros opcionales se utiliza un parser de entradas, que es el método estándar de MATLAB. Este parser es creado por la función \lstinline|fire_detection_plot_input_parser()| (utilizada en la línea 26):
+
+\lstinputlisting[caption=Parser de parámetros opcionales (\lstinline|fire_detection_plot_input_parser.m|),inputencoding=cp1252]{./matlab/fire_detection_plot_input_parser.m}
+
+Esta función define el parser y los parámetros opcionales que acepta, así como sus valores por defecto. 
+
+La función \lstinline|fire_detection_mamdani_plot()| se puede utilizar por ejemplo para generar las gráficas de la figura \ref{fig:mamdani-fire-detection-example} ejecutando el script \lstinline|fire_detection_mamdani_examples.m|:
+
+\lstinputlisting[caption=Ejemplos del método de Mamdani (\lstinline|fire_detection_mamdani_examples.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani_examples.m}
+
 \subsection{Método de interpolación basado en índices de solapamiento aplicado a la detección de incendios forestales}
 Con las funciones implementadas también se puede aplicar el método de interpolación basado en índices de solapamiento a la determinación de riesgo de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_interpolation(O, T, M, t, s, l, h, d)|, similar a la ya definida para Mamdani. Esta función, además de las entradas escalares de temperatura, humo, etc. (\lstinline|t, s, l, h, d|) recibe el índice de solapamiento \lstinline|O|, la t-norma \lstinline|T| y la función de agregación \lstinline|M| utilizadas en el método. Al igual que el método de Mamdani, esta función devuelve el valor de riesgo como un conjunto difuso y sus correspondientes valores desdifusificados:
 
