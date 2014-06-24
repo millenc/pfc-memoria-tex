@@ -1,11 +1,15 @@
 % !TeX spellcheck = es_ES
 \chapter{Teoría de conjuntos difusos}
 \label{cha:teoria-conjuntos-difusos}
+
+En este primer capítulo se introduce la teoría relacionada con conjuntos difusos necesaria para el desarrollo del proyecto. Los conjuntos difusos forman la base de los métodos estudiados en este proyecto y han tenido una importancia capital en el desarrollo de la inteligencia artificial en las últimas decadas, desde que fueran introducidos por L.A. Zadeh en 1965 \cite{Zadeh65}. Por esta razón, es necesario definirlos de forma apropiada y estudiar algunas de sus propiedades fundamentales.
+
 \section{Conjuntos difusos}
 
-\subsection{Definición y propiedades}
-En esta sección se presentan algunas definiciones y teoremas que forman la base de toda la teoría de lógica difusa y de los teoremas y métodos presentados en este trabajo.
+En esta sección se define el concepto de conjunto difuso (sec. \ref{sec:fuzzy-set-definition-and-properties}), así como las operaciones más básicas que se pueden realizar sobre ellos (sec. \ref{sec:fuzzy-set-operations}). En la sección \ref{sec:lang-variables} se presenta el concepto de variable lingüística, una de las aplicaciones más importantes de los conjuntos difusos y clave para el desarrollo de la lógica difusa.
 
+\subsection{Definición y propiedades}
+\label{sec:fuzzy-set-definition-and-properties}
 \begin{definition}
 Sea \emph{X} un conjunto clásico de objetos, denominado \emph{universo}, cuyos elementos son denotados como \emph{x}. La pertenencia a un subconjunto clásico \emph{A} de \emph{X} se expresa normalmente por medio de una función de pertenencia $\mu_{A}:X\rightarrow\{0,1\}$ tal que:
 \begin{equation}
@@ -65,6 +69,7 @@ VT = \{(150,0),(160,0),(170,0),\ldots,(190,0.5),(195,0.88),(200,1),(210,1),\ldot
 \end{figure}
 
 \subsection{Variables lingüísticas}
+\label{sec:lang-variables}
 Una variable lingüística se puede definir de manera informal como una variable que puede tomar palabras del lenguaje natural como valores. Para formular palabras y utilizarlas como valores de variables lingüísticas se utilizan conjuntos difusos (por medio de sus correspondientes funciones de pertenencia). Así pues, una variable lingüística se puede definir como \cite{wang1997}:
 
 \begin{definition}\label{def:informal-lang-variable}
@@ -98,6 +103,7 @@ Una \emph{variable lingüística} se caracteriza por la tupla $(X,T,U,M)$, donde
 \end{itemize}
 \end{definition}
 \subsection{Operaciones sobre conjuntos difusos}
+\label{sec:fuzzy-set-operations}
 En esta sección se definen algunas operaciones básicas sobre conjuntos difusos. Un conjunto difuso compuesto a partir de dos conjuntos difusos sobre el mismo universo \emph{U} puede definirse por su función de pertenencia tal que:
 \begin{definition}
 Dada una función \begin{math}\emph{F}:[0,1]^2\rightarrow[0,1]\end{math} y dos conjuntos difusos \emph{A} y \emph{B} definidos sobre el mismo universo \emph{U}, \begin{math}A,B\in FS(U)\end{math}, denotamos como \begin{math}F(A,B)\end{math} el conjunto difuso sobre \emph{U} cuya función de pertenencia viene dada por:
