@@ -98,15 +98,15 @@ R(2).B = @threat.low;
 
 La variable \lstinline|R| resultante es un vector de estructuras y se puede obtener la regla \emph{i-ésima} haciendo uso del índice (como cualquier otro vector): \lstinline|R(i)|.
 
-\subsection{Difusificadores}
-Otro componente importante de los sistemas difusos basados en reglas son los difusificadores. Un difusificador es una función que transforma una entrada escalar del sistema en un conjunto difuso. Existen diferente tipos de difusificadores, tal y como se ha estudiado en la sección \ref{sec:difusificadores}. En este proyecto, sin embargo, sólo se ha utilizado el difusificador \emph{singleton} cuya implementación en MATLAB es la siguiente:
+\subsection{Fusificadores}
+Otro componente importante de los sistemas difusos basados en reglas son los fusificadores. Un fusificador es una función que transforma una entrada escalar del sistema en un conjunto difuso. Existen diferente tipos de fusificadores, tal y como se ha estudiado en la sección \ref{sec:fusificadores}. En este proyecto, sin embargo, sólo se ha utilizado el fusificador \emph{singleton} cuya implementación en MATLAB es la siguiente:
 
-\lstinputlisting[caption=Difusificador singleton (\lstinline|functions/singleton_fuzzifier.m|),inputencoding=cp1252]{./matlab/functions/singleton_fuzzifier.m}
+\lstinputlisting[caption=Fusificador singleton (\lstinline|functions/singleton_fuzzifier.m|),inputencoding=cp1252]{./matlab/functions/singleton_fuzzifier.m}
 
-\subsection{Desdifusificadores}
-El último componente de un sistema difuso basado en reglas es el \emph{desdifusificador}. Un desdifusificador es una función que transforma el conjunto difuso de salida en un valor escalar. En la sección \ref{sec:desdifusificadores} se han establecido las propiedades que debe tener un desdifusificador y se han definido algunos de los más utilizados.
+\subsection{Defusificadores}
+El último componente de un sistema difuso basado en reglas es el \emph{defusificador}. Un defusificador es una función que transforma el conjunto difuso de salida en un valor escalar. En la sección \ref{sec:defusificadores} se han establecido las propiedades que debe tener un defusificador y se han definido algunos de los más utilizados.
 
-MATLAB, en su toolbox \emph{Fuzzy Logic,} ya tiene implementados los desdifusificadores más utilizados por medio de la función \lstinline|defuzz(x, mf, type)|. Esta función toma como parámetros el universo de referencia del conjunto \lstinline|x|, los grados de pertenencia para los valores del universo de referencia \lstinline|mf| y el tipo de desdifusificador a utilizar \lstinline|type|. Los tipos de desdifusificadores posibles son:
+MATLAB, en su toolbox \emph{Fuzzy Logic,} ya tiene implementados los defusificadores más utilizados por medio de la función \lstinline|defuzz(x, mf, type)|. Esta función toma como parámetros el universo de referencia del conjunto \lstinline|x|, los grados de pertenencia para los valores del universo de referencia \lstinline|mf| y el tipo de defusificador a utilizar \lstinline|type|. Los tipos de defusificadores posibles son:
 
 \begin{itemize}
 \item \lstinline|centroid|: Centroide.
@@ -246,7 +246,7 @@ En la función  \lstinline|fire_detection_rules| (código \ref{matlab_fire_detec
 \lstinputlisting[label=matlab_fire_detection_rules, caption=Conjunto de reglas (\lstinline|fire_detection_rules.m|) ,inputencoding=cp1252]{./matlab/fire_detection_rules.m}
 \lstset{linewidth=\textwidth}
 \subsection{Método de Mamdani aplicado a la detección de incendios forestales}
-Con el código implementado hasta ahora ya es posible aplicar el método de Mamdani a la detección y determinación de riesgos de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_mamdani(temp, smoke, light, humidity, distance)| que recibe como parámetros las entradas escalares de temperatura, humo , etc. y devuelve el riesgo de incendio resultante al aplicar el método de Mamdani. Esta función además devuelve los valores desdifusificados de este conjunto de salida:
+Con el código implementado hasta ahora ya es posible aplicar el método de Mamdani a la detección y determinación de riesgos de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_mamdani(temp, smoke, light, humidity, distance)| que recibe como parámetros las entradas escalares de temperatura, humo , etc. y devuelve el riesgo de incendio resultante al aplicar el método de Mamdani. Esta función además devuelve los valores defusificados de este conjunto de salida:
 
 \lstinputlisting[caption=Método de Mamdani aplicado a la determinación de riesgo de incendios forestales (\lstinline|fire_detection_mamdani.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani.m}
 
@@ -273,7 +273,7 @@ La función \lstinline|fire_detection_mamdani_plot()| se puede utilizar por ejem
 \lstinputlisting[caption=Ejemplos del método de Mamdani (\lstinline|fire_detection_mamdani_examples.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani_examples.m}
 
 \subsection{Método de interpolación basado en índices de solapamiento aplicado a la detección de incendios forestales}
-Con las funciones implementadas también se puede aplicar el método de interpolación basado en índices de solapamiento a la determinación de riesgo de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_interpolation(O, T, M, t, s, l, h, d)|, similar a la ya definida para Mamdani. Esta función, además de las entradas escalares de temperatura, humo, etc. (\lstinline|t, s, l, h, d|) recibe el índice de solapamiento \lstinline|O|, la t-norma \lstinline|T| y la función de agregación \lstinline|M| utilizadas en el método. Al igual que el método de Mamdani, esta función devuelve el valor de riesgo como un conjunto difuso y sus correspondientes valores desdifusificados:
+Con las funciones implementadas también se puede aplicar el método de interpolación basado en índices de solapamiento a la determinación de riesgo de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_interpolation(O, T, M, t, s, l, h, d)|, similar a la ya definida para Mamdani. Esta función, además de las entradas escalares de temperatura, humo, etc. (\lstinline|t, s, l, h, d|) recibe el índice de solapamiento \lstinline|O|, la t-norma \lstinline|T| y la función de agregación \lstinline|M| utilizadas en el método. Al igual que el método de Mamdani, esta función devuelve el valor de riesgo como un conjunto difuso y sus correspondientes valores defusificados:
 
 \lstinputlisting[caption=Método de interpolación basado en índices de solapamiento aplicado a la determinación de riesgo de incendios forestales (\lstinline|fire_detection_interpolation.m|),inputencoding=cp1252]{./matlab/fire_detection_interpolation.m}
 
