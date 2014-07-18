@@ -14,8 +14,95 @@ El objetivo principal de la lógica difusa es intentar dotar a las máquinas de 
 
 Por medio del uso de variables lingüísticas se pueden modelar conceptos como \emph{``muy alto''} o \emph{``bastante caliente''} y establecer relaciones entre ellos, expresadas de forma matemática y algorítmica. Los sistemas de lógica difusa tratan la imprecisión de las entradas mediante el uso de variables lingüísticas (expresadas como conjuntos difusos), que transforman dichos valores de entrada en números difusos.
 
+\section{Razonamiento aproximado}
+El razonamiento aproximado utiliza conjuntos difusos y lógica difusa para modelar la forma de discurrir y razonar del ser humano. El razonamiento aproximado no posee la precisión y exactitud de la lógica clásica, pero es más efectivo a la hora de lidiar con imprecisiones, conceptos vagos o sistemas complejos y/o pobremente definidos.
+
+En este proyecto se va a implementar una forma de razonamiento aproximado que utiliza un mecanismo de inferencia difusa basado en el modus ponens generalizado, que es una extensión del modus ponens clásico.
+
+\subsection{Modus ponens clásico}
+El modus ponens clásico es una proposición compuesta muy conocida en la lógica clásica. Tiene la forma:
+
+\begin{equation}
+((p \wedge (p \rightarrow q)) \rightarrow q)
+\end{equation}
+
+Para inferir el valor de verdad de \emph{q} a partir del de \emph{p} utilizando el modus ponens clásico, se utiliza una \emph{regla} de inferencia, expresada de forma simbólica utilizando el \emph{silogismo}:
+
+\begin{equation}
+\begin{array}{rl}
+\text{Premisa 1:} & p \\
+\text{Premisa 2:} & p \to q \\
+\cline{2-2}
+\text{Conclusión:} & q
+\end{array}
+\label{eq:inference-rule}
+\end{equation}
+
+que puede expresarse como: si la proposición \emph{p} es verdadera (premisa 1) y la proposición $p \to q$ es verdadera (premisa 2), entonces \emph{q} es verdadera (conclusión). Esto permite obtener el valor de verdad de \emph{q} a partir del de \emph{p} utilizando una regla de inferencia. Es decir, por medio de esta regla de inferencia sabemos que, si \emph{p} es verdadero, entonces \emph{q} es también verdadero.
+
+La regla de inferencia \ref{eq:inference-rule} puede expresarse de manera más detallada como:
+
+\begin{equation}
+\begin{array}{rl}
+\text{Premisa 1:} & x \text{ es } A \\
+\text{Premisa 2:} & \text{IF } x \text{ es } A \text{ THEN } y \text{ es } B \\
+\cline{2-2}
+\text{Conclusión:} & y \text{ es } B
+\end{array}
+\label{eq:inference-rule-detail}
+\end{equation}
+
+donde $p = x \text{ es } A$ y $q = y \text{ es } B$.
+
+\begin{example}
+Un ejemplo de la regla de inferencia \ref{eq:inference-rule-detail} es la regla de divisibilidad por 3: \emph{``Ùn número entero es divisible por 3 si la suma de sus dígitos es múltiplo de 3''}. Puede expresarse mediante el siguiente silogismo:
+
+\begin{equation}
+\normalfont
+\begin{array}{rl}
+\text{Premisa 1:} & \text{\emph{La suma de los dígitos de un número es múltiplo de 3}} \\
+\text{Premisa 2:} & \text{IF \emph{La suma de los dígitos de un número es múltiplo de 3} THEN \emph{El número es divisible por 3}} \\
+\cline{2-2}
+\text{Conclusión:} & \text{\emph{El número es divisible por 3}}
+\end{array}
+\label{eq:inference-rule-example}
+\end{equation}
+
+En este ejemplo se utilizan conceptos exactos (lógica clásica). Un número pertenece o no pertence al conjunto de números cuya suma de cifras es múltiplo de 3. Por lo tanto la proposición \emph{``La suma de los dígitos de un número es múltiplo de 3''} sólo puede tomar los valores \emph{Verdadero} (1) o \emph{Falso} (0). 
+\end{example}
+
+\subsection{Modus ponens generalizado}
+
+El \emph{modus ponens generalizado} es, como su nombre índica, una generalización del modus ponens clásico (definido en la sección anterior) utilizado en la lógica difusa. Tiene la forma:
+
+\begin{equation}
+\begin{array}{rl}
+\text{Premisa 1:} & p' \\
+\text{Premisa 2:} & p \to q \\
+\cline{2-2}
+\text{Conclusión:} & q'
+\end{array}
+\label{eq:fuzzy-inference-rule}
+\end{equation}
+
+o lo que es lo mismo:
+
+\begin{equation}
+\begin{array}{rl}
+\text{Premisa 1:} & x \text{ es } A' \\
+\text{Premisa 2:} & \text{IF } x \text{ es } A \text{ THEN } y \text{ es } B \\
+\cline{2-2}
+\text{Conclusión:} & y \text{ es } B'
+\end{array}
+\label{eq:fuzzy-inference-rule-detail}
+\end{equation}
+
+En este caso las proposiciones $p'=x \text{ es } A'$, $p=x \text{ es } A$, $q=y \text{ es } B$, $q'=y \text{ es } B'$ vienen caracterizadas por los conjuntos difusos $A'$,$A$,$B$ y $B'$,que representan conceptos difusos. Esta regla de inferencia puede interpretarse de la siguiente manera: si $p \to q$ y tenemos $p'$ (aproximadamente $p$) entonces tenemos $q'$ (aproximadamente q). El modus ponens generalizado permite, por tanto, utilizar conceptos difusos y obtener el ``grado de verdad'' de la conclusión a partir de las premisas.
+
+En la siguiente sección se define el concepto de \emph{regla difusa} (p.e. $\text{IF } x \text{ es } A \text{ THEN } y \text{ es } B$), que constituye una de las premisas en el modus ponens generalizado. En las secciones \ref{sec:mamdani-controller} y \ref{sec:interpolation-method} se definen los métodos de inferencia difusa que se van a estudiar en este proyecto. Estos métodos utilizan reglas difusas y el modus ponens generalizado para obtener las salidas ($B'$) a partir de las premisas ($A'$).
+
 \section{Reglas difusas}
-Una manera de modelar el conocimiento humano es por medio de \emph{reglas difusas IF-THEN}\footnote{Podría traducirse como SI-ENTONCES.}:
+Una \emph{regla difusa IF-THEN}\footnote{Podría traducirse como SI-ENTONCES.} puede definirse de manera informal como:
 
 \begin{definition}
 Una regla difusa IF-THEN es una estructura condicional de la forma:
