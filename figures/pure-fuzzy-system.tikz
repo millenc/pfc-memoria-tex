@@ -27,7 +27,7 @@
 \node [state, above of=inference-engine] (rule-base) {Conjunto de reglas difusas};
 \node [output, right of=inference-engine,node distance=7cm] (output) {};
 
-\draw [->] (input) -- node {$x_{1},\ldots,x_{n} \in FS(U)$} (inference-engine);
+\draw [->] (input) -- node {$x \in FS(U)$} (inference-engine);
 \draw [->] (rule-base) -- node {} (inference-engine);
 \draw [->] (inference-engine) -- node {$y \in FS(V)$} (output);
 \end{tikzpicture}

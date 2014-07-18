@@ -43,9 +43,9 @@
 \node [state-small, right of=inference-engine,node distance=6cm,align=left] (defuzzifier) {Defusificar};
 \node [output, right of=defuzzifier,node distance=2.5cm] (output) {};
 
-\draw [->] (input) -- node {$x \in U$} (fuzzifier);
+\draw [->] (input) -- node {$x' \in U$} (fuzzifier);
 \draw [->] (fuzzifier) -- node {$x \in FS(U)$} (inference-engine);
 \draw [->] (rule-base) -- node {} (inference-engine);
 \draw [->] (inference-engine) -- node {$y \in FS(V)$} (defuzzifier);
-\draw [->] (defuzzifier) -- node {$y \in V$} (output);
+\draw [->] (defuzzifier) -- node {$y' \in V$} (output);
 \end{tikzpicture}
