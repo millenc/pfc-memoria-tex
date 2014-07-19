@@ -369,10 +369,10 @@ Sea $G_{O}$ una función de solapamiento tal que $G_{O}(x,G_{O}(y,z)) = G_{O}(y,
 \end{proposition}
 
 \section{Índices de solapamiento}\label{sec:overlap-indexes}
-\subsection{Definición y propiedades}
-En esta sección se presenta la definición de índice de solapamiento y se estudian algunas de sus propiedades más importantes. Los índices de solapamiento tienen una importancia vital en el desarrollo de este trabajo, ya que son la base del método estudiado. 
+En esta sección se presenta la definición de índice de solapamiento y se estudian algunas de sus propiedades más importantes. Los índices de solapamiento tienen una importancia vital en el desarrollo de este trabajo, ya que son la base del método de inferencia difusa estudiado. 
 
-El concepto de solapamiento aplicado a conjuntos difusos fue introducido por Zadeh en 1978 \cite{zadeh1978}.
+\subsection{Definición y propiedades}
+El concepto de solapamiento aplicado a conjuntos difusos fue introducido por Zadeh en 1978 \cite{zadeh1978}. A grandes rasgos, un índice de solapamiento es una función que permite determinar cuánto se solapan dos conjuntos difusos, es decir, cómo de coincidentes son dichos conjuntos.
 
 \begin{definition}
 Sea $A,B \in FS(U)$. La consistencia entre A y B se define como:
@@ -425,3 +425,23 @@ O(A,B) = M(G_{O}(A(u_{1}),B(u_{1})),\cdots,G_{O}(A(u_{n}),B(u_{n})))
 \end{equation}
 es un índice de solapamiento en el sentido de la definición \ref{def:bustince-overlap-index}. Recíprocamente, si $G_{O}$ es una función de solapamiento y $M:[0,1]^{n} \rightarrow [0,1]$ es un operador de agregación tal que O definido por la ecuación \ref{eq:construction-overlap-index} es un índice de solapamiento, entonces $M(x_{1},\cdots,x_{n}) = 0$ si y sólo si $x_{1} = \cdots = x_{n} = 0$.
 \end{theorem}
+
+\begin{example}
+\normalfont
+Utilizando el método de construcción del teorema \ref{eq:construction-overlap-index} se pueden construir los siguientes índices de solapamiento:
+
+\begin{itemize}
+	\item Si $M = \text{Media aritmética}$ y $G_O = x \cdot y$:
+	\begin{equation}
+	O_{\pi}(A,B) = \frac{1}{n}\sum_{i=1}^{n}\mu_A(x_i) \cdot \mu_B(x_i)
+	\end{equation}
+	\item Si $M = \max(x_1,\cdots,x_n)$ y $G_O = \min(x,y)$:
+	\begin{equation}
+	O_{Z}(A,B) = \max\limits_{i=1}^{n}(\min(\mu_A(x_i),\mu_B(x_i)))
+	\end{equation}
+	\item Si $M = \text{Media aritmética}$ y $G_O = \sin(\frac{\pi}{2}(x \cdot y)^{\frac{1}{4}})$:
+	\begin{equation}
+	O_{sin}(A, B) = \frac{1}{n}\sum_{i=1}^{n}\sin(\frac{\pi}{2}(\mu_A(x_i) \cdot \mu_B(x_i))^{\frac{1}{4}})
+	\end{equation}
+\end{itemize}
+\end{example}
