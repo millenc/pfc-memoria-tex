@@ -147,10 +147,10 @@ Una t-norma es una operación binaria \emph{T} en el intervalo $[0,1]$ que es co
    \item $T(x,1) = x$ (Elemento neutro)\label{T4}
   \end{enumerate}
 \end{definition}
-Estas propiedades son suficientes para garantizar que las t-normas generalizan la conjunción clásica ($x\bigwedge y$) cuando se aplican a valores booleanos ($T(0,0)=0$,$T(0,1)=T(1,0)=0$ y $T(1,1)=1$).
+Estas propiedades son suficientes para garantizar que las t-normas generalizan la conjunción clásica ($x\wedge y$) cuando se aplican a valores booleanos ($T(0,0)=0$,$T(0,1)=T(1,0)=0$ y $T(1,1)=1$).
 Algunos ejemplos prominentes de t-normas son los siguientes:
 \begin{itemize}
-	\item \bfseries Mínimo o t-norma de Gödel: $T_{G}(x,y) = min\{x,y\}$
+	\item \bfseries Mínimo: $T_{G}(x,y) = min\{x,y\}$
 	\item \bfseries Producto: $T_{P}(x,y) = xy$
 	\item \bfseries \L{}ukasiewicz: $T_{L}(x,y) = max\{x+y-1,0\}$
 	\item \bfseries T-norma drástica: \mdseries $T_{D}(x,y) = \begin{cases} y & if\quad x=1, \\ x & if\quad y=1, \\0 & \text{en cualquier otro caso}. \end{cases}$
@@ -202,7 +202,7 @@ Una t-conorma es una operación binaria \emph{S} en el intervalo $[0,1]$ que es 
    \item $S(x,0) = x$ (Elemento neutro)\label{S4}
   \end{enumerate}
 \end{definition}
-De la misma forma que las t-normas (definición \ref{def:tnorma}) generalizan la conjunción clásica, las t-conormas generalizan la disyunción ($x\bigvee y$). A continuación se incluyen algunos ejemplos de t-conormas:
+De la misma forma que las t-normas (definición \ref{def:tnorma}) generalizan la conjunción clásica, las t-conormas generalizan la disyunción ($x\vee y$). A continuación se incluyen algunos ejemplos de t-conormas:
 \begin{itemize}
 	\item \bfseries Máximo: $S_{max}(x,y) = max\{x,y\}$
 	\item \bfseries Suma probabilística: $S_{P}(x,y) = x + y - xy$
@@ -246,7 +246,7 @@ De la misma forma que las t-normas (definición \ref{def:tnorma}) generalizan la
 	\label{fig:t-conorms}
 	\caption{Representación gráfica de las t-conormas \emph{Máximo} (\ref{fig:t-conorms-max}), \emph{Suma probabilística} (\ref{fig:t-conorms-probabilistic-sum}), \emph{Suma acotada} (\ref{fig:t-conorms-bounded-sum})  y la \emph{t-conorma drástica} (\ref{fig:t-conorms-drastic}).}
 \end{figure}
-Otra clase importante de funciones son los \emph{operadores de agregación} \index{operador de agregación}\cite{calvo2002aggregation, beliakov2007aggregation}.
+Otra clase importante de funciones son los \emph{operadores de agregación} \index{operador de agregación}\cite{calvo2002aggregation, beliakov2007aggregation}. Los operadores de agregación son funciones que toman uno o varios parámetros y devuelven un único valor, que de alguna manera representa a los parámetros de entrada agregados.
 \begin{definition}
 Una función $\emph{M} : [a,b]^{n} \rightarrow [a,b]$ es un operador de agregación si es monótona y no decreciente en cada una de sus componentes y además cumple que $M(a, a, \cdots,a) = a$ y $M(b, b, \cdots,b) = b$.
 \end{definition}
