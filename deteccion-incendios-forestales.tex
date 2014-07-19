@@ -1,7 +1,7 @@
 % !TeX spellcheck = es_ES
 \chapter{Detección de incendios forestales}
 \label{cha:deteccion-incendios-forestales}
-En este capítulo se presenta una aplicación práctica de los métodos de inferencia difusa basados en reglas, descritos en los capítulos anteriores (REFERENCIA). El objetivo es definir un sistema basado en reglas capaz de determinar el riesgo de incendios forestales a partir de mediciones de algunas magnitudes tales como la temperatura, el humo, la humedad etc. Estas magnitudes constituirán las entradas del sistema de inferencia que obtendrá una estimación cuantitativa del riesgo del incendio forestal.
+En este capítulo se presenta una aplicación práctica de los métodos de inferencia difusa basados en reglas, descritos en los capítulos anteriores. El objetivo es definir un sistema basado en reglas capaz de determinar el riesgo de incendios forestales a partir de mediciones de algunas magnitudes tales como la temperatura, el humo, la humedad etc. Estas magnitudes constituirán las entradas del sistema de inferencia, que las utilizará para dar una estimación cuantitativa del riesgo del incendio forestal.
 
 \section{Red de sensores inalámbricos}
 El primer paso para la determinación del riesgo de un incendio forestal es la medición y toma de datos ambientales relacionados con dicho incendio. Para ello se puede desplegar una red de sensores inalámbricos (\emph{Wireless Sensor Networks}, WSN), que han sido desarrolladas y utilizadas en una gran variedad de aplicaciones en áreas tales como automoción \cite{hsin2007}, defensa, medicina, agricultura \cite{tao2008}\cite{hwang2010}, etc. 
@@ -27,7 +27,7 @@ Las entradas del sistema difuso son valores escalares de magnitudes que describe
    \item \bfseries Distancia: \normalfont medida en metros (0 a 80m).
 \end{enumerate}
 
-Para cada una de estas variables lingüísticas se definen tres valores posibles: \emph{Baja} (L,\emph{Low}), \emph{Media} (M, \emph{Medium}) y \emph{Alta} (H, \emph{High}) que los valores tienen el sentido de \emph{Cerca} (C, \emph{Close}), \emph{Media} (M, \emph{Medium}) y \emph{Lejos} (F, \emph{Far}) respectivamente.
+Para cada una de estas variables lingüísticas se definen tres valores posibles: \emph{Baja} (L,\emph{Low}), \emph{Media} (M, \emph{Medium}) y \emph{Alta} (H, \emph{High}). En el caso de la distancia, estos valores tienen el sentido de \emph{Cerca} (C, \emph{Close}), \emph{Media} (M, \emph{Medium}) y \emph{Lejos} (F, \emph{Far}) respectivamente.
 
 La salida del sistema viene dada por la variable lingüística $y = $ \emph{``Riesgo de incendio''}, que determina el riesgo de incendio forestal en una escala del 0 al 100 (\%). Esta variable lingüística puede tomar los valores: \emph{Muy bajo} (VL, \emph{Very Low}), \emph{Bajo} (L, \emph{Low}), \emph{Medio} (M, \emph{Medium}), \emph{Alto} (H, \emph{High}) y \emph{Muy Alto} (VH, \emph{Very High}). 
 
@@ -90,7 +90,7 @@ En la figura \ref{fig:fire-detection-lang-variables} se representan las variable
 
 \section{Conjunto de reglas}
 
-Una vez definidas las variables lingüísticas, es necesario construir un conjunto de reglas, que forman la base de conocimiento sobre el problema y permiten, mediante el mecanismo de inferencia, transformar las entradas en salidas. En este caso particular las reglas tienen la forma:
+Una vez definidas las variables lingüísticas, es necesario construir un conjunto de reglas, que forman la base de conocimiento sobre el problema. Este conjunto de reglas permite, mediante el mecanismo de inferencia, transformar las entradas en salidas. En este caso particular las reglas tienen la forma:
 
 \begin{equation}
 \text{IF }\chi_1  \text{ es }A_1\text{ AND }\chi_2 \text{ es }A_2\text{ AND }\chi_3 \text{ es }A_3\text{ AND }\chi_4  \text{ es }A_4\text{ AND }\chi_5 \text{ es }A_5\text{ THEN }y\text{ es }B
@@ -516,8 +516,8 @@ La ventaja de este método es que permite seleccionar diferentes combinaciones d
 	\setlength\figurewidth{7cm}
 	\input{figures/fire-detection-results/interpolation/interpolation-comparison-Tnorma-prod--T30_S20_L500_H50_D40.tikz}
 \end{subfigure}
-\label{fig:fire-detection-interpolation-comparison-tnorm-prod}
 \caption{T-norma: Producto ($T_{prod}$)}
+\label{fig:fire-detection-interpolation-comparison-tnorm-prod}
 \end{figure}
 
 \begin{figure}[h!]

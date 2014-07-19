@@ -19,7 +19,7 @@ xmax=100,
 ymin=0,
 ymax=0.003,
 name=plot3,
-title={Omaxmin}
+title={$O_Z$}
 ]
 \addplot [color=black,solid,line width=1.2pt,forget plot]
   table[row sep=crcr]{0	0\\
@@ -152,7 +152,7 @@ ymax=1.5e-14,
 name=plot1,
 at=(plot3.above north west),
 anchor=below south west,
-title={Opi}
+title={$O_{\pi}$}
 ]
 \addplot [color=black,solid,line width=1.2pt,forget plot]
   table[row sep=crcr]{0	0\\
@@ -285,7 +285,7 @@ ymax=1.5e-14,
 name=plot2,
 at=(plot1.right of south east),
 anchor=left of south west,
-title={Oavgmin}
+title={$O_{avgmin}$}
 ]
 \addplot [color=black,solid,line width=1.2pt,forget plot]
   table[row sep=crcr]{0	0\\
@@ -417,7 +417,7 @@ ymin=0,
 ymax=4e-14,
 at=(plot2.below south west),
 anchor=above north west,
-title={Osqrt}
+title={$O_{\sqrt{\text{ }}}$}
 ]
 \addplot [color=black,solid,line width=1.2pt,forget plot]
   table[row sep=crcr]{0	0\\
@@ -549,7 +549,7 @@ ymin=0,
 ymax=1e-13,
 at=(plot3.below south west),
 anchor=above north west,
-title={Osin}
+title={$O_{sin}$}
 ]
 \addplot [color=black,solid,line width=1.2pt,forget plot]
   table[row sep=crcr]{0	0\\
