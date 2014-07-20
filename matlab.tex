@@ -1,6 +1,6 @@
 \chapter{Implementación en MATLAB}
 \label{cha:implementacion-matlab}
-En este capítulo se incluye el código fuente de la implementación en MATLAB de los métodos estudiados en este proyecto.
+En este capítulo se incluye el código fuente de la implementación en MATLAB de los sistemas de lógica difusa estudiados en este trabajo.
 
 \section{General}
 En esta sección se incluyen algunas funciones de propósito general que han sido implementadas en el desarrollo de este proyecto.
@@ -23,19 +23,31 @@ Además se han implementado sendas funciones para calcular las t-normas del seno
 
 \lstinputlisting[label=lst:einsteinmean, caption=T-norma de Einstein (\lstinline|functions/einsteinmean.m|),inputencoding=cp1252]{./matlab/functions/einsteinmean.m}
 
-Como se puede ver, en la función \lstinline|einsteinmean()| se ha utilizado una función anónima (\lstinline|@(x)(1-x)|), que es una funcionalidad muy útil de MATLAB, inspirada en los lenguajes funcionales, que permite declarar funciones \emph{lambda} o \emph{anónimas} (sin nombre) y utilizarlas como argumentos de otras funciones (en este caso de \lstinline|arrayfun()|, que aplica dicha función anónima a todos los elementos de un vector). Esta característica del lenguaje de MATLAB se utilizará también a la hora de definir índices de solapamiento.
+Como se puede ver, en la función \lstinline[breaklines=true]|einsteinmean()| se ha utilizado una función anónima: 
+
+\begin{lstlisting}[numbers=none]
+@(x)(1 - x)
+\end{lstlisting}
+
+que es una funcionalidad muy útil de MATLAB, inspirada en los lenguajes funcionales, que permite declarar funciones \emph{lambda} o \emph{anónimas} (sin nombre) y utilizarlas como argumentos de otras funciones (en este caso de \lstinline|arrayfun()|, que aplica dicha función anónima a todos los elementos de un vector). Esta característica del lenguaje de MATLAB se utilizará también a la hora de definir índices de solapamiento.
 
 \subsection{Construcción de índices de solapamiento}
 Los índices de solapamiento (\ref{sec:overlap-indexes}) juegan un papel crucial en el desarrollo de este proyecto, al ser la base del método de interpolación estudiado (\ref{sec:interpolation-method}). En la sección \ref{sec:overlap-index-construction} se ha presentado un método para construir índices de solapamiento a partir de operadores de agregación y funciones de solapamiento. 
 
 Este mismo concepto de ``construir'' índices de solapamiento a partir de otras funciones se puede implementar en MATLAB. Para ello se va a utilizar una técnica de programación llamada \emph{clausura}\footnote{Conocida generalmente por su término inglés ``closure''.}, que junto con las funciones anónimas, es muy utilizada en los lenguajes funcionales. A grandes rasgos, una clausura es una función de primer orden (puede tratarse como cualquier otra variable de tipo básico) que mantiene el estado de las variables del ámbito en el que fue creada. Así pues, el objetivo es definir una función que tome como parámetros una función de agregación y una de solapamiento y devuelva una nueva función que sea el índice de solapamiento construido a partir de estas funciones recibidas como parámetros.
 
-Para implementar la construcción de índices de solapamiento se ha definido la función \lstinline|make_overlap_index()| (\lstinline|functions/make_overlap_index.m|), que toma como parámetros una función de agregación \lstinline|M| y una de solapamiento \lstinline|Go| y devuelve una nueva función que es el índice de solapamiento construido a partir de \lstinline|M| y 
+Para implementar la construcción de índices de solapamiento se ha definido la función:
+
+\begin{lstlisting}[numbers=none]
+make_overlap_index( M, Go )
+\end{lstlisting}
+
+en \lstinline|functions/make_overlap_index.m|, que toma como parámetros una función de agregación \lstinline|M| y una de solapamiento \lstinline|Go| y devuelve una nueva función que es el índice de solapamiento construido a partir de \lstinline|M| y 
 \lstinline|Go| (según el teorema \ref{sec:overlap-index-construction}):
 
 \lstinputlisting[label=lst:make_overlap_index,caption=Construcción de índices de solapamiento (\lstinline|functions/make_overlap_index.m|).,inputencoding=cp1252]{./matlab/functions/make_overlap_index.m}
 
-El resultado de llamar a esta función es una nueva función que calcula el índice de solapamiento entre dos conjuntos pasados como parámetros \lstinline|A| y \lstinline|B|. Por ejemplo, si queremos construir el índice de solapamiento de Zadeh $O_Z$ (ecuación \ref{eq:zadeh-consistency}) debemos pasar a la función \lstinline|make_overlap_index()| un puntero a la función máximo (\lstinline|@max|) como función de agregación y un puntero a la función mínimo (\lstinline|@min|) como función de solapamiento:
+El resultado de llamar a esta función es una nueva función que calcula el índice de solapamiento entre dos conjuntos pasados como parámetros \lstinline|A| y \lstinline|B|. Por ejemplo, si queremos construir el índice de solapamiento de Zadeh $O_Z$ (ecuación \ref{eq:zadeh-consistency}) debemos pasar esta función un puntero a la función máximo (\lstinline|@max|) como función de agregación y un puntero a la función mínimo (\lstinline|@min|) como función de solapamiento:
 
 \begin{lstlisting}
 Oz = make_overlap_index(@max,@min);
@@ -128,7 +140,13 @@ El primero de los métodos estudiados en este proyecto es el método de Mamdani 
 \lstinputlisting[caption=Método de Mamdani (\lstinline|functions/mamdani.m|),inputencoding=cp1252]{./matlab/functions/mamdani.m}
 
 \subsection{Método de interpolación basado en índices de solapamiento}
-El método más importante estudiado en este proyecto es el método de interpolación basado en índices de solapamiento (algoritmo \ref{algo:multi-overlap-interpolation-method}). Este método se ha implementado en la función \lstinline|interpolation(R, fact, y, O, T, M)| (\lstinline|functions/interpolation.m|) que toma como parámetros:
+El método más importante estudiado en este proyecto es el método de interpolación basado en índices de solapamiento (algoritmo \ref{algo:multi-overlap-interpolation-method}). Este método se ha implementado en la función 
+
+\begin{lstlisting}[numbers=none]
+interpolation(R, fact, y, O, T, M)
+\end{lstlisting}
+
+definida en \lstinline|functions/interpolation.m| y que toma como parámetros:
 
 \begin{itemize}
 \item \lstinline|R|: Conjunto de reglas tal y como se ha definido en la sección \ref{sec:matlab-rule-base}.
@@ -143,7 +161,13 @@ El método toma estos parámetros y devuelve el conjunto difuso de salida, resul
 
 \lstinputlisting[label=lst:interpolation,caption=Método de interpolación basado en índices de solapamiento (\lstinline|functions/interpolation.m|),inputencoding=cp1252]{./matlab/functions/interpolation.m}
 
-Como se puede, ver en la línea 23 del código \ref{lst:interpolation} se utiliza una función llamada \lstinline|matching_degree()| (\lstinline|functions/matching_degree.m|) para calcular el grado de activación de cada regla. Esta función toma como parámetros:
+Como se puede ver, en la línea 23 \ref{lst:interpolation} se utiliza la función:
+
+\begin{lstlisting}[numbers=none]
+matching_degree(R, fact, O, T)
+\end{lstlisting}
+
+definida en \lstinline|functions/matching_degree.m|, para calcular el grado de activación de cada regla. Esta función toma como parámetros:
 
 \begin{itemize}
 \item \lstinline|R|: Regla.
@@ -156,9 +180,15 @@ Esta función calcula el índice de solapamiento (\lstinline|O|) de cada anteced
 
 \lstinputlisting[label=lst:matching_degree,caption=Cálculo del grado de activación basado en índices de solapamiento (\lstinline|functions/matching_degree.m|),inputencoding=cp1252]{./matlab/functions/matching_degree.m}
 
-Estos métodos, a pesar de ser correctos y devolver los resultados esperados son mejorables en lo que a rendimiento se refiere. El principal problema de esta implementación es que se recalculan los conjuntos difusos de los antecedentes y el consecuente en cada regla (línea 27 en \ref{lst:interpolation} y línea 16 en \ref{lst:matching_degree}). Este cálculo sólo es necesario hacerlo la primera vez para cada valor de cada variable lingüística y después reutilizarlo.
+Estos métodos, a pesar de ser correctos y devolver los resultados esperados, son mejorables en lo que a rendimiento se refiere. El principal problema de esta implementación es que se recalculan los conjuntos difusos de los antecedentes y el consecuente en cada regla (línea 27 en \ref{lst:interpolation} y línea 16 en \ref{lst:matching_degree}). Sin embargo, este cálculo sólo es necesario hacerlo la primera vez para cada valor de cada variable lingüística y después reutilizarlo.
 
-Por ello se ha implementado una nueva versión de estos métodos que utiliza una caché de conjuntos difusos ya calculados, que se almacenan en una especie de \emph{tabla hash}. La tabla hash se ha implementado utilizando una clausura, de forma que se devuelve una función que mantiene la estructura de la tabla hash en el ámbito y la utiliza en llamadas posteriores. La función \lstinline|fuzzyset_hash()| se ha implementado en \lstinline|functions/fuzzyset_hash.m| de la siguiente manera:
+Por ello, se ha implementado una nueva versión de estos métodos que utiliza una caché de conjuntos difusos ya calculados, que se almacenan en una especie de \emph{tabla hash}. La tabla hash se ha implementado utilizando una clausura, de forma que se devuelve una función que mantiene la estructura de la tabla hash en el ámbito y la utiliza en llamadas posteriores. La función 
+
+\begin{lstlisting}[numbers=none]
+fuzzyset_hash()
+\end{lstlisting}
+
+definida en \lstinline|functions/fuzzyset_hash.m| se ha implementado de la siguiente manera:
 
 \lstinputlisting[label=lst:fuzzyset_hash,caption=Función para construir una tabla hash de conjuntos difusos,inputencoding=cp1252]{./matlab/functions/fuzzyset_hash.m}
 
@@ -234,7 +264,13 @@ Este método construye la función de pertenencia lineal que pasa entre los punt
 
 \subsection{Conjunto de reglas}
 
-El conjunto de reglas se ha definido en la función \lstinline|fire_detection_rules()| (\lstinline|fire_detection_rules.m|), de forma que sea sencillo obtener y utilizar este conjunto en otros scripts y funciones. Esta función devuelve un vector de estructuras tal y como se ha definido en la sección \ref{sec:matlab-rule-base}.
+El conjunto de reglas se ha definido en la función:
+
+\begin{lstlisting}[numbers=none]
+fire_detection_rules()
+\end{lstlisting}
+
+en \lstinline|fire_detection_rules.m|, de forma que sea sencillo obtener y utilizar este conjunto en otros scripts y funciones. Esta función devuelve un vector de estructuras tal y como se ha definido en la sección \ref{sec:matlab-rule-base}.
 
 Este tipo de estructura tiene la ventaja de que es sencilla de implementar y de entender. Sin embargo, para conjuntos de reglas grandes (como es el caso) resulta tedioso tener que indicar el índice para cada regla y repetir una y otra vez el nombre del conjunto (\lstinline|R|) o de los campos. 
 
@@ -246,11 +282,23 @@ En la función  \lstinline|fire_detection_rules| (código \ref{matlab_fire_detec
 \lstinputlisting[label=matlab_fire_detection_rules, caption=Conjunto de reglas (\lstinline|fire_detection_rules.m|) ,inputencoding=cp1252]{./matlab/fire_detection_rules.m}
 \lstset{linewidth=\textwidth}
 \subsection{Método de Mamdani aplicado a la detección de incendios forestales}
-Con el código implementado hasta ahora ya es posible aplicar el método de Mamdani a la detección y determinación de riesgos de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_mamdani(temp, smoke, light, humidity, distance)| que recibe como parámetros las entradas escalares de temperatura, humo , etc. y devuelve el riesgo de incendio resultante al aplicar el método de Mamdani. Esta función además devuelve los valores defusificados de este conjunto de salida:
+Con el código implementado hasta ahora ya es posible aplicar el método de Mamdani a la detección y determinación de riesgos de incendios forestales. Para ello se ha definido la función: 
+
+\begin{lstlisting}[numbers=none]
+fire_detection_mamdani(temp, smoke, light, humidity, distance)
+\end{lstlisting}
+
+ que recibe como parámetros las entradas escalares de temperatura, humo , etc. y devuelve el riesgo de incendio resultante al aplicar el método de Mamdani. Esta función además devuelve los valores defusificados de este conjunto de salida:
 
 \lstinputlisting[caption=Método de Mamdani aplicado a la determinación de riesgo de incendios forestales (\lstinline|fire_detection_mamdani.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani.m}
 
-Utilizando esta función se puede definir una nueva función \lstinline|fire_detection_mamdani_plot()| que acepta los mismos argumentos (y algunos parámetros opcionales más) y que además de aplicar el método de Mamdani sobre las entradas, genera una gráfica con los resultados obtenidos:
+Utilizando esta función se puede definir una nueva función:
+
+\begin{lstlisting}[numbers=none]
+fire_detection_mamdani_plot(temp, smoke, light, humidity, distance)
+\end{lstlisting}
+
+ que acepta los mismos argumentos (y algunos parámetros opcionales más) y que además de aplicar el método de Mamdani sobre las entradas, genera una gráfica con los resultados obtenidos:
 
 \lstinputlisting[caption=Método de Mamdani y gráfica con resultados (\lstinline|fire_detection_mamdani_plot.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani_plot.m}
 
@@ -262,7 +310,13 @@ Este método acepta los siguientes parámetros opcionales:
 \item \lstinline|'exportTikz'| (true/false): Exportar la gráfica generada a tikz.
 \end{itemize} 
 
-Para obtener y validar estos parámetros opcionales se utiliza un parser de entradas, que es el método estándar de MATLAB. Este parser es creado por la función \lstinline|fire_detection_plot_input_parser()| (utilizada en la línea 26):
+Para obtener y validar estos parámetros opcionales se utiliza un parser de entradas, que es el método estándar de MATLAB. Este parser es creado por la función:
+
+\begin{lstlisting}[numbers=none]
+fire_detection_plot_input_parser()
+\end{lstlisting}
+
+(utilizada en la línea 26):
 
 \lstinputlisting[label=lst:fire_detection_plot_input_parser, caption=Parser de parámetros opcionales (\lstinline|fire_detection_plot_input_parser.m|),inputencoding=cp1252]{./matlab/fire_detection_plot_input_parser.m}
 
@@ -273,11 +327,23 @@ La función \lstinline|fire_detection_mamdani_plot()| se puede utilizar por ejem
 \lstinputlisting[caption=Ejemplos del método de Mamdani (\lstinline|fire_detection_mamdani_examples.m|),inputencoding=cp1252]{./matlab/fire_detection_mamdani_examples.m}
 
 \subsection{Método de interpolación basado en índices de solapamiento aplicado a la detección de incendios forestales}
-Con las funciones implementadas también se puede aplicar el método de interpolación basado en índices de solapamiento a la determinación de riesgo de incendios forestales. Para ello se ha definido la función \lstinline|fire_detection_interpolation(O, T, M, t, s, l, h, d)|, similar a la ya definida para Mamdani. Esta función, además de las entradas escalares de temperatura, humo, etc. (\lstinline|t, s, l, h, d|) recibe el índice de solapamiento \lstinline|O|, la t-norma \lstinline|T| y la función de agregación \lstinline|M| utilizadas en el método. Al igual que el método de Mamdani, esta función devuelve el valor de riesgo como un conjunto difuso y sus correspondientes valores defusificados:
+Con las funciones implementadas también se puede aplicar el método de interpolación basado en índices de solapamiento a la determinación de riesgo de incendios forestales. Para ello se ha definido la función:
+
+\begin{lstlisting}[numbers=none]
+fire_detection_interpolation(O, T, M, t, s, l, h, d)
+\end{lstlisting}
+
+ similar a la ya definida para Mamdani. Esta función, además de las entradas escalares de temperatura, humo, etc. (\lstinline|t, s, l, h, d|) recibe el índice de solapamiento \lstinline|O|, la t-norma \lstinline|T| y la función de agregación \lstinline|M| utilizadas en el método. Al igual que el método de Mamdani, esta función devuelve el valor de riesgo como un conjunto difuso y sus correspondientes valores defusificados:
 
 \lstinputlisting[caption=Método de interpolación basado en índices de solapamiento aplicado a la determinación de riesgo de incendios forestales (\lstinline|fire_detection_interpolation.m|),inputencoding=cp1252]{./matlab/fire_detection_interpolation.m}
 
-Al igual que en el método de Mamdani, se puede definir una función que utilice esta función para generar gráficas con los resultados. Esta función (\lstinline|fire_detection_interpolation_plot()|) se ha implementado en \lstinline|fire_detection_interpolation_plot.m| de la siguiente forma:
+Al igual que en el método de Mamdani, se puede definir una función que utilice esta función para generar gráficas con los resultados. La función:
+
+\begin{lstlisting}[numbers=none]
+fire_detection_interpolation_plot(O, T, M, t, s, l, h, d)
+\end{lstlisting}
+
+ se ha implementado en \lstinline|fire_detection_interpolation_plot.m| de la siguiente forma:
 
 \lstinputlisting[caption=Método de interpolación y generación de gráficas con resultados (\lstinline|fire_detection_interpolation_plot.m|),inputencoding=cp1252]{./matlab/fire_detection_interpolation_plot.m}
 
@@ -288,7 +354,13 @@ Los parámetros opcionales de este método son los mismos que en el método de M
 \subsection{Comparativa de resultados obtenidos con el método de interpolación}
 En la sección \ref{sec:fire-detection-interpolation-method} se ha presentado una comparativa de los resultados obtenidos al aplicar el método de interpolación basado en índices de solapamiento a unas entradas concretas utilizando diferentes combinaciones de t-normas e índices de solapamiento.
 
-Para obtener estos resultados se ha implementado la función  \lstinline|fire_detection_interpolation_comparison(t, s, l, h, d)| que aplica el método de interpolación con cada combinación de t-normas e índices de solapamiento  a las entradas \lstinline|t, s, l, h, d|:
+Para obtener estos resultados se ha implementado la función:  
+
+\begin{lstlisting}[numbers=none]
+fire_detection_interpolation_comparison(t, s, l, h, d)
+\end{lstlisting}
+
+ que aplica el método de interpolación con cada combinación de t-normas e índices de solapamiento  a las entradas \lstinline|t, s, l, h, d|:
 
 \lstinputlisting[caption=Comparativa de resultados obtenidos con el método de interpolación (\lstinline|fire_detection_interpolation_comparison.m|),inputencoding=cp1252]{./matlab/fire_detection_interpolation_comparison.m}
 
