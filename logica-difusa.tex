@@ -398,3 +398,9 @@ Construir $B' = \{(y, B'(y))|y \in Y\}$ dado por: \\
 \label{algo:multi-overlap-interpolation-method}
 \end{algorithm}
 
+Como en el algoritmo anterior, se toma un conjunto de reglas, en este caso con varios antecedentes cada una, y un hecho $A'$. Se debe seleccionar también un operador de agregación $M$, una t-norma $T$ y un índice de solapamiento $O$. En caso de que las reglas tengan más de un antecedente, el hecho $A'$ debe tener un valor para cada uno de ellos ($A'_1,\cdots,A'_n$).
+
+Cada regla se evalúa por separado y para cada una se calculan los índices de solapamiento de cada valor del hecho $A'$ con su correspondiente antecedente en la regla (línea 3). Estos índices de solapamiento se agregan utilizando la t-norma $T$, que modela la conjunción AND (línea 4). El valor obtenido es el ``grado de activación'' de la regla ($k_i$). Este valor se utiliza para construir sobre el universo de salida $Y$ el conjunto difuso $K_i$, tal que todos los elementos $y \in Y$ tienen como grado de pertenencia el valor $k_i$ (línea 5).
+
+Por último, para cada regla se calcula el conjunto de salida como el mínimo entre su correspondiente conjunto $K_i$ (calculado en pasos previos) y el conjunto difuso de salida de la regla $B_i$. Los conjuntos de salida obtenidos para cada regla se agregan utilizando el operador de agregación $M$ para obtener el conjunto de salida $B'$ (línea 7). El conjunto $B'$ es el resultado final de aplicar el método de inferencia a la entrada $A'$.
+
